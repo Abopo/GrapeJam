@@ -10,11 +10,15 @@ public class Grape : MonoBehaviour {
         get { return _rigidbody; }
     }
 
+    Transform swarmCenter;
+    float expandSpeed = 12f;
+
     bool _canJump;
 
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
+        swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
 	}
 	
 	// Update is called once per frame
@@ -26,7 +30,7 @@ public class Grape : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.collider.tag == "Ground") {
-            //_canJump = true;
+            _canJump = true;
             _rigidbody.drag = 0f;
             _rigidbody.angularDrag = 5f;
         }
@@ -37,7 +41,17 @@ public class Grape : MonoBehaviour {
             appliedForce.y = jumpForce;
             _rigidbody.drag = 2f;
             _rigidbody.angularDrag = 0f;
-
+            _canJump = false;
         }
+    }
+
+    public void Expand() {
+        Vector3 dir = (transform.position - swarmCenter.position).normalized;
+        appliedForce += dir * expandSpeed;
+    }
+
+    public void Contract() {
+        Vector3 dir = (swarmCenter.position - transform.position).normalized;
+        appliedForce += dir * expandSpeed;
     }
 }

@@ -10,7 +10,7 @@ public class GrapeCamera : MonoBehaviour {
 
     float _moveSpeed = 10f;
     float _minHeight = 1f;
-    float _maxHeight = 7f;
+    float _maxHeight = 8f;
 
 	// Use this for initialization
 	void Start () {

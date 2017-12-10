@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GrapeSwarm : MonoBehaviour {
-    public float moveForce = 10;
+    public float moveForce = 15;
     public float jumpForce = 500;
 
     Grape[] _grapes;
@@ -11,8 +11,10 @@ public class GrapeSwarm : MonoBehaviour {
 
     Vector3 _appliedForce;
     Vector3 _rotateAxis;
-    float _rotateSpeed = 50f;
+    float _rotateSpeed = 75f;
     bool _tryJump;
+    bool _expand;
+    bool _contract;
 
     // Use this for initialization
     void Start () {
@@ -27,6 +29,8 @@ public class GrapeSwarm : MonoBehaviour {
         }
 
         _tryJump = false;
+        _expand = false;
+        _contract = false;
 	}
 	
 	// Update is called once per frame
@@ -60,16 +64,25 @@ public class GrapeSwarm : MonoBehaviour {
             _appliedForce += _camera.right * -moveForce;
         }
         if (Input.GetKey(KeyCode.Q)) {
+            // Rotate the swarm
             _rotateAxis.y = -1f;
         }
         if (Input.GetKey(KeyCode.E)) {
             _rotateAxis.y = 1f;
         }
+        if(Input.GetKey(KeyCode.R)) {
+            // Expand the swarm
+            _expand = true;
+        }
+        if(Input.GetKey(KeyCode.F)) {
+            // Contract the swarm
+            _contract = true;
+        }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKey(KeyCode.Space)) {
             // Jump
-            _appliedForce.y = jumpForce;
-            _tryJump = false;
+            //_appliedForce.y = jumpForce;
+            _tryJump = true;
         }
     }
 
@@ -81,7 +94,17 @@ public class GrapeSwarm : MonoBehaviour {
             if (_tryJump) {
                 g.TryJump(jumpForce);
             }
+            if(_expand) {
+                g.Expand();
+            }
+            if (_contract) {
+                g.Contract();
+            }
         }
+
+        _tryJump = false;
+        _expand = false;
+        _contract = false;
     }
 
     void FollowSwarm() {
