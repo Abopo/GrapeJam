@@ -10,6 +10,8 @@ public class Grape : MonoBehaviour {
         get { return _rigidbody; }
     }
 
+    bool _canJump;
+
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
@@ -27,6 +29,15 @@ public class Grape : MonoBehaviour {
             //_canJump = true;
             _rigidbody.drag = 0f;
             _rigidbody.angularDrag = 5f;
+        }
+    }
+
+    public void TryJump(float jumpForce) {
+        if(_canJump) {
+            appliedForce.y = jumpForce;
+            _rigidbody.drag = 2f;
+            _rigidbody.angularDrag = 0f;
+
         }
     }
 }

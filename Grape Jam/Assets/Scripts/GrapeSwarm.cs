@@ -10,7 +10,9 @@ public class GrapeSwarm : MonoBehaviour {
     Transform _camera;
 
     Vector3 _appliedForce;
-    bool _canJump;
+    Vector3 _rotateAxis;
+    float _rotateSpeed = 50f;
+    bool _tryJump;
 
     // Use this for initialization
     void Start () {
@@ -23,6 +25,8 @@ public class GrapeSwarm : MonoBehaviour {
             _grapes[index] = g.GetComponent<Grape>();
             ++index;
         }
+
+        _tryJump = false;
 	}
 	
 	// Update is called once per frame
@@ -34,39 +38,50 @@ public class GrapeSwarm : MonoBehaviour {
 		FollowSwarm();
 
         _appliedForce = Vector3.zero;
+        _rotateAxis = Vector3.zero;
     }
 
     void CheckInput() {
         if (Input.GetKey(KeyCode.W)) {
             // Move forward
             //_appliedForce.z = moveForce;
-            _appliedForce = (transform.position - _camera.position).normalized * moveForce;
+            _appliedForce += (transform.position - _camera.position).normalized * moveForce;
         }
         if (Input.GetKey(KeyCode.S)) {
-            _appliedForce.z = -moveForce;
+            //_appliedForce.z = -moveForce;
+            _appliedForce += (transform.position - _camera.position).normalized * -moveForce;
         }
         if (Input.GetKey(KeyCode.D)) {
-            _appliedForce.x = moveForce;
+            //_appliedForce.x = moveForce;
+            _appliedForce += _camera.right * moveForce;
         }
         if (Input.GetKey(KeyCode.A)) {
-            _appliedForce.x = -moveForce;
+            //_appliedForce.x = -moveForce;
+            _appliedForce += _camera.right * -moveForce;
+        }
+        if (Input.GetKey(KeyCode.Q)) {
+            _rotateAxis.y = -1f;
+        }
+        if (Input.GetKey(KeyCode.E)) {
+            _rotateAxis.y = 1f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _canJump) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             // Jump
             _appliedForce.y = jumpForce;
-            _canJump = false;
+            _tryJump = false;
         }
     }
 
     void CommandSwarm() {
         foreach (Grape g in _grapes) {
             g.appliedForce = _appliedForce;
+            g.transform.RotateAround(transform.position, _rotateAxis, _rotateSpeed * Time.deltaTime);
 
-            g.Rigidbody.drag = 2f;
-            g.Rigidbody.angularDrag = 0f;
+            if (_tryJump) {
+                g.TryJump(jumpForce);
+            }
         }
-
     }
 
     void FollowSwarm() {
