@@ -14,6 +14,8 @@ public class Grape : MonoBehaviour {
     float expandSpeed = 12f;
 
     bool _canJump;
+    float _jumpSquatTime = 0.25f;
+    float _jumpSquatTimer = 0f;
 
     // Use this for initialization
     void Start () {
@@ -25,14 +27,23 @@ public class Grape : MonoBehaviour {
 	void Update () {
         _rigidbody.AddForce(appliedForce);
 
+        if(!_canJump) {
+            _jumpSquatTimer += Time.deltaTime;
+        }
+
         appliedForce = Vector3.zero;
 	}
 
     private void OnCollisionEnter(Collision collision) {
-        if(collision.collider.tag == "Ground") {
-            _canJump = true;
-            _rigidbody.drag = 0f;
-            _rigidbody.angularDrag = 5f;
+        if(collision.collider.tag == "Ground" && _jumpSquatTimer > _jumpSquatTime) {
+            // Make sure we collided from the bottom
+            Vector3 closestPoint = collision.collider.ClosestPoint(transform.position);
+            if (closestPoint.y < transform.position.y) {
+                // We've hit the floor
+                _canJump = true;
+                _rigidbody.drag = 0f;
+                _rigidbody.angularDrag = 5f;
+            }
         }
     }
 
@@ -42,16 +53,19 @@ public class Grape : MonoBehaviour {
             _rigidbody.drag = 2f;
             _rigidbody.angularDrag = 0f;
             _canJump = false;
+            _jumpSquatTimer = 0f;
         }
     }
 
     public void Expand() {
         Vector3 dir = (transform.position - swarmCenter.position).normalized;
+        dir.y = 0;
         appliedForce += dir * expandSpeed;
     }
 
     public void Contract() {
         Vector3 dir = (swarmCenter.position - transform.position).normalized;
+        dir.y = 0;
         appliedForce += dir * expandSpeed;
     }
 }

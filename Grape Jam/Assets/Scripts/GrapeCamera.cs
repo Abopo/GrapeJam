@@ -3,26 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GrapeCamera : MonoBehaviour {
-    Transform grapeSwarm;
+    Transform _grapeSwarm;
+    Camera _mainCamera;
 
-    Vector3 rotateAxis;
-    float rotateSpeed = 50f;
+    Vector3 _rotateAxis;
+    float _rotateSpeed = 50f;
+    float _speedOffset = 0f;
 
     float _moveSpeed = 10f;
-    float _minHeight = 1f;
-    float _maxHeight = 8f;
+    float _minHeight = 4.5f;
+    float _maxHeight = 15f;
 
-	// Use this for initialization
-	void Start () {
-        grapeSwarm = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
+    bool _usingController = false;
 
-        rotateAxis = Vector3.zero;
+    // Use this for initialization
+    void Start () {
+        _grapeSwarm = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
+        _mainCamera = GetComponent<Camera>();
+
+        _rotateAxis = Vector3.zero;
+
+        if (Input.GetJoystickNames().Length > 0) {
+            _usingController = true;
+        }
 
         AttachToSwarm();
 	}
 
     void AttachToSwarm() {
-        transform.position = grapeSwarm.position;
+        transform.position = _grapeSwarm.position;
         transform.Translate(0f, 5f, -15f, Space.World);
     }
 
@@ -30,28 +39,83 @@ public class GrapeCamera : MonoBehaviour {
     void Update () {
         CheckInput();
 
-        transform.RotateAround(grapeSwarm.transform.position, rotateAxis, rotateSpeed * Time.deltaTime);
-        transform.LookAt(grapeSwarm);
-        rotateAxis = Vector3.zero;
+        transform.RotateAround(_grapeSwarm.transform.position, _rotateAxis, (_rotateSpeed * _speedOffset) * Time.deltaTime);
+        AdjustDistance();
+
+        if (transform.localPosition.y > _maxHeight) {
+            transform.localPosition = new Vector3(transform.localPosition.x, _maxHeight, transform.localPosition.z);
+        } else if (transform.localPosition.y < _minHeight) {
+            transform.localPosition = new Vector3(transform.localPosition.x, _minHeight, transform.localPosition.z);
+        }
+
+        transform.LookAt(_grapeSwarm);
+
+        _rotateAxis = Vector3.zero;
     }
     
     void CheckInput() {
-        if(Input.GetKey(KeyCode.LeftArrow)) {
-            rotateAxis.y = 1.0f;
-        }
-        if(Input.GetKey(KeyCode.RightArrow)) {
-            rotateAxis.y = -1.0f;
-        }
-        if(Input.GetKey(KeyCode.UpArrow)) {
-            transform.Translate(0f, _moveSpeed * Time.deltaTime, 0f, Space.World);
-            if(transform.localPosition.y > _maxHeight) {
-                transform.localPosition = new Vector3(transform.localPosition.x, _maxHeight, transform.localPosition.z);
+        if (_usingController) {
+            _rotateAxis.y = Input.GetAxis("CameraHorizontal");
+            _speedOffset = Mathf.Abs(Input.GetAxis("CameraHorizontal"));
+            if (Input.GetAxis("CameraVertical") != 0) {
+                transform.Translate(0f, (_moveSpeed * Input.GetAxis("CameraVertical")) * Time.deltaTime, 0f, Space.World);
+            }
+
+            if (Input.GetAxis("CameraZoom") > 0) {
+                Vector3 dir = (_grapeSwarm.position - transform.position).normalized;
+                transform.Translate(transform.forward * 5f * Time.deltaTime, Space.World);
+            }
+            if(Input.GetAxis("CameraZoom") < 0) {
+                Vector3 dir = (_grapeSwarm.position - transform.position).normalized;
+                transform.Translate(transform.forward * -5f * Time.deltaTime, Space.World);
+            }
+        } else {
+            if (Input.GetKey(KeyCode.LeftArrow)) {
+                _rotateAxis.y = 1.0f;
+            }
+            if (Input.GetKey(KeyCode.RightArrow)) {
+                _rotateAxis.y = -1.0f;
+            }
+            if (Input.GetKey(KeyCode.UpArrow)) {
+                transform.Translate(0f, _moveSpeed * Time.deltaTime, 0f, Space.World);
+                if (transform.localPosition.y > _maxHeight) {
+                    transform.localPosition = new Vector3(transform.localPosition.x, _maxHeight, transform.localPosition.z);
+                }
+            }
+            if (Input.GetKey(KeyCode.DownArrow)) {
+                transform.Translate(0f, -_moveSpeed * Time.deltaTime, 0f, Space.World);
+                if (transform.localPosition.y < _minHeight) {
+                    transform.localPosition = new Vector3(transform.localPosition.x, _minHeight, transform.localPosition.z);
+                }
             }
         }
-        if(Input.GetKey(KeyCode.DownArrow)) {
-            transform.Translate(0f, -_moveSpeed * Time.deltaTime, 0f, Space.World);
-            if (transform.localPosition.y < _minHeight) {
-                transform.localPosition = new Vector3(transform.localPosition.x, _minHeight, transform.localPosition.z);
+
+        if(Input.GetKeyDown(KeyCode.Return)) {
+            transform.LookAt(_grapeSwarm);
+        }
+    }
+
+    // Zooms in/out based on spread of swarm
+    void AdjustDistance() {
+        float averageSpread = _grapeSwarm.GetComponent<GrapeSwarm>().AverageSpread();
+        float wantDistance = 2f * averageSpread;
+        float curDist = (transform.position - _grapeSwarm.transform.position).magnitude;
+
+        Debug.Log("Want Dist : " + wantDistance.ToString());
+        Debug.Log("Cur Dist : " + curDist.ToString());
+        Debug.DrawRay(transform.position, transform.forward * 5, Color.red);
+
+        if(wantDistance < 15f) {
+            wantDistance = 15f;
+        }
+
+        if (Mathf.Abs(Mathf.Abs(curDist) - Mathf.Abs(wantDistance)) > 1f) {
+            Vector3 dir = (_grapeSwarm.position - transform.position).normalized;
+
+            if (curDist < wantDistance) {
+                transform.Translate(dir * -5f * Time.deltaTime, Space.World);
+            } else if (curDist > wantDistance) {
+                transform.Translate(dir * 5f * Time.deltaTime, Space.World);
             }
         }
     }
