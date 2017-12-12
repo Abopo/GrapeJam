@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GrapeSwarm : MonoBehaviour {
-    public float moveForce = 15;
+    public float groundMoveForce;
+    public float airMoveForce;
     public float jumpForce = 500;
 
     Grape[] _grapes;
     Transform _camera;
 
-    Vector3 _appliedForce;
+    Vector3 _forceDirX;
+    Vector3 _forceDirZ;
     Vector3 _rotateAxis;
     float _rotateSpeed = 75f;
     bool _tryJump;
@@ -20,15 +22,9 @@ public class GrapeSwarm : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        GameObject[] gs = GameObject.FindGameObjectsWithTag("Grape");
         _camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
-        _grapes = new Grape[gs.Length];
-        int index = 0;
-        foreach(GameObject g in gs) {
-            _grapes[index] = g.GetComponent<Grape>();
-            ++index;
-        }
+        InitializeGrapes();
 
         _tryJump = false;
         _expand = false;
@@ -38,16 +34,29 @@ public class GrapeSwarm : MonoBehaviour {
             _usingController = true;
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void InitializeGrapes() {
+        GameObject[] gs = GameObject.FindGameObjectsWithTag("Grape");
+        _grapes = new Grape[gs.Length];
+        int index = 0;
+        foreach (GameObject g in gs) {
+            _grapes[index] = g.GetComponent<Grape>();
+            _grapes[index].groundMoveForce = groundMoveForce;
+            _grapes[index].airMoveForce = airMoveForce;
+            ++index;
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         CheckInput();
 
         CommandSwarm();
 
 		FollowSwarm();
 
-        _appliedForce = Vector3.zero;
+        _forceDirX = Vector3.zero;
+        _forceDirZ = Vector3.zero;
         _rotateAxis = Vector3.zero;
     }
 
@@ -55,25 +64,25 @@ public class GrapeSwarm : MonoBehaviour {
         Vector3 horComPos = new Vector3(_camera.position.x, transform.position.y, _camera.position.z);
 
         if (_usingController) {
-            _appliedForce += (transform.position - horComPos).normalized * (moveForce * Input.GetAxis("Vertical"));
-            _appliedForce += _camera.right * (moveForce * Input.GetAxis("Horizontal"));
+            _forceDirZ += (transform.position - horComPos).normalized;
+            _forceDirX += _camera.right;
         } else {
             if (Input.GetKey(KeyCode.W)) {
                 // Move forward
                 //_appliedForce.z = moveForce;
-                _appliedForce += (transform.position - horComPos).normalized * moveForce;
+                _forceDirZ += (transform.position - horComPos).normalized;
             }
             if (Input.GetKey(KeyCode.S)) {
                 //_appliedForce.z = -moveForce;
-                _appliedForce += (transform.position - horComPos).normalized * -moveForce;
+                _forceDirZ += (transform.position - horComPos).normalized;
             }
             if (Input.GetKey(KeyCode.D)) {
                 //_appliedForce.x = moveForce;
-                _appliedForce += _camera.right * moveForce;
+                _forceDirX += _camera.right;
             }
             if (Input.GetKey(KeyCode.A)) {
                 //_appliedForce.x = -moveForce;
-                _appliedForce += _camera.right * -moveForce;
+                _forceDirX += _camera.right;
             }
         }
         if (Input.GetKey(KeyCode.Q) || Input.GetButton("RotateLeft")) {
@@ -92,16 +101,17 @@ public class GrapeSwarm : MonoBehaviour {
             _contract = true;
         }
 
-        if (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")) {
             // Jump
             //_appliedForce.y = jumpForce;
             _tryJump = true;
-        }        
+        }
     }
 
     void CommandSwarm() {
         foreach (Grape g in _grapes) {
-            g.appliedForce = _appliedForce;
+            g.forceDirZ = _forceDirX;
+            g.forceDirX = _forceDirZ;
             g.transform.RotateAround(transform.position, _rotateAxis, _rotateSpeed * Time.deltaTime);
 
             if (_tryJump) {

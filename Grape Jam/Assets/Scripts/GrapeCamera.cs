@@ -101,10 +101,6 @@ public class GrapeCamera : MonoBehaviour {
         float wantDistance = 2f * averageSpread;
         float curDist = (transform.position - _grapeSwarm.transform.position).magnitude;
 
-        Debug.Log("Want Dist : " + wantDistance.ToString());
-        Debug.Log("Cur Dist : " + curDist.ToString());
-        Debug.DrawRay(transform.position, transform.forward * 5, Color.red);
-
         if(wantDistance < 15f) {
             wantDistance = 15f;
         }

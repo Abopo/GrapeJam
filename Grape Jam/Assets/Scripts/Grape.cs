@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Grape : MonoBehaviour {
-    public Vector3 appliedForce;
+    public float groundMoveForce;
+    public float airMoveForce;
+    public Vector3 forceDirX;
+    public Vector3 forceDirZ;
 
+    float _curMoveForce;
+    Vector3 _appliedForce;
+    float _maxMoveSpeed = 15f;
     Rigidbody _rigidbody;
     public Rigidbody Rigidbody {
         get { return _rigidbody; }
@@ -14,7 +20,12 @@ public class Grape : MonoBehaviour {
     float expandSpeed = 12f;
 
     bool _canJump;
-    float _jumpSquatTime = 0.25f;
+    float _groundDrag = 0f;
+    float _groundAngularDrag = 5f;
+    float _airDrag = 3f;
+    float _airAngularDrag = 1f;
+
+    float _jumpSquatTime = 0.05f;
     float _jumpSquatTimer = 0f;
 
     // Use this for initialization
@@ -24,34 +35,60 @@ public class Grape : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        _rigidbody.AddForce(appliedForce);
+	void LateUpdate () {
+        DetermineForce();
+
+        _rigidbody.AddForce(_appliedForce);
 
         if(!_canJump) {
             _jumpSquatTimer += Time.deltaTime;
         }
 
-        appliedForce = Vector3.zero;
+        _appliedForce = Vector3.zero;
 	}
 
+    void DetermineForce() {
+        _appliedForce += forceDirX * (_curMoveForce * Input.GetAxis("Vertical"));
+        _appliedForce += forceDirZ * (_curMoveForce * Input.GetAxis("Horizontal"));
+
+        // Don't add force if we've exceeded the max speed
+        if(Mathf.Abs(_rigidbody.velocity.x) > _maxMoveSpeed && 
+            Mathf.Sign(_rigidbody.velocity.x) == Mathf.Sign(_appliedForce.x)) {
+            _appliedForce.x = 0;
+        }
+        if (Mathf.Abs(_rigidbody.velocity.z) > _maxMoveSpeed &&
+            Mathf.Sign(_rigidbody.velocity.z) == Mathf.Sign(_appliedForce.z)) {
+            _appliedForce.z = 0;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision) {
-        if(collision.collider.tag == "Ground" && _jumpSquatTimer > _jumpSquatTime) {
+        CheckFloor(collision);
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        CheckFloor(collision);
+    }
+
+    void CheckFloor(Collision collision) {
+        if ((collision.collider.tag == "Ground" || collision.collider.tag == "Grape") &&
+            _jumpSquatTimer > _jumpSquatTime) {
             // Make sure we collided from the bottom
             Vector3 closestPoint = collision.collider.ClosestPoint(transform.position);
-            if (closestPoint.y < transform.position.y) {
+            if (transform.position.y - closestPoint.y > 0.15f) {
                 // We've hit the floor
                 _canJump = true;
-                _rigidbody.drag = 0f;
-                _rigidbody.angularDrag = 5f;
+                _curMoveForce = groundMoveForce;
+                _rigidbody.angularDrag = _groundAngularDrag;
             }
         }
     }
 
     public void TryJump(float jumpForce) {
         if(_canJump) {
-            appliedForce.y = jumpForce;
-            _rigidbody.drag = 2f;
-            _rigidbody.angularDrag = 0f;
+            _appliedForce.y = jumpForce;
+            _curMoveForce = airMoveForce;
+            _rigidbody.angularDrag = _airAngularDrag;
             _canJump = false;
             _jumpSquatTimer = 0f;
         }
@@ -60,12 +97,12 @@ public class Grape : MonoBehaviour {
     public void Expand() {
         Vector3 dir = (transform.position - swarmCenter.position).normalized;
         dir.y = 0;
-        appliedForce += dir * expandSpeed;
+        _appliedForce += dir * expandSpeed;
     }
 
     public void Contract() {
         Vector3 dir = (swarmCenter.position - transform.position).normalized;
         dir.y = 0;
-        appliedForce += dir * expandSpeed;
+        _appliedForce += dir * expandSpeed;
     }
 }
