@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4010307047158656}
   - component: {fileID: 212267004896782302}
   - component: {fileID: 114463121253667424}
+  - component: {fileID: 114280829258799328}
   m_Layer: 8
   m_Name: Outline
   m_TagString: Untagged
@@ -41,7 +42,7 @@ GameObject:
   - component: {fileID: 23062987402068426}
   - component: {fileID: 54753265714247354}
   - component: {fileID: 114530301158765520}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grape
   m_TagString: Grape
   m_Icon: {fileID: 0}
@@ -84,6 +85,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -99,6 +101,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -129,6 +132,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &114280829258799328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1069079693794096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0aee85b86606094384907b96857850f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &114463121253667424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88416968e509fce48ba64770f8f18355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCamera: {fileID: 0}
+  depthCamera: {fileID: 0}
 --- !u!114 &114530301158765520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +194,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -192,6 +210,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
