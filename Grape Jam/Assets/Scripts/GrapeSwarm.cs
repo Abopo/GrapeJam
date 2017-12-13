@@ -7,7 +7,7 @@ public class GrapeSwarm : MonoBehaviour {
     public float airMoveForce;
     public float jumpForce = 500;
 
-    Grape[] _grapes;
+    List<Grape> _grapes = new List<Grape>();
     Transform _camera;
 
     Vector3 _forceDirX;
@@ -37,10 +37,9 @@ public class GrapeSwarm : MonoBehaviour {
 
     void InitializeGrapes() {
         GameObject[] gs = GameObject.FindGameObjectsWithTag("Grape");
-        _grapes = new Grape[gs.Length];
         int index = 0;
         foreach (GameObject g in gs) {
-            _grapes[index] = g.GetComponent<Grape>();
+            _grapes.Add(g.GetComponent<Grape>());
             _grapes[index].groundMoveForce = groundMoveForce;
             _grapes[index].airMoveForce = airMoveForce;
             ++index;
@@ -136,7 +135,7 @@ public class GrapeSwarm : MonoBehaviour {
             totalPosition += grape.transform.position;
         }
 
-        Vector3 averagePosition = totalPosition / _grapes.Length;
+        Vector3 averagePosition = totalPosition / _grapes.Count;
 
         transform.position = averagePosition;
     }
@@ -148,8 +147,13 @@ public class GrapeSwarm : MonoBehaviour {
             averageSpread += (transform.position - g.transform.position).magnitude;
         }
 
-        averageSpread = averageSpread / _grapes.Length;
+        averageSpread = averageSpread / _grapes.Count;
 
         return averageSpread;
+    }
+
+    public void LoseGrape(Grape grape) {
+        _grapes.Remove(grape);
+        FollowSwarm();
     }
 }

@@ -16,8 +16,8 @@ public class Grape : MonoBehaviour {
         get { return _rigidbody; }
     }
 
-    Transform swarmCenter;
-    float expandSpeed = 12f;
+    Transform _swarmCenter;
+    float _expandSpeed = 12f;
 
     bool _canJump;
     float _groundDrag = 0f;
@@ -31,7 +31,7 @@ public class Grape : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
-        swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
+        _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
 	}
 	
 	// Update is called once per frame
@@ -64,6 +64,18 @@ public class Grape : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         CheckFloor(collision);
+
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Death Plane") {
+            // Remove self from swarm
+            _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
+
+            // Destroy this grape
+            DestroyObject(this.gameObject);
+        }
+
     }
 
     private void OnCollisionStay(Collision collision) {
@@ -95,14 +107,14 @@ public class Grape : MonoBehaviour {
     }
 
     public void Expand() {
-        Vector3 dir = (transform.position - swarmCenter.position).normalized;
+        Vector3 dir = (transform.position - _swarmCenter.position).normalized;
         dir.y = 0;
-        _appliedForce += dir * expandSpeed;
+        _appliedForce += dir * _expandSpeed;
     }
 
     public void Contract() {
-        Vector3 dir = (swarmCenter.position - transform.position).normalized;
+        Vector3 dir = (_swarmCenter.position - transform.position).normalized;
         dir.y = 0;
-        _appliedForce += dir * expandSpeed;
+        _appliedForce += dir * _expandSpeed;
     }
 }
