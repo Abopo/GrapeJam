@@ -5,7 +5,7 @@ using UnityEngine;
 public class Button_Toggle : MonoBehaviour {
 
     [SerializeField] bool Active = false;
-    [SerializeField] GameObject ObjectToToggle = null;
+    [SerializeField] ActivateableObject ObjectToToggle = null;
 
     // Use this for initialization
     void Start() {
@@ -24,7 +24,7 @@ public class Button_Toggle : MonoBehaviour {
 
         //TODO: Swap Between On/Off visually
 
-        ObjectToToggle.SetActive(!ObjectToToggle.activeSelf);
+        ObjectToToggle.Toggle();
         Active = !Active;
     }
 }

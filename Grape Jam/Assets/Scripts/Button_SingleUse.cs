@@ -5,7 +5,7 @@ using UnityEngine;
 public class Button_SingleUse : MonoBehaviour {
 
     [SerializeField] bool Active = false;
-    [SerializeField] GameObject ObjectToToggle = null;
+    [SerializeField] ActivateableObject ObjectToActivate = null;
 
 	// Use this for initialization
 	void Start () {
@@ -19,15 +19,13 @@ public class Button_SingleUse : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (ObjectToToggle == null)
+        if (ObjectToActivate == null)
             return;
 
         //TODO: Swap Between On/Off visually
 
-        if (!Active)
-        {
-            Active = true;
-            ObjectToToggle.SetActive(!ObjectToToggle.activeSelf);
-        }
+        Active = true;
+        ObjectToActivate.Activate();
+        //ObjectToActivate.Toggle();
     }
 }

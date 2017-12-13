@@ -154,6 +154,12 @@ public class GrapeSwarm : MonoBehaviour {
 
     public void AddGrape(Grape grape) {
         _grapes.Add(grape);
+        grape.airMoveForce = airMoveForce;
+        grape.groundMoveForce = groundMoveForce;
         FollowSwarm();
+    }
+
+    public int GetGrapeCount() {
+        return _grapes.Count;
     }
 }

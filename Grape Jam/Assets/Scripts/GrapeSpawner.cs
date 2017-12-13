@@ -6,30 +6,37 @@ public class GrapeSpawner : MonoBehaviour {
 
     [SerializeField] GrapeSwarm Swarm = null;
     [SerializeField] Grape Grape = null;
-    [SerializeField] Transform Parent = null;
+    [SerializeField] float SpawnRate = 1.0f;
+    [SerializeField] int MaxGrapes = 10;
+
+    float _timer = 0.0f;
 
 	// Use this for initialization
 	void Start () {
-		
+        _timer = 0.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        _timer += Time.deltaTime;
 	}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (Grape == null || Parent == null)
+    private void OnTriggerEnter(Collider other) {
+        SpawnGrape(other);
+    }
+
+    private void OnTriggerStay(Collider other) {
+        SpawnGrape(other);
+    }
+
+    private void SpawnGrape(Collider other) {
+        if (other.tag != "Grape")
             return;
 
-        if(other.tag == "Grape")
-        {
-            // TODO: Check minimum number of grapes for level
-
-            //Transform position = this.transform;
-            //position.Translate(new Vector3(0, 1, 0));
-            Swarm.AddGrape(Instantiate(Grape, transform.position, Quaternion.identity));
+        if (_timer > SpawnRate && Swarm.GetGrapeCount() < MaxGrapes) {
+            Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+            Swarm.AddGrape(newGrape);
+            _timer = 0.0f;
         }
     }
 }
