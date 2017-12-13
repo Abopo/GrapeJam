@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/InitialTesting - Josh.unity
-  isLoaded: 1
-  isActive: 1
