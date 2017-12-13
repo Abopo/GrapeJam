@@ -106,6 +106,13 @@ public class Grape : MonoBehaviour {
         }
     }
 
+    public void Orbit(float dir) {
+        Vector3 towardCenter = (_swarmCenter.position - transform.position).normalized;
+        _rigidbody.AddForce(towardCenter * 1.5f);
+        Vector3 right = Vector3.Cross(towardCenter, Vector3.up);
+        _rigidbody.AddForce(right * 5 * dir);
+    }
+
     public void Expand() {
         Vector3 dir = (transform.position - _swarmCenter.position).normalized;
         dir.y = 0;
