@@ -51,10 +51,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Button_SingleUse.cs" />
+     <Compile Include="Assets\Button_Toggle.cs" />
      <Compile Include="Assets\Scripts\Grape.cs" />
      <Compile Include="Assets\Scripts\GrapeCamera.cs" />
      <Compile Include="Assets\Scripts\GrapeSwarm.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\Visuals\Billboard.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -156,4 +156,9 @@ public class GrapeSwarm : MonoBehaviour {
         _grapes.Remove(grape);
         FollowSwarm();
     }
+
+    public void AddGrape(Grape grape) {
+        _grapes.Add(grape);
+        FollowSwarm();
+    }
 }
