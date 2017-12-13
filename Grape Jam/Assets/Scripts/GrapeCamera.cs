@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GrapeCamera : MonoBehaviour {
     Transform _grapeSwarm;
-    Camera _mainCamera;
 
     Vector3 _rotateAxis;
     float _rotateSpeed = 50f;
@@ -12,14 +11,13 @@ public class GrapeCamera : MonoBehaviour {
 
     float _moveSpeed = 10f;
     float _minHeight = 4.5f;
-    float _maxHeight = 15f;
+    float _maxHeight = 20f;
 
     bool _usingController = false;
 
     // Use this for initialization
     void Start () {
         _grapeSwarm = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
-        _mainCamera = GetComponent<Camera>();
 
         _rotateAxis = Vector3.zero;
 
@@ -100,10 +98,6 @@ public class GrapeCamera : MonoBehaviour {
         float averageSpread = _grapeSwarm.GetComponent<GrapeSwarm>().AverageSpread();
         float wantDistance = 2f * averageSpread;
         float curDist = (transform.position - _grapeSwarm.transform.position).magnitude;
-
-        Debug.Log("Want Dist : " + wantDistance.ToString());
-        Debug.Log("Cur Dist : " + curDist.ToString());
-        Debug.DrawRay(transform.position, transform.forward * 5, Color.red);
 
         if(wantDistance < 15f) {
             wantDistance = 15f;
