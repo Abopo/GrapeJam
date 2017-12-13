@@ -66,21 +66,11 @@ public class GrapeSwarm : MonoBehaviour {
             _forceDirZ += (transform.position - horComPos).normalized;
             _forceDirX += _camera.right;
         } else {
-            if (Input.GetKey(KeyCode.W)) {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) {
                 // Move forward
-                //_appliedForce.z = moveForce;
                 _forceDirZ += (transform.position - horComPos).normalized;
             }
-            if (Input.GetKey(KeyCode.S)) {
-                //_appliedForce.z = -moveForce;
-                _forceDirZ += (transform.position - horComPos).normalized;
-            }
-            if (Input.GetKey(KeyCode.D)) {
-                //_appliedForce.x = moveForce;
-                _forceDirX += _camera.right;
-            }
-            if (Input.GetKey(KeyCode.A)) {
-                //_appliedForce.x = -moveForce;
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) {
                 _forceDirX += _camera.right;
             }
         }
@@ -111,7 +101,12 @@ public class GrapeSwarm : MonoBehaviour {
         foreach (Grape g in _grapes) {
             g.forceDirZ = _forceDirX;
             g.forceDirX = _forceDirZ;
-            g.transform.RotateAround(transform.position, _rotateAxis, _rotateSpeed * Time.deltaTime);
+            if(_rotateAxis.y > 0) {
+                g.Orbit(1);
+            } else if(_rotateAxis.y < 0) {
+                g.Orbit(-1);
+            }
+            //g.transform.RotateAround(transform.position, _rotateAxis, _rotateSpeed * Time.deltaTime);
 
             if (_tryJump) {
                 g.TryJump(jumpForce);
