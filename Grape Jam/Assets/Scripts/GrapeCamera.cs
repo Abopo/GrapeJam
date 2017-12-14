@@ -15,6 +15,8 @@ public class GrapeCamera : MonoBehaviour {
 
     bool _usingController = false;
 
+    Vector3 dampVel = Vector3.zero;
+
     // Use this for initialization
     void Start () {
         _grapeSwarm = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
@@ -105,12 +107,8 @@ public class GrapeCamera : MonoBehaviour {
 
         if (Mathf.Abs(Mathf.Abs(curDist) - Mathf.Abs(wantDistance)) > 1f) {
             Vector3 dir = (_grapeSwarm.position - transform.position).normalized;
-
-            if (curDist < wantDistance) {
-                transform.Translate(dir * -5f * Time.deltaTime, Space.World);
-            } else if (curDist > wantDistance) {
-                transform.Translate(dir * 5f * Time.deltaTime, Space.World);
-            }
+            Vector3 wantPos = _grapeSwarm.position - dir * wantDistance;
+            transform.position = Vector3.SmoothDamp(transform.position, wantPos, ref dampVel, 0.3f);
         }
     }
 }

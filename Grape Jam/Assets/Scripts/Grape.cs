@@ -108,9 +108,15 @@ public class Grape : MonoBehaviour {
 
     public void Orbit(float dir) {
         Vector3 towardCenter = (_swarmCenter.position - transform.position).normalized;
-        _rigidbody.AddForce(towardCenter * 1.5f);
         Vector3 right = Vector3.Cross(towardCenter, Vector3.up);
-        _rigidbody.AddForce(right * 5 * dir);
+        _rigidbody.AddForce(right * (_curMoveForce/2) * dir);
+        // Force is increased based on distance to center point to keep orbit consistent
+        float inwardForce = _curMoveForce;
+        float centerDist = (_swarmCenter.position - transform.position).magnitude;
+        if (centerDist > 1) {
+            inwardForce = inwardForce / centerDist;
+        }
+        _rigidbody.AddForce(towardCenter * inwardForce);
     }
 
     public void Expand() {
