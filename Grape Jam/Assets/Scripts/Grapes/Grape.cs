@@ -28,17 +28,21 @@ public class Grape : MonoBehaviour {
     float _jumpSquatTime = 0.05f;
     float _jumpSquatTimer = 0f;
 
+    bool _onSlide = false;
+
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
 	}
-	
-	// Update is called once per frame
-	void LateUpdate () {
-        DetermineForce();
 
-        _rigidbody.AddForce(_appliedForce);
+    // Update is called once per frame
+    void LateUpdate() {
+        if (!_onSlide) {
+            DetermineForce();
+
+            _rigidbody.AddForce(_appliedForce);
+        }
 
         if(!_canJump) {
             _jumpSquatTimer += Time.deltaTime;
@@ -65,6 +69,10 @@ public class Grape : MonoBehaviour {
     private void OnCollisionEnter(Collision collision) {
         CheckFloor(collision);
 
+        if (collision.collider.tag == "Trampoline") {
+            _canJump = true;
+            TryJump(collision.collider.GetComponent<Trampoline>().bounceForce);
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -75,15 +83,19 @@ public class Grape : MonoBehaviour {
             // Destroy this grape
             DestroyObject(this.gameObject);
         }
-
-    }
+    }    
 
     private void OnCollisionStay(Collision collision) {
         CheckFloor(collision);
+
+        if(collision.collider.tag == "Slide") {
+            // Don't apply any movement forces while in a slide
+            _onSlide = true;
+        }
     }
 
     void CheckFloor(Collision collision) {
-        if ((collision.collider.tag == "Ground" || collision.collider.tag == "Grape") &&
+        if ((collision.collider.tag == "Ground" || collision.collider.tag == "Grape" || collision.collider.tag == "Slide") &&
             _jumpSquatTimer > _jumpSquatTime) {
             // Make sure we collided from the bottom
             Vector3 closestPoint = collision.collider.ClosestPoint(transform.position);
@@ -92,6 +104,7 @@ public class Grape : MonoBehaviour {
                 _canJump = true;
                 _curMoveForce = groundMoveForce;
                 _rigidbody.angularDrag = _groundAngularDrag;
+                _onSlide = false;
             }
         }
     }
@@ -103,6 +116,7 @@ public class Grape : MonoBehaviour {
             _rigidbody.angularDrag = _airAngularDrag;
             _canJump = false;
             _jumpSquatTimer = 0f;
+            _onSlide = false;
         }
     }
 

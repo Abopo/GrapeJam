@@ -9,6 +9,8 @@ TagManager:
   - GrapeSwarm
   - Death Plane
   - Depth Camera
+  - Trampoline
+  - Slide
   layers:
   - Default
   - TransparentFX
