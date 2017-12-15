@@ -29,6 +29,7 @@ public class Grape : MonoBehaviour {
     float _jumpSquatTimer = 0f;
 
     bool _onSlide = false;
+    bool _takeInput = true;
 
     // Use this for initialization
     void Start () {
@@ -38,7 +39,7 @@ public class Grape : MonoBehaviour {
 
     // Update is called once per frame
     void LateUpdate() {
-        if (!_onSlide) {
+        if (!_onSlide && _takeInput) {
             DetermineForce();
 
             _rigidbody.AddForce(_appliedForce);
@@ -77,11 +78,7 @@ public class Grape : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Death Plane") {
-            // Remove self from swarm
-            _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
-
-            // Destroy this grape
-            DestroyObject(this.gameObject);
+            Die();
         }
     }    
 
@@ -143,5 +140,29 @@ public class Grape : MonoBehaviour {
         Vector3 dir = (_swarmCenter.position - transform.position).normalized;
         dir.y = 0;
         _appliedForce += dir * _expandSpeed;
+    }
+
+    public void Trim() {
+        // Remove self from swarm
+        _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
+
+        // Stop taking Input
+        _takeInput = false;
+    }
+
+    public void JoinSwarm() {
+        // Remove self from swarm
+        _swarmCenter.GetComponent<GrapeSwarm>().AddGrape(this);
+
+        // Stop taking Input
+        _takeInput = true;
+    }
+
+    public void Die() {
+        // Remove self from swarm
+        _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
+
+        // Destroy this grape
+        DestroyObject(this.gameObject);
     }
 }

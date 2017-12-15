@@ -95,6 +95,11 @@ public class GrapeSwarm : MonoBehaviour {
             //_appliedForce.y = jumpForce;
             _tryJump = true;
         }
+
+        if(Input.GetButtonDown("Trim")) {
+            // Cut away grapes outside of range
+            TrimGrapes();
+        }
     }
 
     void CommandSwarm() {
@@ -135,6 +140,34 @@ public class GrapeSwarm : MonoBehaviour {
         transform.position = averagePosition;
     }
 
+    void TrimGrapes() {
+        float averageDistance = AverageDistance();
+        averageDistance += 2.5f;
+        float tempMag = 0;
+        List<Grape> cutGrapes = new List<Grape>();
+        // Get the grapes to be cut
+        foreach (Grape g in _grapes) {
+            tempMag = (transform.position - g.transform.position).magnitude;
+            if(tempMag > averageDistance) {
+                cutGrapes.Add(g);
+            }
+        }
+        // Cut those grapes out 
+        // (This process takes both loops becuase you can't remove from the same list you are iterating through)
+        foreach(Grape g in cutGrapes) {
+            g.Trim();
+        }
+
+        // Add in any grapes that are within the ring
+        GameObject[] _allGrapes = GameObject.FindGameObjectsWithTag("Grape");
+        foreach(GameObject g in _allGrapes) {
+            tempMag = (transform.position - g.transform.position).magnitude;
+            if (tempMag < averageDistance && !_grapes.Contains(g.GetComponent<Grape>())) {
+                g.GetComponent<Grape>().JoinSwarm();
+            }
+        }
+    }
+
     public float FurthestGrapeDistance() {
         float furthest = 0;
 
@@ -149,6 +182,19 @@ public class GrapeSwarm : MonoBehaviour {
         return furthest;
     }
 
+    public float AverageDistance() {
+        float averageDis = 0;
+
+        foreach (Grape g in _grapes) {
+            averageDis += (transform.position - g.transform.position).magnitude;
+        }
+
+        averageDis = averageDis / _grapes.Count;
+
+
+        return averageDis;
+    }
+
     public void LoseGrape(Grape grape) {
         _grapes.Remove(grape);
         FollowSwarm();
@@ -158,7 +204,6 @@ public class GrapeSwarm : MonoBehaviour {
         _grapes.Add(grape);
         grape.airMoveForce = airMoveForce;
         grape.groundMoveForce = groundMoveForce;
-        FollowSwarm();
     }
 
     public int GetGrapeCount() {
