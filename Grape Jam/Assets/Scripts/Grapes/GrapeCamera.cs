@@ -98,6 +98,9 @@ public class GrapeCamera : MonoBehaviour {
     // Zooms in/out based on spread of swarm
     void AdjustDistance() {
         float furthestGrape = _grapeSwarm.GetComponent<GrapeSwarm>().FurthestGrapeDistance();
+        if(furthestGrape <= 1) {
+            furthestGrape = 1f;
+        }
         _maxHeight = furthestGrape * 10f;
         float wantDistance = 2f * furthestGrape;
         float curDist = (transform.position - _grapeSwarm.transform.position).magnitude;

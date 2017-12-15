@@ -26,7 +26,6 @@ public class GrapeOutline : MonoBehaviour {
 
         if(Physics.Raycast(_toCamera, out rayHit, toCam.magnitude, rayMask)) {
             _spriteRenderer.enabled = true;
-            Debug.Log(rayHit.collider.tag);
             Debug.DrawRay(_toCamera.origin, _toCamera.direction * toCam.magnitude);
         } else {
             _spriteRenderer.enabled = false;
