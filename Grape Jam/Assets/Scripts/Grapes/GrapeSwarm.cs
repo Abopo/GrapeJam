@@ -7,13 +7,14 @@ public class GrapeSwarm : MonoBehaviour {
     public float airMoveForce;
     public float jumpForce = 500;
 
+    public GrapeSpawner respawnPoint;
+
     List<Grape> _grapes = new List<Grape>();
     Transform _camera;
 
     Vector3 _forceDirX;
     Vector3 _forceDirZ;
     Vector3 _rotateAxis;
-    float _rotateSpeed = 75f;
     bool _tryJump;
     bool _expand;
     bool _contract;
@@ -25,6 +26,9 @@ public class GrapeSwarm : MonoBehaviour {
         _camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
         InitializeGrapes();
+        if(_grapes.Count == 0) {
+            respawnPoint.RespawnSwarm();
+        }
 
         _tryJump = false;
         _expand = false;
@@ -183,6 +187,10 @@ public class GrapeSwarm : MonoBehaviour {
     }
 
     public float AverageDistance() {
+        if(_grapes.Count <= 1) {
+            return 2f;
+        }
+
         float averageDis = 0;
 
         foreach (Grape g in _grapes) {
@@ -197,7 +205,9 @@ public class GrapeSwarm : MonoBehaviour {
 
     public void LoseGrape(Grape grape) {
         _grapes.Remove(grape);
-        FollowSwarm();
+        if(_grapes.Count <= 0) {
+            respawnPoint.RespawnSwarm();
+        }
     }
 
     public void AddGrape(Grape grape) {

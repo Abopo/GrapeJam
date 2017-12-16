@@ -24,8 +24,10 @@ public class Button_SingleUse : MonoBehaviour {
 
         //TODO: Swap Between On/Off visually
 
-        Active = true;
-        ObjectToActivate.Activate();
-        //ObjectToActivate.Toggle();
+        if (other.tag == "Grape") {
+            Active = true;
+            ObjectToActivate.Activate();
+            //ObjectToActivate.Toggle();
+        }
     }
 }

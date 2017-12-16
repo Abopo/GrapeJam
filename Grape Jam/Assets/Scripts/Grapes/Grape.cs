@@ -20,9 +20,7 @@ public class Grape : MonoBehaviour {
     float _expandSpeed = 12f;
 
     bool _canJump;
-    float _groundDrag = 0f;
     float _groundAngularDrag = 5f;
-    float _airDrag = 3f;
     float _airAngularDrag = 1f;
 
     float _jumpSquatTime = 0.05f;
@@ -35,6 +33,7 @@ public class Grape : MonoBehaviour {
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
+        _curMoveForce = airMoveForce;
 	}
 
     // Update is called once per frame
@@ -55,7 +54,7 @@ public class Grape : MonoBehaviour {
     void DetermineForce() {
         _appliedForce += forceDirX * (_curMoveForce * Input.GetAxis("Vertical"));
         _appliedForce += forceDirZ * (_curMoveForce * Input.GetAxis("Horizontal"));
-
+        
         // Don't add force if we've exceeded the max speed
         if(Mathf.Abs(_rigidbody.velocity.x) > _maxMoveSpeed && 
             Mathf.Sign(_rigidbody.velocity.x) == Mathf.Sign(_appliedForce.x)) {

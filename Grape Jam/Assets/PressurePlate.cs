@@ -6,6 +6,7 @@ public class PressurePlate : MonoBehaviour {
 
     [SerializeField] bool Active = false;
     [SerializeField] ActivateableObject ObjectToToggle = null;
+    [SerializeField] int requiredGrapes = 1;
 
     List<GameObject> _currentlyColliding;
     List<GameObject> _deadGrapes;
@@ -18,9 +19,6 @@ public class PressurePlate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (_currentlyColliding.Count == 0)
-            ObjectToToggle.Deactivate();
-
         // Failsafe for scenarios where objects within the list are deactivated 
         // while currently colliding with the trigger, and thus not calling OnTriggerExit
 
@@ -33,22 +31,35 @@ public class PressurePlate : MonoBehaviour {
                 _deadGrapes.Add(grape);
         }
 
-        foreach(GameObject deadGrape in _deadGrapes)
-        {
-            _currentlyColliding.Remove(deadGrape);
+        foreach(GameObject deadGrape in _deadGrapes) {
+            RemoveGrape(deadGrape);
         }
-
     }
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Grape") {
-            _currentlyColliding.Add((other.gameObject));
-            ObjectToToggle.Activate();
+            AddGrape(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (other.tag == "Grape")
-            _currentlyColliding.Remove(other.gameObject);
+        if (other.tag == "Grape") {
+            RemoveGrape(other.gameObject);
+        }
+    }
+
+    void AddGrape(GameObject grape) {
+        _currentlyColliding.Add(grape);
+        if (_currentlyColliding.Count >= requiredGrapes) {
+            ObjectToToggle.Activate();
+        }
+    }
+
+    void RemoveGrape(GameObject grape) {
+        _currentlyColliding.Remove(grape);
+
+        if (_currentlyColliding.Count < requiredGrapes) {
+            ObjectToToggle.Deactivate();
+        }
     }
 }

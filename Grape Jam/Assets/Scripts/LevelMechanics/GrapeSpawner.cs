@@ -6,37 +6,55 @@ public class GrapeSpawner : MonoBehaviour {
 
     [SerializeField] GrapeSwarm Swarm = null;
     [SerializeField] Grape Grape = null;
-    [SerializeField] float SpawnRate = 1.0f;
+    [SerializeField] float SpawnRate = 1f;
     [SerializeField] int MaxGrapes = 10;
 
     float _timer = 0.0f;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake() {
         _timer = 0.0f;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        Swarm = GameObject.FindGameObjectWithTag("GrapeSwarm").GetComponent<GrapeSwarm>();
+    }
+
+    // Use this for initialization
+    void Start () {
+    }
+
+    // Update is called once per frame
+    void Update () {
         _timer += Time.deltaTime;
 	}
 
     private void OnTriggerEnter(Collider other) {
-        SpawnGrape(other);
+        if (other.tag == "Grape") {
+            SpawnGrape(other);
+
+            Swarm.respawnPoint = this;
+        }
     }
 
     private void OnTriggerStay(Collider other) {
-        SpawnGrape(other);
+        if (other.tag == "Grape") {
+            SpawnGrape(other);
+        }
     }
 
     private void SpawnGrape(Collider other) {
-        if (other.tag != "Grape")
-            return;
-
         if (_timer > SpawnRate && Swarm.GetGrapeCount() < MaxGrapes) {
-            Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+            Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 4, 0), Quaternion.identity);
             Swarm.AddGrape(newGrape);
             _timer = 0.0f;
         }
+    }
+
+    private void SpawnGrape() {
+        Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 4, 0), Quaternion.identity);
+        Swarm.AddGrape(newGrape);
+        _timer = 0.0f;
+    }
+
+    public void RespawnSwarm() {
+        Swarm.transform.position = transform.position + new Vector3(0, 1, 0);
+        SpawnGrape();
     }
 }
