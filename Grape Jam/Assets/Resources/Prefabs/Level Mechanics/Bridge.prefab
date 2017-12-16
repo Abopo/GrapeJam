@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 59995461769374302}
   m_Layer: 0
   m_Name: Bridge
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1112553328019482}
   m_LocalRotation: {x: -0, y: -0, z: 0.5133833, w: 0.8581594}
   m_LocalPosition: {x: 34.22, y: 5.63, z: 69.38}
-  m_LocalScale: {x: 13.346101, y: 0.22605546, z: 5.361325}
+  m_LocalScale: {x: 13.346102, y: 0.22605549, z: 5.361325}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,7 +111,7 @@ HingeJoint:
   m_Anchor: {x: -0.49, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.50037116, y: 0.49978694, z: 0.2832532}
+  m_ConnectedAnchor: {x: 0.50037116, y: 0.49978685, z: 0.2832532}
   m_UseSpring: 0
   m_Spring:
     spring: 0

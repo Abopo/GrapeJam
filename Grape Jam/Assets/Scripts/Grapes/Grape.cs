@@ -15,6 +15,7 @@ public class Grape : MonoBehaviour {
     public Rigidbody Rigidbody {
         get { return _rigidbody; }
     }
+    AudioSource _audioSource;
 
     Transform _swarmCenter;
     float _expandSpeed = 12f;
@@ -32,6 +33,7 @@ public class Grape : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
+        _audioSource = GetComponent<AudioSource>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
 	}
@@ -113,6 +115,7 @@ public class Grape : MonoBehaviour {
             _canJump = false;
             _jumpSquatTimer = 0f;
             _onSlide = false;
+            _audioSource.Play();
         }
     }
 

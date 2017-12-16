@@ -250,19 +250,6 @@ Prefab:
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 1120134458}
-    - target: {fileID: 4417325104656702, guid: e8ee2924360e92744b5d4dd528b3f11b, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 13.346102
-      objectReference: {fileID: 0}
-    - target: {fileID: 4417325104656702, guid: e8ee2924360e92744b5d4dd528b3f11b, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.22605549
-      objectReference: {fileID: 0}
-    - target: {fileID: 59995461769374302, guid: e8ee2924360e92744b5d4dd528b3f11b,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0.49978685
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8ee2924360e92744b5d4dd528b3f11b, type: 2}
   m_IsPrefabParent: 0
@@ -926,6 +913,16 @@ Prefab:
     - target: {fileID: 1012237680591766, guid: 63d5bac607ef0c746b9326208185a54a, type: 2}
       propertyPath: m_Name
       value: Grape Swarm
+      objectReference: {fileID: 0}
+    - target: {fileID: 114373222881970836, guid: 63d5bac607ef0c746b9326208185a54a,
+        type: 2}
+      propertyPath: BGM
+      value: 
+      objectReference: {fileID: 1618391225}
+    - target: {fileID: 82377620373863616, guid: 63d5bac607ef0c746b9326208185a54a,
+        type: 2}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63d5bac607ef0c746b9326208185a54a, type: 2}
@@ -4088,6 +4085,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4723654282283878, guid: 3affabde90bf3b741826ace80532d436,
     type: 2}
   m_PrefabInternal: {fileID: 1682823052}
+--- !u!82 &1618391225 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82377620373863616, guid: 63d5bac607ef0c746b9326208185a54a,
+    type: 2}
+  m_PrefabInternal: {fileID: 437428628}
 --- !u!4 &1654959866 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4723654282283878, guid: 3affabde90bf3b741826ace80532d436,
