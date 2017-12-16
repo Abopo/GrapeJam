@@ -17,8 +17,7 @@ public class Button_SingleUse : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
         if (ObjectToActivate == null)
             return;
 

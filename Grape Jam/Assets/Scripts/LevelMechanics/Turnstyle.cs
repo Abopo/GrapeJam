@@ -6,9 +6,6 @@ public class Turnstyle : MonoBehaviour {
 
     [SerializeField] float RotationSpeed = 1.0f;
 
-
-
-
 	// Use this for initialization
 	void Start () {
 		
