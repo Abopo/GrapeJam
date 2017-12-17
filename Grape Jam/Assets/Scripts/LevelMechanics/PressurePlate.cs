@@ -50,7 +50,7 @@ public class PressurePlate : MonoBehaviour {
 
     void AddGrape(GameObject grape) {
         _currentlyColliding.Add(grape);
-        if (_currentlyColliding.Count >= requiredGrapes) {
+        if (_currentlyColliding.Count >= requiredGrapes && !Active) {
             ObjectToToggle.Activate();
         }
     }

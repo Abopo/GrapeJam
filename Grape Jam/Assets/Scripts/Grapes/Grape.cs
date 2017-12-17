@@ -164,4 +164,9 @@ public class Grape : MonoBehaviour {
         // Destroy this grape
         DestroyObject(this.gameObject);
     }
+
+    public void SetTakeInput(bool takeInput)
+    {
+        _takeInput = takeInput;
+    }
 }

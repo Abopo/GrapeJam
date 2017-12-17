@@ -205,6 +205,7 @@ public class GrapeSwarm : MonoBehaviour {
 
     public void LoseGrape(Grape grape) {
         _grapes.Remove(grape);
+        grape.SetTakeInput(false);
         if(_grapes.Count <= 0) {
             respawnPoint.RespawnSwarm();
         }
