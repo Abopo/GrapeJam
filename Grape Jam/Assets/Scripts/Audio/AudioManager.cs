@@ -1,27 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
     [SerializeField] AudioSource BGM = null;
-    private AudioSource[] SFX;
+    public List<AudioSource> SFX = null;
 
     float _masterVolume = 1.0f;
     float _bgmVolume = 1.0f;
     float _sfxVolume = 1.0f;
 
-	// Use this for initialization
-	void Start () {
-        SFX = FindObjectsOfType<AudioSource>();
-
-        PlayerPrefs.SetFloat("SFXVolume", 0.25f);
-
+	// Using Awake to make sure SFX is populated before SetVolume can be called when using volume sliders
+	void Awake () {
+        SFX = new List<AudioSource>();
+        SFX.AddRange(FindObjectsOfType<AudioSource>());
         SetVolume();
 	}
 	
-    void SetVolume()
+    public void SetVolume()
     {
+        if(BGM == null || SFX == null)
+            return;
+    
         _masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
         _sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1.0f);
         _bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 1.0f);

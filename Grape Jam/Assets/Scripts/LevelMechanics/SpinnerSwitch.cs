@@ -12,7 +12,7 @@ public class SpinnerSwitch : MonoBehaviour {
 
     [SerializeField] GameObject ObjectToModify = null;
     [SerializeField] float NumberOfRotations = 1;
-    [SerializeField] Direction SpinDirection = Direction.Clockwise;
+    //[SerializeField] Direction SpinDirection = Direction.Clockwise;
     [SerializeField] float Speed = 5;
 
     int numGrapesActing = 0;
@@ -20,7 +20,7 @@ public class SpinnerSwitch : MonoBehaviour {
 
     float totalForce = 0;
 
-    float _rotationValue = 0;
+   // float _rotationValue = 0;
     float _initialYRotation;
 
 	// Use this for initialization
