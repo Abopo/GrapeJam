@@ -15,16 +15,22 @@ public class Grape : MonoBehaviour {
     public Rigidbody Rigidbody {
         get { return _rigidbody; }
     }
+    AudioSource _audioSource;
 
     Transform _swarmCenter;
     float _expandSpeed = 12f;
 
     bool _canJump;
+    bool _justJumped;
     float _groundAngularDrag = 5f;
     float _airAngularDrag = 1f;
 
-    float _jumpSquatTime = 0.05f;
-    float _jumpSquatTimer = 0f;
+    float _jumpTime = 0.25f;
+    float _jumpTimer = 0f;
+
+    bool _leftGround = false;
+    float _fallCheckTime = 0.1f;
+    float _fallCheckTimer = 0f;
 
     bool _onSlide = false;
     bool _takeInput = true;
@@ -32,6 +38,7 @@ public class Grape : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
+        _audioSource = GetComponent<AudioSource>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
 	}
@@ -44,9 +51,7 @@ public class Grape : MonoBehaviour {
             _rigidbody.AddForce(_appliedForce);
         }
 
-        if(!_canJump) {
-            _jumpSquatTimer += Time.deltaTime;
-        }
+        UpdateTimers();
 
         _appliedForce = Vector3.zero;
 	}
@@ -66,12 +71,30 @@ public class Grape : MonoBehaviour {
         }
     }
 
+    void UpdateTimers() {
+        // Keeps track of when this grape can have it's jump canceled
+        if (!_canJump) {
+            _jumpTimer += Time.deltaTime;
+            if (_jumpTimer >= _jumpTime) {
+                _justJumped = false;
+            }
+        }
+
+        // Give small buffer after falling off a platform to jump
+        // (also allows jumping during small bounce off floor when landing)
+        if (_leftGround) {
+            _fallCheckTimer += Time.deltaTime;
+            if (_fallCheckTimer >= _fallCheckTime) {
+                _canJump = false;
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision collision) {
         CheckFloor(collision);
 
         if (collision.collider.tag == "Trampoline") {
-            _canJump = true;
-            TryJump(collision.collider.GetComponent<Trampoline>().bounceForce);
+            TrampolineBounce(collision.collider.GetComponent<Trampoline>().bounceForce);
         }
     }
 
@@ -90,30 +113,58 @@ public class Grape : MonoBehaviour {
         }
     }
 
+    private void OnCollisionExit(Collision collision) {
+        if(collision.collider.tag == "Ground" || collision.collider.tag == "Slide") {
+            _leftGround = true;
+            _fallCheckTimer = 0f;
+        }
+    }
+
     void CheckFloor(Collision collision) {
-        if ((collision.collider.tag == "Ground" || collision.collider.tag == "Grape" || collision.collider.tag == "Slide") &&
-            _jumpSquatTimer > _jumpSquatTime) {
+        if ((collision.collider.tag == "Ground" || collision.collider.tag == "Grape" || collision.collider.tag == "Slide") && 
+            _jumpTimer >= _jumpTime) {
             // Make sure we collided from the bottom
             Vector3 closestPoint = collision.collider.ClosestPoint(transform.position);
             if (transform.position.y - closestPoint.y > 0.15f) {
                 // We've hit the floor
                 _canJump = true;
+                _justJumped = false;
                 _curMoveForce = groundMoveForce;
                 _rigidbody.angularDrag = _groundAngularDrag;
                 _onSlide = false;
+                _leftGround = false;
             }
         }
     }
 
     public void TryJump(float jumpForce) {
-        if(_canJump) {
+        if(_canJump && !_onSlide) {
             _appliedForce.y = jumpForce;
             _curMoveForce = airMoveForce;
             _rigidbody.angularDrag = _airAngularDrag;
             _canJump = false;
-            _jumpSquatTimer = 0f;
-            _onSlide = false;
+            _jumpTimer = 0f;
+            _justJumped = true;
+            _audioSource.Play();
         }
+    }
+
+    public void JumpCancel(float jumpForce) {
+        if(_justJumped) {
+            _appliedForce.y = -jumpForce / 2;
+            _justJumped = false;
+        }
+    }
+
+    void TrampolineBounce(float bounceForce) {
+        _appliedForce.y = bounceForce;
+        _curMoveForce = airMoveForce;
+        _rigidbody.angularDrag = _airAngularDrag;
+        _canJump = false;
+        _justJumped = false;
+        _jumpTimer = 0f;
+        // TODO: make trampoline sound
+        _audioSource.Play();
     }
 
     public void Orbit(float dir) {

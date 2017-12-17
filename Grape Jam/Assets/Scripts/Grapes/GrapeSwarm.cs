@@ -16,6 +16,7 @@ public class GrapeSwarm : MonoBehaviour {
     Vector3 _forceDirZ;
     Vector3 _rotateAxis;
     bool _tryJump;
+    bool _jumpCancel;
     bool _expand;
     bool _contract;
 
@@ -31,6 +32,7 @@ public class GrapeSwarm : MonoBehaviour {
         }
 
         _tryJump = false;
+        _jumpCancel = false;
         _expand = false;
         _contract = false;
 
@@ -98,6 +100,9 @@ public class GrapeSwarm : MonoBehaviour {
             // Jump
             //_appliedForce.y = jumpForce;
             _tryJump = true;
+        } else if(Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("Jump")) {
+            // Cancel jump momentum
+            _jumpCancel = true;
         }
 
         if(Input.GetButtonDown("Trim")) {
@@ -120,6 +125,9 @@ public class GrapeSwarm : MonoBehaviour {
             if (_tryJump) {
                 g.TryJump(jumpForce);
             }
+            if(_jumpCancel) {
+                g.JumpCancel(jumpForce);
+            }
             if(_expand) {
                 g.Expand();
             }
@@ -129,6 +137,7 @@ public class GrapeSwarm : MonoBehaviour {
         }
 
         _tryJump = false;
+        _jumpCancel = false;
         _expand = false;
         _contract = false;
     }
