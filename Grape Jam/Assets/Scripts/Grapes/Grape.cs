@@ -41,7 +41,9 @@ public class Grape : MonoBehaviour {
         _audioSource = GetComponent<AudioSource>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
-	}
+
+        _audioSource.volume = PlayerPrefs.GetFloat("MasterVolume", 1.0f) * PlayerPrefs.GetFloat("SFXVolume", 1.0f);
+    }
 
     // Update is called once per frame
     void LateUpdate() {

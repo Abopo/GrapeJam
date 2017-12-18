@@ -6,7 +6,7 @@ public class PressurePlateSet : ActivateableObject {
 
     [SerializeField] ActivateableObject ObjectToActivate = null;
 
-    int requiredPlates = 1;
+    [SerializeField] int requiredPlates = 1;
     int plateCount = 0;
 
 	// Use this for initialization
