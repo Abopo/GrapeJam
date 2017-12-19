@@ -126,15 +126,16 @@ public class Grape : MonoBehaviour {
         if ((collision.collider.tag == "Ground" || collision.collider.tag == "Grape" || collision.collider.tag == "Slide") && 
             _jumpTimer >= _jumpTime) {
             // Make sure we collided from the bottom
-            Vector3 closestPoint = collision.collider.ClosestPoint(transform.position);
-            if (transform.position.y - closestPoint.y > 0.15f) {
-                // We've hit the floor
-                _canJump = true;
-                _justJumped = false;
-                _curMoveForce = groundMoveForce;
-                _rigidbody.angularDrag = _groundAngularDrag;
-                _onSlide = false;
-                _leftGround = false;
+            foreach (ContactPoint cp in collision.contacts) {
+                if (transform.position.y - cp.point.y > 0.15f) {
+                    // We've hit the floor
+                    _canJump = true;
+                    _justJumped = false;
+                    _curMoveForce = groundMoveForce;
+                    _rigidbody.angularDrag = _groundAngularDrag;
+                    _onSlide = false;
+                    _leftGround = false;
+                }
             }
         }
     }

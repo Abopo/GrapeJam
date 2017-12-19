@@ -11,10 +11,24 @@ public class PressurePlate : MonoBehaviour {
     List<GameObject> _currentlyColliding;
     List<GameObject> _deadGrapes;
 
+    MeshRenderer _meshRenderer;
+    Material _unactiveMaterial;
+    Material _activeMaterial;
+
+    float upYPos;
+    float downYPos;
+
     // Use this for initialization
     void Start () {
         _currentlyColliding = new List<GameObject>();
         _deadGrapes = new List<GameObject>();
+
+        _meshRenderer = transform.parent.GetComponent<MeshRenderer>();
+        _unactiveMaterial = Resources.Load<Material>("Blender/Materials/PressurePlate");
+        _activeMaterial = Resources.Load<Material>("Blender/Materials/PressurePlate2");
+
+        upYPos = transform.parent.position.y;
+        downYPos = upYPos - 0.15f;
 	}
 	
 	// Update is called once per frame
@@ -34,6 +48,14 @@ public class PressurePlate : MonoBehaviour {
         foreach(GameObject deadGrape in _deadGrapes) {
             RemoveGrape(deadGrape);
         }
+
+        if(_currentlyColliding.Count >= requiredGrapes && transform.parent.position.y > downYPos) {
+            // Move down
+            transform.parent.Translate(0f, -0.5f * Time.deltaTime, 0f, Space.World);
+        } else if (_currentlyColliding.Count < requiredGrapes && transform.parent.position.y < upYPos) {
+            // Move up
+            transform.parent.Translate(0f, 0.5f * Time.deltaTime, 0f, Space.World);
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -51,14 +73,15 @@ public class PressurePlate : MonoBehaviour {
     void AddGrape(GameObject grape) {
         _currentlyColliding.Add(grape);
         if (_currentlyColliding.Count >= requiredGrapes && !Active) {
+            _meshRenderer.material = _activeMaterial;
             ObjectToToggle.Activate();
         }
     }
 
     void RemoveGrape(GameObject grape) {
         _currentlyColliding.Remove(grape);
-
         if (_currentlyColliding.Count < requiredGrapes) {
+            _meshRenderer.material = _unactiveMaterial;
             ObjectToToggle.Deactivate();
         }
     }
