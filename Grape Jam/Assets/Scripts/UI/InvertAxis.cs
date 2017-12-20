@@ -61,6 +61,7 @@ public class InvertAxis : MonoBehaviour {
                     xInvert = 1;
 
                 PlayerPrefs.SetInt("XInverted", xInvert);
+                _grapeCamera.SetXInversion(TheToggle.isOn);
 
                 break;
             case Axis.Y:
@@ -72,6 +73,7 @@ public class InvertAxis : MonoBehaviour {
                     yInvert = 1;
 
                 PlayerPrefs.SetInt("YInverted", yInvert);
+                _grapeCamera.SetYInversion(TheToggle.isOn);
 
                 break;
             default:

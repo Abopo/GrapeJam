@@ -48,7 +48,9 @@ public class GrapeCamera : MonoBehaviour {
     void Update () {
         CheckInput();
 
+        // Invert horizontal rotation
         _rotateAxis.y *= _xInverted;
+
         transform.RotateAround(_grapeSwarm.transform.position, _rotateAxis, (_rotateSpeed * _speedOffset) * Time.deltaTime);
         AdjustDistance();
 
@@ -68,11 +70,7 @@ public class GrapeCamera : MonoBehaviour {
             _rotateAxis.y = Input.GetAxis("CameraHorizontal");
             _speedOffset = Mathf.Abs(Input.GetAxis("CameraHorizontal"));
             if (Input.GetAxis("CameraVertical") != 0) {
-                transform.Translate(0f, (_moveSpeed * Input.GetAxis("CameraVertical")) * Time.deltaTime * _xInverted, 0f, Space.World);
-
-                Debug.Log((_moveSpeed * Input.GetAxis("CameraVertical")) * Time.deltaTime * _yInverted);
-
-
+                transform.Translate(0f, (_moveSpeed * Input.GetAxis("CameraVertical")) * Time.deltaTime * _yInverted, 0f, Space.World);
             }
 
             if (Input.GetAxis("CameraZoom") > 0) {
@@ -145,9 +143,6 @@ public class GrapeCamera : MonoBehaviour {
             _yInverted = -1;
         else
             _yInverted = 1;
-
-        Debug.Log(_yInverted);
-
     }
 
     public void SetCameraSpeed(float speed)
