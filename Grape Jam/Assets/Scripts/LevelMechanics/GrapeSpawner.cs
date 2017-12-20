@@ -9,11 +9,14 @@ public class GrapeSpawner : MonoBehaviour {
     [SerializeField] float SpawnRate = 1f;
     [SerializeField] int MaxGrapes = 10;
 
+    AudioManager _audioManager = null;
+
     float _timer = 0.0f;
 
     private void Awake() {
         _timer = 0.0f;
         Swarm = GameObject.FindGameObjectWithTag("GrapeSwarm").GetComponent<GrapeSwarm>();
+        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Use this for initialization
@@ -43,6 +46,10 @@ public class GrapeSpawner : MonoBehaviour {
         if (_timer > SpawnRate && Swarm.GetGrapeCount() < MaxGrapes) {
             Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 4, 0), Quaternion.identity);
             Swarm.AddGrape(newGrape);
+
+            if (_audioManager != null)
+                _audioManager.AddAudioSource(newGrape.GetComponents<AudioSource>());
+
             _timer = 0.0f;
         }
     }
@@ -50,6 +57,10 @@ public class GrapeSpawner : MonoBehaviour {
     private void SpawnGrape() {
         Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 4, 0), Quaternion.identity);
         Swarm.AddGrape(newGrape);
+
+        if (_audioManager != null)
+            _audioManager.AddAudioSource(newGrape.GetComponents<AudioSource>());
+
         _timer = 0.0f;
     }
 

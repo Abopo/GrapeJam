@@ -52,7 +52,6 @@ public class VolumeSlider : MonoBehaviour {
                 break;
             case SliderType.SFX:
                 PlayerPrefs.SetFloat("SFXVolume", AudioSlider.value);
-                Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
                 PlayerPrefs.Save();
                 break;
             default:

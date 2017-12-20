@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour {
         SFX = new List<AudioSource>();
         SFX.AddRange(FindObjectsOfType<AudioSource>());
         SetVolume();
-	}
+    }
 	
     public void SetVolume()
     {
@@ -32,5 +32,17 @@ public class AudioManager : MonoBehaviour {
         }
 
         BGM.volume = _bgmVolume * _masterVolume;
+    }
+
+    public void AddAudioSource(AudioSource source)
+    {
+        SFX.Add(source);
+        SetVolume();
+    }
+
+    public void AddAudioSource(AudioSource[] source)
+    {
+        SFX.AddRange(source);
+        SetVolume();
     }
 }
