@@ -8,6 +8,9 @@ public class GrapeCamera : MonoBehaviour {
     Vector3 _rotateAxis;
     float _rotateSpeed = 50f;
     float _speedOffset = 0f;
+    int _xInverted = 1;
+    int _yInverted = 1;
+
 
     float _moveSpeed = 10f;
     float _minHeight = 4.5f;
@@ -19,6 +22,12 @@ public class GrapeCamera : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        _xInverted = PlayerPrefs.GetInt("XInverted", 1);
+        _yInverted = PlayerPrefs.GetInt("YInverted", 1);
+        _rotateSpeed = PlayerPrefs.GetFloat("CameraSpeed", 50);
+
+
         _grapeSwarm = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
 
         _rotateAxis = Vector3.zero;
@@ -39,6 +48,7 @@ public class GrapeCamera : MonoBehaviour {
     void Update () {
         CheckInput();
 
+        _rotateAxis.y *= _xInverted;
         transform.RotateAround(_grapeSwarm.transform.position, _rotateAxis, (_rotateSpeed * _speedOffset) * Time.deltaTime);
         AdjustDistance();
 
@@ -58,7 +68,11 @@ public class GrapeCamera : MonoBehaviour {
             _rotateAxis.y = Input.GetAxis("CameraHorizontal");
             _speedOffset = Mathf.Abs(Input.GetAxis("CameraHorizontal"));
             if (Input.GetAxis("CameraVertical") != 0) {
-                transform.Translate(0f, (_moveSpeed * Input.GetAxis("CameraVertical")) * Time.deltaTime, 0f, Space.World);
+                transform.Translate(0f, (_moveSpeed * Input.GetAxis("CameraVertical")) * Time.deltaTime * _xInverted, 0f, Space.World);
+
+                Debug.Log((_moveSpeed * Input.GetAxis("CameraVertical")) * Time.deltaTime * _yInverted);
+
+
             }
 
             if (Input.GetAxis("CameraZoom") > 0) {
@@ -114,5 +128,30 @@ public class GrapeCamera : MonoBehaviour {
             Vector3 wantPos = _grapeSwarm.position - dir * wantDistance;
             transform.position = Vector3.SmoothDamp(transform.position, wantPos, ref dampVel, 0.3f);
         }
+    }
+
+    public void SetXInversion(bool invert)
+    {
+        if (invert)
+            _xInverted = -1;
+        else
+            _xInverted = 1;
+
+    }
+
+    public void SetYInversion(bool invert)
+    {
+        if (invert)
+            _yInverted = -1;
+        else
+            _yInverted = 1;
+
+        Debug.Log(_yInverted);
+
+    }
+
+    public void SetCameraSpeed(float speed)
+    {
+        _rotateSpeed = speed;
     }
 }

@@ -10,13 +10,17 @@ public class VolumeSlider : MonoBehaviour {
         SFX
     }
 
-    [SerializeField] AudioManager Manager = null;
     [SerializeField] Slider AudioSlider = null;
     [SerializeField] Text ValueText = null;
     [SerializeField] SliderType Type = SliderType.Master;
 
+    AudioManager _audioManager = null;
+
 	// Use this for initialization
 	void Start () {
+
+        if (_audioManager == null)
+            _audioManager = FindObjectOfType<AudioManager>();
 
         switch(Type)
         {
@@ -28,15 +32,14 @@ public class VolumeSlider : MonoBehaviour {
                 break;
             case SliderType.SFX:
                 AudioSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1.0f);
-                Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
                 break;
             default:
                 break;
         }
 	}
-	
+
     public void OnValueChange() {
-        if (Manager == null || AudioSlider == null)
+        if (_audioManager == null || AudioSlider == null)
             return;
 
         switch(Type)
@@ -59,6 +62,6 @@ public class VolumeSlider : MonoBehaviour {
         if (ValueText != null)
             ValueText.text = ((int)(AudioSlider.value * 100)).ToString();
 
-        Manager.SetVolume();
+        _audioManager.SetVolume();
     }
 }
