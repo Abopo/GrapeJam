@@ -183,6 +183,10 @@ public class Grape : MonoBehaviour {
         _rigidbody.AddForce(towardCenter * inwardForce);
     }
 
+    public void CutOrbit() {
+        _rigidbody.velocity = new Vector3(_rigidbody.velocity.x / 4, _rigidbody.velocity.y, _rigidbody.velocity.z / 4);
+    }
+
     public void Expand() {
         Vector3 dir = (transform.position - _swarmCenter.position).normalized;
         dir.y = 0;

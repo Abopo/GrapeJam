@@ -11,6 +11,7 @@ TagManager:
   - Depth Camera
   - Trampoline
   - Slide
+  - LevelEnd
   layers:
   - Default
   - TransparentFX

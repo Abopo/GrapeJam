@@ -75,6 +75,7 @@ public class PressurePlate : MonoBehaviour {
         if (_currentlyColliding.Count >= requiredGrapes && !Active) {
             _meshRenderer.material = _activeMaterial;
             ObjectToToggle.Activate();
+            Debug.Log("activate");
         }
     }
 
@@ -83,6 +84,7 @@ public class PressurePlate : MonoBehaviour {
         if (_currentlyColliding.Count < requiredGrapes) {
             _meshRenderer.material = _unactiveMaterial;
             ObjectToToggle.Deactivate();
+            Debug.Log("deactivate");
         }
     }
 }

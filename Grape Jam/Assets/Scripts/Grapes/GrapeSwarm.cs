@@ -17,6 +17,7 @@ public class GrapeSwarm : MonoBehaviour {
     Vector3 _rotateAxis;
     bool _tryJump;
     bool _jumpCancel;
+    bool _endRotate;
     bool _expand;
     bool _contract;
 
@@ -33,6 +34,7 @@ public class GrapeSwarm : MonoBehaviour {
 
         _tryJump = false;
         _jumpCancel = false;
+        _endRotate = false;
         _expand = false;
         _contract = false;
 
@@ -83,9 +85,15 @@ public class GrapeSwarm : MonoBehaviour {
         if (Input.GetKey(KeyCode.Q) || Input.GetButton("RotateLeft")) {
             // Rotate the swarm
             _rotateAxis.y = -1f;
+        } else if (Input.GetKeyUp(KeyCode.Q) || Input.GetButtonUp("RotateLeft")) {
+            // cancel rotation momentum
+            _endRotate = true;
         }
         if (Input.GetKey(KeyCode.E) || Input.GetButton("RotateRight")) {
             _rotateAxis.y = 1f;
+        } else if (Input.GetKeyUp(KeyCode.E) || Input.GetButtonUp("RotateRight")) {
+            // cancel rotation momentum
+            _endRotate = true;
         }
         if (Input.GetKey(KeyCode.R) || (Input.GetAxis("Expand") > 0)) {
             // Expand the swarm
@@ -120,6 +128,9 @@ public class GrapeSwarm : MonoBehaviour {
             } else if(_rotateAxis.y < 0) {
                 g.Orbit(-1);
             }
+            if(_endRotate) {
+                g.CutOrbit();
+            }
             //g.transform.RotateAround(transform.position, _rotateAxis, _rotateSpeed * Time.deltaTime);
 
             if (_tryJump) {
@@ -138,6 +149,7 @@ public class GrapeSwarm : MonoBehaviour {
 
         _tryJump = false;
         _jumpCancel = false;
+        _endRotate = false;
         _expand = false;
         _contract = false;
     }

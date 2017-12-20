@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64135955550265198}
   m_Layer: 0
   m_Name: PressurePlate
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,8 +53,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1318700773721942}
   m_LocalRotation: {x: -0.7055564, y: -0.046799883, z: -0.046799883, w: 0.7055564}
-  m_LocalPosition: {x: -45.62, y: 7.4716134, z: -17.2}
-  m_LocalScale: {x: 1.3241421, y: 1.3241428, z: 0.14163299}
+  m_LocalPosition: {x: -69.49, y: 12.8, z: -4}
+  m_LocalScale: {x: 1.3241421, y: 1.3241433, z: 0.14163305}
   m_Children:
   - {fileID: 4659845607891508}
   m_Father: {fileID: 0}
