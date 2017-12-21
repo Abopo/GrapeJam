@@ -15,6 +15,7 @@ public class Grape : MonoBehaviour {
     public Rigidbody Rigidbody {
         get { return _rigidbody; }
     }
+    AudioManager _audioManager;
     AudioSource _audioSource;
 
     Transform _swarmCenter;
@@ -39,10 +40,12 @@ public class Grape : MonoBehaviour {
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
         _audioSource = GetComponent<AudioSource>();
+        _audioManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
 
-        _audioSource.volume = PlayerPrefs.GetFloat("MasterVolume", 1.0f) * PlayerPrefs.GetFloat("SFXVolume", 1.0f);
+        _audioManager.AddAudioSource(_audioSource);
+        ///_audioSource.volume = PlayerPrefs.GetFloat("MasterVolume", 1.0f) * PlayerPrefs.GetFloat("SFXVolume", 1.0f);
     }
 
     // Update is called once per frame
@@ -215,16 +218,30 @@ public class Grape : MonoBehaviour {
         _takeInput = true;
     }
 
+    public void Shoot() {
+        Vector3 shootForce;
+        shootForce.x = Random.Range(50, 100f);
+        shootForce.y = Random.Range(800f, 900f);
+        shootForce.z = Random.Range(50f, 100f);
+
+        if(_rigidbody == null) {
+            _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        _rigidbody.AddForce(shootForce);
+    }
+
     public void Die() {
         // Remove self from swarm
         _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
+
+        _audioManager.RemoveAudioSource(_audioSource);
 
         // Destroy this grape
         DestroyObject(this.gameObject);
     }
 
-    public void SetTakeInput(bool takeInput)
-    {
+    public void SetTakeInput(bool takeInput) {
         _takeInput = takeInput;
     }
 }

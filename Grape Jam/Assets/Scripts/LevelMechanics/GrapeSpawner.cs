@@ -30,7 +30,7 @@ public class GrapeSpawner : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Grape") {
-            SpawnGrape(other);
+            ShootGrape(other);
 
             Swarm.respawnPoint = this;
         }
@@ -38,7 +38,7 @@ public class GrapeSpawner : MonoBehaviour {
 
     private void OnTriggerStay(Collider other) {
         if (other.tag == "Grape") {
-            SpawnGrape(other);
+            ShootGrape(other);
         }
     }
 
@@ -54,6 +54,7 @@ public class GrapeSpawner : MonoBehaviour {
         }
     }
 
+
     private void SpawnGrape() {
         Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 4, 0), Quaternion.identity);
         Swarm.AddGrape(newGrape);
@@ -64,8 +65,35 @@ public class GrapeSpawner : MonoBehaviour {
         _timer = 0.0f;
     }
 
+    private void ShootGrape(Collider other) {
+        if (_timer > SpawnRate && Swarm.GetGrapeCount() < MaxGrapes) {
+            Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            newGrape.Shoot();
+
+            Swarm.AddGrape(newGrape);
+
+            if (_audioManager != null)
+                _audioManager.AddAudioSource(newGrape.GetComponents<AudioSource>());
+
+            _timer = 0.0f;
+        }
+    }
+
+    private void ShootGrape() {
+        Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        newGrape.Shoot();
+
+        Swarm.AddGrape(newGrape);
+
+        if (_audioManager != null)
+            _audioManager.AddAudioSource(newGrape.GetComponents<AudioSource>());
+
+        _timer = 0.0f;
+    }
+
+
     public void RespawnSwarm() {
         Swarm.transform.position = transform.position + new Vector3(0, 1, 0);
-        SpawnGrape();
+        ShootGrape();
     }
 }

@@ -12,6 +12,9 @@ public class GrapeSwarm : MonoBehaviour {
     List<Grape> _grapes = new List<Grape>();
     Transform _camera;
 
+    Vector3 _wantPos;
+    Vector3 _smoothDamp;
+
     Vector3 _forceDirX;
     Vector3 _forceDirZ;
     Vector3 _rotateAxis;
@@ -162,7 +165,15 @@ public class GrapeSwarm : MonoBehaviour {
 
         Vector3 averagePosition = totalPosition / _grapes.Count;
 
-        transform.position = averagePosition;
+        _wantPos = averagePosition;
+
+        float mag = (_wantPos - transform.position).magnitude;
+        if (mag > 1f) {
+            // Move towards the desired position
+            transform.position = Vector3.SmoothDamp(transform.position, _wantPos, ref _smoothDamp, 0.15f);
+        } else {
+            transform.position = _wantPos;
+        }
     }
 
     void TrimGrapes() {

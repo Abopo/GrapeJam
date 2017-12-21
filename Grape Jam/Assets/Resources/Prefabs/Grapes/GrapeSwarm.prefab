@@ -145,8 +145,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1012237680591766}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0.64257425, z: -0, w: 0.76622343}
+  m_LocalPosition: {x: 4.64, y: 5.62, z: -0.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4216112488641416}
@@ -154,7 +154,7 @@ Transform:
   - {fileID: 4095616068621924}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -79.968, z: 0}
 --- !u!4 &4674771906425686
 Transform:
   m_ObjectHideFlags: 1
@@ -227,7 +227,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294963656
+    m_Bits: 4294959560
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -370,6 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGM: {fileID: 82377620373863616}
+  SFX: []
 --- !u!114 &114384722588076182
 MonoBehaviour:
   m_ObjectHideFlags: 1

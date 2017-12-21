@@ -36,13 +36,19 @@ public class AudioManager : MonoBehaviour {
 
     public void AddAudioSource(AudioSource source)
     {
-        SFX.Add(source);
-        SetVolume();
+        if (!SFX.Contains(source)) {
+            SFX.Add(source);
+            SetVolume();
+        }
     }
 
     public void AddAudioSource(AudioSource[] source)
     {
         SFX.AddRange(source);
         SetVolume();
+    }
+
+    public void RemoveAudioSource(AudioSource source) {
+        SFX.Remove(source);
     }
 }
