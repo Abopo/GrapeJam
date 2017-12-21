@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PressurePlateSet : ActivateableObject {
 
-    [SerializeField] ActivateableObject ObjectToActivate = null;
+    [SerializeField] ActivateableObject[] ObjectsToActivate;
 
     [SerializeField] int requiredPlates = 1;
     int plateCount = 0;
@@ -22,14 +22,18 @@ public class PressurePlateSet : ActivateableObject {
     public override void Activate() {
         plateCount += 1;
         if(plateCount >= requiredPlates) {
-            ObjectToActivate.Activate();
+            foreach (ActivateableObject ao in ObjectsToActivate) {
+                ao.Activate();
+            }
         }
     }
 
     public override void Deactivate() {
         plateCount -= 1;
         if(plateCount < requiredPlates) {
-            ObjectToActivate.Deactivate();
+            foreach (ActivateableObject ao in ObjectsToActivate) {
+                ao.Activate();
+            }
         }
     }
 

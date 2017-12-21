@@ -18,6 +18,10 @@ public class PressurePlate : MonoBehaviour {
     float upYPos;
     float downYPos;
 
+    public List<GameObject> CurrentlyColliding {
+        get { return _currentlyColliding; }
+    }
+
     // Use this for initialization
     void Start () {
         _currentlyColliding = new List<GameObject>();
