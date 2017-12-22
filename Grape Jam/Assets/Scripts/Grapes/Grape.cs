@@ -29,7 +29,7 @@ public class Grape : MonoBehaviour {
     float _jumpTime = 0.25f;
     float _jumpTimer = 0f;
 
-    bool _leftGround = false;
+    bool _leftGround = true;
     float _fallCheckTime = 0.1f;
     float _fallCheckTimer = 0f;
 
