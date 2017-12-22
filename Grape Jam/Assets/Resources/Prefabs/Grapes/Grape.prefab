@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 3073
 --- !u!114 &114463121253667424
 MonoBehaviour:
   m_ObjectHideFlags: 1
