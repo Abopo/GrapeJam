@@ -17,7 +17,7 @@ public class Grape : MonoBehaviour {
     }
     AudioManager _audioManager;
     AudioSource _audioSource;
-
+    
     Transform _swarmCenter;
     float _expandSpeed = 12f;
 
@@ -35,12 +35,13 @@ public class Grape : MonoBehaviour {
 
     bool _onSlide = false;
     bool _takeInput = true;
+    bool _initialSpawn = true;
 
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
         _audioSource = GetComponent<AudioSource>();
-        _audioManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>();
+        _audioManager = (AudioManager)GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
 
@@ -51,7 +52,9 @@ public class Grape : MonoBehaviour {
     // Update is called once per frame
     void LateUpdate() {
         if (!_onSlide && _takeInput) {
-            DetermineForce();
+            if (!_initialSpawn) {
+                DetermineForce();
+            }
 
             _rigidbody.AddForce(_appliedForce);
         }
@@ -138,6 +141,7 @@ public class Grape : MonoBehaviour {
                     _rigidbody.angularDrag = _groundAngularDrag;
                     _onSlide = false;
                     _leftGround = false;
+                    _initialSpawn = false;
                 }
             }
         }
@@ -193,13 +197,13 @@ public class Grape : MonoBehaviour {
     public void Expand() {
         Vector3 dir = (transform.position - _swarmCenter.position).normalized;
         dir.y = 0;
-        _appliedForce += dir * _expandSpeed;
+        _appliedForce += dir * _curMoveForce/1.5f;
     }
 
     public void Contract() {
         Vector3 dir = (_swarmCenter.position - transform.position).normalized;
         dir.y = 0;
-        _appliedForce += dir * _expandSpeed;
+        _appliedForce += dir * _curMoveForce/1.5f;
     }
 
     public void Trim() {

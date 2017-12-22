@@ -59,6 +59,10 @@ public class PressurePlate : MonoBehaviour {
         } else if (_currentlyColliding.Count < requiredGrapes && transform.parent.position.y < upYPos) {
             // Move up
             transform.parent.Translate(0f, 0.5f * Time.deltaTime, 0f, Space.World);
+        } else if(_currentlyColliding.Count >= requiredGrapes && transform.parent.position.y <= downYPos && !Active) {
+            // Activate
+            ObjectToToggle.Activate();
+            Active = true;
         }
     }
 
@@ -78,8 +82,6 @@ public class PressurePlate : MonoBehaviour {
         _currentlyColliding.Add(grape);
         if (_currentlyColliding.Count >= requiredGrapes && !Active) {
             _meshRenderer.material = _activeMaterial;
-            ObjectToToggle.Activate();
-            Debug.Log("activate");
         }
     }
 
@@ -88,7 +90,7 @@ public class PressurePlate : MonoBehaviour {
         if (_currentlyColliding.Count < requiredGrapes) {
             _meshRenderer.material = _unactiveMaterial;
             ObjectToToggle.Deactivate();
-            Debug.Log("deactivate");
+            Active = false;
         }
     }
 }

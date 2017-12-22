@@ -30,11 +30,16 @@ public class PressurePlateSet : ActivateableObject {
 
     public override void Deactivate() {
         plateCount -= 1;
+        if(plateCount < 0) {
+            plateCount = 0;
+        }
+        /*
         if(plateCount < requiredPlates) {
             foreach (ActivateableObject ao in ObjectsToActivate) {
-                ao.Activate();
+                ao.Deactivate();
             }
         }
+        */
     }
 
     public override void Toggle() {
