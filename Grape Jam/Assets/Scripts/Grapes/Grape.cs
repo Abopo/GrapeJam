@@ -17,9 +17,8 @@ public class Grape : MonoBehaviour {
     }
     AudioManager _audioManager;
     AudioSource _audioSource;
-
+    
     Transform _swarmCenter;
-    float _expandSpeed = 12f;
 
     bool _canJump;
     bool _justJumped;
@@ -35,12 +34,17 @@ public class Grape : MonoBehaviour {
 
     bool _onSlide = false;
     bool _takeInput = true;
+    bool _initialSpawn = true;
+
+
+    bool _jumpingIntoJar = false;
+    Transform _jar;
 
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
         _audioSource = GetComponent<AudioSource>();
-        _audioManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>();
+        _audioManager = (AudioManager)GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
 
@@ -51,9 +55,20 @@ public class Grape : MonoBehaviour {
     // Update is called once per frame
     void LateUpdate() {
         if (!_onSlide && _takeInput) {
-            DetermineForce();
+            if (!_initialSpawn) {
+                DetermineForce();
+            }
 
             _rigidbody.AddForce(_appliedForce);
+        } else if(_jumpingIntoJar) {
+            Vector3 force = Vector3.zero;
+            Vector3 toJar = _jar.position - transform.position;
+            toJar.Normalize();
+            //force.x = toJar.x * (toJar.magnitude * 20f);
+            //force.z = toJar.z * (toJar.magnitude * 20f);
+
+            _rigidbody.AddForce(force);
+            _rigidbody.velocity = new Vector3(toJar.x * toJar.magnitude * 10f, _rigidbody.velocity.y, toJar.z * toJar.magnitude * 10f);
         }
 
         UpdateTimers();
@@ -107,6 +122,10 @@ public class Grape : MonoBehaviour {
         if (other.tag == "Death Plane") {
             Die();
         }
+        if(other.tag == "LevelEnd") {
+            _jumpingIntoJar = false;
+            _takeInput = false;
+        }
     }    
 
     private void OnCollisionStay(Collision collision) {
@@ -138,6 +157,7 @@ public class Grape : MonoBehaviour {
                     _rigidbody.angularDrag = _groundAngularDrag;
                     _onSlide = false;
                     _leftGround = false;
+                    _initialSpawn = false;
                 }
             }
         }
@@ -193,13 +213,13 @@ public class Grape : MonoBehaviour {
     public void Expand() {
         Vector3 dir = (transform.position - _swarmCenter.position).normalized;
         dir.y = 0;
-        _appliedForce += dir * _expandSpeed;
+        _appliedForce += dir * _curMoveForce/1.5f;
     }
 
     public void Contract() {
         Vector3 dir = (_swarmCenter.position - transform.position).normalized;
         dir.y = 0;
-        _appliedForce += dir * _expandSpeed;
+        _appliedForce += dir * _curMoveForce/1.5f;
     }
 
     public void Trim() {
@@ -245,5 +265,27 @@ public class Grape : MonoBehaviour {
 
     public void SetTakeInput(bool takeInput) {
         _takeInput = takeInput;
+    }
+
+    public void JumpIntoJar(Transform inJar) {
+        if(_jumpingIntoJar) {
+            return;
+        }
+
+        Vector3 force = Vector3.zero;
+        _jar = inJar;
+        Vector3 toJar = _jar.position - transform.position;
+        toJar.Normalize();
+        //force.x = toJar.x * (toJar.magnitude * 20f);
+        //force.z = toJar.z * (toJar.magnitude * 20f);
+        force.y = 900f;
+
+        _rigidbody.AddForce(force);
+        _rigidbody.velocity = new Vector3(toJar.x * toJar.magnitude, _rigidbody.velocity.y, toJar.z * toJar.magnitude);
+
+        _audioSource.Play();
+
+        _takeInput = false;
+        _jumpingIntoJar = true;
     }
 }

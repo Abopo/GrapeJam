@@ -8,6 +8,7 @@ public class GrapeSpawner : MonoBehaviour {
     [SerializeField] Grape Grape = null;
     [SerializeField] float SpawnRate = 1f;
     [SerializeField] int MaxGrapes = 10;
+    [SerializeField] Collider topCollider;
 
     AudioManager _audioManager = null;
 
@@ -67,8 +68,9 @@ public class GrapeSpawner : MonoBehaviour {
 
     private void ShootGrape(Collider other) {
         if (_timer > SpawnRate && Swarm.GetGrapeCount() < MaxGrapes) {
-            Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
             newGrape.Shoot();
+            Physics.IgnoreCollision(newGrape.GetComponent<SphereCollider>(), topCollider, true);
 
             Swarm.AddGrape(newGrape);
 
@@ -82,6 +84,7 @@ public class GrapeSpawner : MonoBehaviour {
     private void ShootGrape() {
         Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         newGrape.Shoot();
+        Physics.IgnoreCollision(newGrape.GetComponent<SphereCollider>(), topCollider, true);
 
         Swarm.AddGrape(newGrape);
 

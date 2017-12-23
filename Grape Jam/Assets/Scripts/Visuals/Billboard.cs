@@ -8,7 +8,7 @@ public class Billboard : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        depthCamera = GameObject.FindGameObjectWithTag("Depth Camera").GetComponent<Camera>();
+        depthCamera = (Camera)GameObject.FindGameObjectWithTag("Depth Camera").GetComponent<Camera>();
 	}
 	
 	// Update is called once per frame

@@ -46,6 +46,12 @@ public class Button_SingleUse : MonoBehaviour {
         }
     }
 
+    private void OnTriggerExit(Collider other) {
+        if(other.tag == "Grape") {
+            RemoveGrape(other.gameObject);
+        }
+    }
+
     void AddGrape(GameObject grape) {
         _currentlyColliding.Add(grape);
         if (_currentlyColliding.Count >= requiredGrapes && !Active) {
