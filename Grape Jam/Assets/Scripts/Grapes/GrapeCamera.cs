@@ -114,6 +114,9 @@ public class GrapeCamera : MonoBehaviour {
             furthestGrape = 1f;
         }
         _maxHeight = furthestGrape * 10f;
+        if(_maxHeight < 20f) {
+            _maxHeight = 20f;
+        }
         float wantDistance = 2f * furthestGrape;
         float curDist = (transform.position - _grapeSwarm.transform.position).magnitude;
 

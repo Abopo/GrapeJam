@@ -18,13 +18,15 @@ public class Bridge : ActivateableObject {
          _rigidbody.AddForce(_gravity);
 	}
 
-    public override void Activate() {
+    public override bool Activate() {
         _rigidbody.isKinematic = false;
         _gravity = Physics.gravity;
+        return true;
     }
 
-    public override void Deactivate() {
+    public override bool Deactivate() {
         _gravity = -Physics.gravity;
+        return false;
     }
 
     public override void Toggle() {

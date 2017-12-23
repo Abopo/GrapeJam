@@ -8,6 +8,7 @@ public class PressurePlateSet : ActivateableObject {
 
     [SerializeField] int requiredPlates = 1;
     int plateCount = 0;
+    bool _done = false;
 
 	// Use this for initialization
 	void Start () {
@@ -19,16 +20,19 @@ public class PressurePlateSet : ActivateableObject {
 		
 	}
 
-    public override void Activate() {
+    public override bool Activate() {
         plateCount += 1;
         if(plateCount >= requiredPlates) {
             foreach (ActivateableObject ao in ObjectsToActivate) {
                 ao.Activate();
             }
+            _done = true;
         }
+
+        return _done;
     }
 
-    public override void Deactivate() {
+    public override bool Deactivate() {
         plateCount -= 1;
         if(plateCount < 0) {
             plateCount = 0;
@@ -40,6 +44,7 @@ public class PressurePlateSet : ActivateableObject {
             }
         }
         */
+        return _done;
     }
 
     public override void Toggle() {
