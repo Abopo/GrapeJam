@@ -208,11 +208,6 @@ Prefab:
       propertyPath: m_Name
       value: Level End
       objectReference: {fileID: 0}
-    - target: {fileID: 136171781969775776, guid: a1f60df083dce47408963285cad1a5de,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1f60df083dce47408963285cad1a5de, type: 2}
   m_IsPrefabParent: 0

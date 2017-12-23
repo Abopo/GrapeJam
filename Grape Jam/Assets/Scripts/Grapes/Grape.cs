@@ -19,7 +19,6 @@ public class Grape : MonoBehaviour {
     AudioSource _audioSource;
     
     Transform _swarmCenter;
-    float _expandSpeed = 12f;
 
     bool _canJump;
     bool _justJumped;
@@ -36,6 +35,10 @@ public class Grape : MonoBehaviour {
     bool _onSlide = false;
     bool _takeInput = true;
     bool _initialSpawn = true;
+
+
+    bool _jumpingIntoJar = false;
+    Transform _jar;
 
     // Use this for initialization
     void Start () {
@@ -57,6 +60,15 @@ public class Grape : MonoBehaviour {
             }
 
             _rigidbody.AddForce(_appliedForce);
+        } else if(_jumpingIntoJar) {
+            Vector3 force = Vector3.zero;
+            Vector3 toJar = _jar.position - transform.position;
+            toJar.Normalize();
+            //force.x = toJar.x * (toJar.magnitude * 20f);
+            //force.z = toJar.z * (toJar.magnitude * 20f);
+
+            _rigidbody.AddForce(force);
+            _rigidbody.velocity = new Vector3(toJar.x * toJar.magnitude * 10f, _rigidbody.velocity.y, toJar.z * toJar.magnitude * 10f);
         }
 
         UpdateTimers();
@@ -109,6 +121,10 @@ public class Grape : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Death Plane") {
             Die();
+        }
+        if(other.tag == "LevelEnd") {
+            _jumpingIntoJar = false;
+            _takeInput = false;
         }
     }    
 
@@ -249,5 +265,27 @@ public class Grape : MonoBehaviour {
 
     public void SetTakeInput(bool takeInput) {
         _takeInput = takeInput;
+    }
+
+    public void JumpIntoJar(Transform inJar) {
+        if(_jumpingIntoJar) {
+            return;
+        }
+
+        Vector3 force = Vector3.zero;
+        _jar = inJar;
+        Vector3 toJar = _jar.position - transform.position;
+        toJar.Normalize();
+        //force.x = toJar.x * (toJar.magnitude * 20f);
+        //force.z = toJar.z * (toJar.magnitude * 20f);
+        force.y = 900f;
+
+        _rigidbody.AddForce(force);
+        _rigidbody.velocity = new Vector3(toJar.x * toJar.magnitude, _rigidbody.velocity.y, toJar.z * toJar.magnitude);
+
+        _audioSource.Play();
+
+        _takeInput = false;
+        _jumpingIntoJar = true;
     }
 }
