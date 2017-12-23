@@ -1,15 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenuButtonFunctions : MonoBehaviour {
 
+    [SerializeField] Button TheButton;
     PauseManager _pauseManager = null;
 
     public void Start()
     {
         if (_pauseManager == null)
             _pauseManager = FindObjectOfType<PauseManager>();
+
+
+        //TheButton.OnSubmit(TheButton.onClick);
+        
     }
 
     // Use this for initialization

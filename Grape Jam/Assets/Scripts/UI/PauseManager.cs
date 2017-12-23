@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PauseManager : MonoBehaviour {
 
@@ -14,6 +16,9 @@ public class PauseManager : MonoBehaviour {
     [SerializeField] GameObject PauseShadow = null;
     [SerializeField] GameObject PauseMenu = null;
     [SerializeField] GameObject PauseSettingsMenu = null;
+    [SerializeField] GameObject DefaultSelection = null;
+    [SerializeField] GameObject DefaultSelectionSettings = null;
+
 
     PauseState _currentState = PauseState.NotPaused;
     float _gameTimescale = 1;
@@ -25,23 +30,63 @@ public class PauseManager : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
+    void Update()
+    {
+        switch(_currentState)
         {
-            switch(_currentState)
-            {
-                case PauseState.NotPaused:
-                    SetState(PauseState.Paused_Default);
-                    break;
-                case PauseState.Paused_Default:
-                    SetState(PauseState.NotPaused);
-                    break;
-                case PauseState.Paused_Settings:
-                    SetState(PauseState.NotPaused);
-                    break;
-                default:
-                    break;
-            }
+            case PauseState.NotPaused:
+                { 
+                    if(Input.GetButtonDown("Pause"))
+                    {
+                        SetState(PauseState.Paused_Default);
+                    }
+                }
+                break;
+            case PauseState.Paused_Default:
+                {
+                    if(Input.GetButtonDown("Pause"))
+                    {
+                        SetState(PauseState.NotPaused);
+                    }
+
+                    if (Input.GetButtonDown("Submit"))
+                    {
+                        var currentButton = EventSystem.current.GetComponent<Button>();
+
+                        if (currentButton != null)
+                            currentButton.onClick.Invoke();
+                    }
+
+                    if(Input.GetButtonDown("Cancel"))
+                    {
+                        SetState(PauseState.NotPaused);
+                    }
+
+                }
+                break;
+            case PauseState.Paused_Settings:
+                {
+                    if (Input.GetButtonDown("Pause"))
+                    {
+                        SetState(PauseState.NotPaused);
+                    }
+
+                    if (Input.GetButtonDown("Submit"))
+                    {
+                        var currentButton = EventSystem.current.GetComponent<Button>();
+
+                        if (currentButton != null)
+                            currentButton.onClick.Invoke();
+                    }
+
+                    if(Input.GetButtonDown("Cancel"))
+                    {
+                        SetState(PauseState.Paused_Default);
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -121,10 +166,12 @@ public class PauseManager : MonoBehaviour {
 
     void DisplaySettingsMenu() {
         PauseSettingsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(DefaultSelectionSettings);
     }
 
     void DisplayDefaultPauseMenu() {
         PauseMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(DefaultSelection);
     }
 
     void HideDefaultPauseMenu() {
