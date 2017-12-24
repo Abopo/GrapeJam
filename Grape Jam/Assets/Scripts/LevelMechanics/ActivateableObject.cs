@@ -14,14 +14,16 @@ public class ActivateableObject : MonoBehaviour {
 		
 	}
 
-    public virtual void Activate()
+    public virtual bool Activate()
     {
         gameObject.SetActive(true);
+        return true;
     }
 
-    public virtual void Deactivate()
+    public virtual bool Deactivate()
     {
         gameObject.SetActive(false);
+        return false;
     }
 
     public virtual void Toggle()

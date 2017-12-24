@@ -15,8 +15,9 @@ public class PressurePlate : MonoBehaviour {
     Material _unactiveMaterial;
     Material _activeMaterial;
 
-    float upYPos;
-    float downYPos;
+    float _upYPos;
+    float _downYPos;
+    bool _done = false;
 
     public List<GameObject> CurrentlyColliding {
         get { return _currentlyColliding; }
@@ -31,8 +32,8 @@ public class PressurePlate : MonoBehaviour {
         _unactiveMaterial = Resources.Load<Material>("Blender/Materials/PressurePlate");
         _activeMaterial = Resources.Load<Material>("Blender/Materials/PressurePlate2");
 
-        upYPos = transform.parent.position.y;
-        downYPos = upYPos - 0.15f;
+        _upYPos = transform.parent.position.y;
+        _downYPos = _upYPos - 0.15f;
 	}
 	
 	// Update is called once per frame
@@ -53,15 +54,15 @@ public class PressurePlate : MonoBehaviour {
             RemoveGrape(deadGrape);
         }
 
-        if(_currentlyColliding.Count >= requiredGrapes && transform.parent.position.y > downYPos) {
+        if(_currentlyColliding.Count >= requiredGrapes && transform.parent.position.y > _downYPos) {
             // Move down
             transform.parent.Translate(0f, -0.5f * Time.deltaTime, 0f, Space.World);
-        } else if (_currentlyColliding.Count < requiredGrapes && transform.parent.position.y < upYPos) {
+        } else if (_currentlyColliding.Count < requiredGrapes && transform.parent.position.y < _upYPos && !_done) {
             // Move up
             transform.parent.Translate(0f, 0.5f * Time.deltaTime, 0f, Space.World);
-        } else if(_currentlyColliding.Count >= requiredGrapes && transform.parent.position.y <= downYPos && !Active) {
+        } else if(_currentlyColliding.Count >= requiredGrapes && transform.parent.position.y <= _downYPos && !Active) {
             // Activate
-            ObjectToToggle.Activate();
+            _done = ObjectToToggle.Activate();
             Active = true;
         }
     }
@@ -88,9 +89,11 @@ public class PressurePlate : MonoBehaviour {
     void RemoveGrape(GameObject grape) {
         _currentlyColliding.Remove(grape);
         if (_currentlyColliding.Count < requiredGrapes) {
-            _meshRenderer.material = _unactiveMaterial;
-            ObjectToToggle.Deactivate();
-            Active = false;
+            _done = ObjectToToggle.Deactivate();
+            if (!_done) {
+                _meshRenderer.material = _unactiveMaterial;
+                Active = false;
+            }
         }
     }
 }

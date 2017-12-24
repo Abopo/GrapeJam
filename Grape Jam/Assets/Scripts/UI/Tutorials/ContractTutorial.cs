@@ -36,10 +36,12 @@ public class ContractTutorial : ActivateableObject {
         }
     }
 
-    public override void Activate() {
+    public override bool Activate() {
         _activated = true;
+        return true;
     }
 
-    public override void Deactivate() {
+    public override bool Deactivate() {
+        return false;
     }
 }
