@@ -175,10 +175,12 @@ public class PauseManager : MonoBehaviour {
     }
 
     void HideDefaultPauseMenu() {
+        EventSystem.current.SetSelectedGameObject(null);
         PauseMenu.SetActive(false);
     }
 
     void HidePauseSettingsMenu() {
+        EventSystem.current.SetSelectedGameObject(null);
         PauseSettingsMenu.SetActive(false);
     }
 }
