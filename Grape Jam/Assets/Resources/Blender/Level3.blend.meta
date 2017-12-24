@@ -62,6 +62,23 @@ ModelImporter:
     100108: Cube_032
     100110: Cube_033
     100112: Sphere_019
+    100114: Sphere_020
+    100116: Sphere_021
+    100118: Sphere_022
+    100120: Sphere_023
+    100122: Sphere_024
+    100124: Sphere_025
+    100126: Sphere_026
+    100128: Sphere_027
+    100130: Sphere_028
+    100132: Sphere_029
+    100134: Sphere_030
+    100136: Sphere_031
+    100138: Sphere_032
+    100140: BezierCurve
+    100142: Plane
+    100144: Sphere_033
+    100146: Sphere_034
     400000: BezierCurve_001
     400002: Cylinder
     400004: //RootNode
@@ -119,6 +136,23 @@ ModelImporter:
     400108: Cube_032
     400110: Cube_033
     400112: Sphere_019
+    400114: Sphere_020
+    400116: Sphere_021
+    400118: Sphere_022
+    400120: Sphere_023
+    400122: Sphere_024
+    400124: Sphere_025
+    400126: Sphere_026
+    400128: Sphere_027
+    400130: Sphere_028
+    400132: Sphere_029
+    400134: Sphere_030
+    400136: Sphere_031
+    400138: Sphere_032
+    400140: BezierCurve
+    400142: Plane
+    400144: Sphere_033
+    400146: Sphere_034
     2300000: BezierCurve_001
     2300002: Cylinder
     2300004: Sphere
@@ -175,6 +209,23 @@ ModelImporter:
     2300106: Cube_032
     2300108: Cube_033
     2300110: Sphere_019
+    2300112: Sphere_020
+    2300114: Sphere_021
+    2300116: Sphere_022
+    2300118: Sphere_023
+    2300120: Sphere_024
+    2300122: Sphere_025
+    2300124: Sphere_026
+    2300126: Sphere_027
+    2300128: Sphere_028
+    2300130: Sphere_029
+    2300132: Sphere_030
+    2300134: Sphere_031
+    2300136: Sphere_032
+    2300138: BezierCurve
+    2300140: Plane
+    2300142: Sphere_033
+    2300144: Sphere_034
     3300000: BezierCurve_001
     3300002: Cylinder
     3300004: Sphere
@@ -231,6 +282,23 @@ ModelImporter:
     3300106: Cube_032
     3300108: Cube_033
     3300110: Sphere_019
+    3300112: Sphere_020
+    3300114: Sphere_021
+    3300116: Sphere_022
+    3300118: Sphere_023
+    3300120: Sphere_024
+    3300122: Sphere_025
+    3300124: Sphere_026
+    3300126: Sphere_027
+    3300128: Sphere_028
+    3300130: Sphere_029
+    3300132: Sphere_030
+    3300134: Sphere_031
+    3300136: Sphere_032
+    3300138: BezierCurve
+    3300140: Plane
+    3300142: Sphere_033
+    3300144: Sphere_034
     4300000: BezierCurve_001
     4300002: Cylinder
     4300004: Sphere_004
@@ -287,6 +355,23 @@ ModelImporter:
     4300106: Cube
     4300108: Cube_002
     4300110: Sphere_019
+    4300112: Sphere_024
+    4300114: Sphere_023
+    4300116: Sphere_022
+    4300118: Sphere_021
+    4300120: Sphere_020
+    4300122: Sphere_028
+    4300124: Sphere_027
+    4300126: Sphere_026
+    4300128: Sphere_025
+    4300130: Sphere_032
+    4300132: Sphere_031
+    4300134: Sphere_030
+    4300136: Sphere_029
+    4300138: BezierCurve
+    4300140: Plane
+    4300142: Sphere_034
+    4300144: Sphere_033
     7400000: Default Take
     9500000: //RootNode
   externalObjects:

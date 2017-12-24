@@ -10,7 +10,9 @@ public class Grape : MonoBehaviour {
 
     float _curMoveForce;
     Vector3 _appliedForce;
-    float _maxMoveSpeed = 15f;
+    float _groundMaxMoveSpeed = 15f;
+    float _airMaxMoveSpeed = 10f;
+    float _curMaxMoveSpeed = 15f;
     Rigidbody _rigidbody;
     public Rigidbody Rigidbody {
         get { return _rigidbody; }
@@ -81,11 +83,11 @@ public class Grape : MonoBehaviour {
         _appliedForce += forceDirZ * (_curMoveForce * Input.GetAxis("Horizontal"));
         
         // Don't add force if we've exceeded the max speed
-        if(Mathf.Abs(_rigidbody.velocity.x) > _maxMoveSpeed && 
+        if(Mathf.Abs(_rigidbody.velocity.x) > _curMaxMoveSpeed && 
             Mathf.Sign(_rigidbody.velocity.x) == Mathf.Sign(_appliedForce.x)) {
             _appliedForce.x = 0;
         }
-        if (Mathf.Abs(_rigidbody.velocity.z) > _maxMoveSpeed &&
+        if (Mathf.Abs(_rigidbody.velocity.z) > _curMaxMoveSpeed &&
             Mathf.Sign(_rigidbody.velocity.z) == Mathf.Sign(_appliedForce.z)) {
             _appliedForce.z = 0;
         }
@@ -140,7 +142,12 @@ public class Grape : MonoBehaviour {
     private void OnCollisionExit(Collision collision) {
         if(collision.collider.tag == "Ground" || collision.collider.tag == "Slide") {
             _leftGround = true;
+            _canJump = false;
+            _onSlide = false;
             _fallCheckTimer = 0f;
+            _curMoveForce = airMoveForce;
+            _curMaxMoveSpeed = _airMaxMoveSpeed;
+            _rigidbody.angularDrag = _airAngularDrag;
         }
     }
 
@@ -154,6 +161,7 @@ public class Grape : MonoBehaviour {
                     _canJump = true;
                     _justJumped = false;
                     _curMoveForce = groundMoveForce;
+                    _curMaxMoveSpeed = _groundMaxMoveSpeed;
                     _rigidbody.angularDrag = _groundAngularDrag;
                     _onSlide = false;
                     _leftGround = false;
@@ -167,6 +175,7 @@ public class Grape : MonoBehaviour {
         if(_canJump && !_onSlide) {
             _appliedForce.y = jumpForce;
             _curMoveForce = airMoveForce;
+            _curMaxMoveSpeed = _airMaxMoveSpeed;
             _rigidbody.angularDrag = _airAngularDrag;
             _canJump = false;
             _jumpTimer = 0f;
@@ -185,6 +194,7 @@ public class Grape : MonoBehaviour {
     void TrampolineBounce(float bounceForce) {
         _appliedForce.y = bounceForce;
         _curMoveForce = airMoveForce;
+        _curMaxMoveSpeed = _airMaxMoveSpeed;
         _rigidbody.angularDrag = _airAngularDrag;
         _canJump = false;
         _justJumped = false;

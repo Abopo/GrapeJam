@@ -98,11 +98,11 @@ public class GrapeSwarm : MonoBehaviour {
             // cancel rotation momentum
             _endRotate = true;
         }
-        if (Input.GetKey(KeyCode.R) || (Input.GetAxis("Expand") > 0)) {
+        if (Input.GetKey(KeyCode.R) || (Input.GetAxis("Contract") > 0)) {
             // Expand the swarm
             _expand = true;
         }
-        if (Input.GetKey(KeyCode.F) || (Input.GetAxis("Contract") > 0)) {
+        if (Input.GetKey(KeyCode.F) || (Input.GetAxis("Expand") > 0)) {
             // Contract the swarm
             _contract = true;
         }
