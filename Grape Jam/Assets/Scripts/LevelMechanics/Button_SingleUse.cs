@@ -11,10 +11,15 @@ public class Button_SingleUse : MonoBehaviour {
     List<GameObject> _currentlyColliding;
     List<GameObject> _deadGrapes;
 
+    AudioSource _audioSource;
+
     // Use this for initialization
     void Start() {
         _currentlyColliding = new List<GameObject>();
         _deadGrapes = new List<GameObject>();
+
+        _audioSource = GetComponent<AudioSource>();
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>().AddAudioSource(_audioSource);
     }
 
     // Update is called once per frame
@@ -60,6 +65,8 @@ public class Button_SingleUse : MonoBehaviour {
             //TODO: Swap Between On/Off visually
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(true);
+            // Play audio clip
+            _audioSource.Play();
         }
     }
 

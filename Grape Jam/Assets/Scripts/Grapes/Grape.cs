@@ -17,9 +17,8 @@ public class Grape : MonoBehaviour {
     public Rigidbody Rigidbody {
         get { return _rigidbody; }
     }
-    AudioManager _audioManager;
-    AudioSource _audioSource;
-    
+    GrapeAudio _grapeAudio;
+
     Transform _swarmCenter;
 
     bool _canJump;
@@ -45,13 +44,11 @@ public class Grape : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
-        _audioSource = GetComponent<AudioSource>();
-        _audioManager = (AudioManager)GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>();
+        _grapeAudio = GetComponent<GrapeAudio>();
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
 
-        _audioManager.AddAudioSource(_audioSource);
-        ///_audioSource.volume = PlayerPrefs.GetFloat("MasterVolume", 1.0f) * PlayerPrefs.GetFloat("SFXVolume", 1.0f);
+        _grapeAudio.PlayPipe();
     }
 
     // Update is called once per frame
@@ -142,7 +139,6 @@ public class Grape : MonoBehaviour {
     private void OnCollisionExit(Collision collision) {
         if(collision.collider.tag == "Ground" || collision.collider.tag == "Slide") {
             _leftGround = true;
-            _canJump = false;
             _onSlide = false;
             _fallCheckTimer = 0f;
             _curMoveForce = airMoveForce;
@@ -180,7 +176,7 @@ public class Grape : MonoBehaviour {
             _canJump = false;
             _jumpTimer = 0f;
             _justJumped = true;
-            _audioSource.Play();
+            _grapeAudio.PlayJump();
         }
     }
 
@@ -200,7 +196,7 @@ public class Grape : MonoBehaviour {
         _justJumped = false;
         _jumpTimer = 0f;
         // TODO: make trampoline sound
-        _audioSource.Play();
+        _grapeAudio.PlayJump();
     }
 
     public void Orbit(float dir) {
@@ -267,7 +263,7 @@ public class Grape : MonoBehaviour {
         // Remove self from swarm
         _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
 
-        _audioManager.RemoveAudioSource(_audioSource);
+        _grapeAudio.Remove();
 
         // Destroy this grape
         DestroyObject(this.gameObject);
@@ -293,7 +289,7 @@ public class Grape : MonoBehaviour {
         _rigidbody.AddForce(force);
         _rigidbody.velocity = new Vector3(toJar.x * toJar.magnitude, _rigidbody.velocity.y, toJar.z * toJar.magnitude);
 
-        _audioSource.Play();
+        _grapeAudio.PlayJump();
 
         _takeInput = false;
         _jumpingIntoJar = true;

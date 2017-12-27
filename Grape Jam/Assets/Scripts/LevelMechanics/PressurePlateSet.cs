@@ -10,13 +10,16 @@ public class PressurePlateSet : ActivateableObject {
     int plateCount = 0;
     bool _done = false;
 
+    AudioSource _audioSource;
+
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        _audioSource = GetComponent<AudioSource>();
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>().AddAudioSource(_audioSource);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -26,6 +29,7 @@ public class PressurePlateSet : ActivateableObject {
             foreach (ActivateableObject ao in ObjectsToActivate) {
                 ao.Activate();
             }
+            _audioSource.Play();
             _done = true;
         }
 
