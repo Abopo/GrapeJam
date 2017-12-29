@@ -28,7 +28,9 @@ public class AudioManager : MonoBehaviour {
 
         foreach(var effects in SFX)
         {
-            effects.volume = _sfxVolume * _masterVolume;
+            if (effects != null) {
+                effects.volume = _sfxVolume * _masterVolume;
+            }
         }
 
         BGM.volume = _bgmVolume * _masterVolume;

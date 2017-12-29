@@ -200,6 +200,10 @@ public class Grape : MonoBehaviour {
     }
 
     public void Orbit(float dir) {
+        if (_onSlide || _initialSpawn) {
+            return;
+        }
+
         Vector3 towardCenter = (_swarmCenter.position - transform.position).normalized;
         Vector3 right = Vector3.Cross(towardCenter, Vector3.up);
         _rigidbody.AddForce(right * (_curMoveForce/2) * dir);
@@ -213,16 +217,28 @@ public class Grape : MonoBehaviour {
     }
 
     public void CutOrbit() {
+        if (_onSlide || _initialSpawn) {
+            return;
+        }
+
         _rigidbody.velocity = new Vector3(_rigidbody.velocity.x / 4, _rigidbody.velocity.y, _rigidbody.velocity.z / 4);
     }
 
     public void Expand() {
+        if (_onSlide || _initialSpawn) {
+            return;
+        }
+
         Vector3 dir = (transform.position - _swarmCenter.position).normalized;
         dir.y = 0;
         _appliedForce += dir * _curMoveForce/1.5f;
     }
 
     public void Contract() {
+        if (_onSlide || _initialSpawn) {
+            return;
+        }
+
         Vector3 dir = (_swarmCenter.position - transform.position).normalized;
         dir.y = 0;
         _appliedForce += dir * _curMoveForce/1.5f;

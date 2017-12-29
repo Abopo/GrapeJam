@@ -33,7 +33,7 @@ public class PressurePlate : MonoBehaviour {
         _activeMaterial = Resources.Load<Material>("Blender/Materials/PressurePlate2");
 
         _upYPos = transform.parent.position.y;
-        _downYPos = _upYPos - 0.15f;
+        _downYPos = _upYPos - 0.10f;
 	}
 	
 	// Update is called once per frame
