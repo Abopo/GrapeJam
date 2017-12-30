@@ -33,7 +33,7 @@ public class PressurePlate : MonoBehaviour {
         _activeMaterial = Resources.Load<Material>("Blender/Materials/PressurePlate2");
 
         _upYPos = transform.parent.position.y;
-        _downYPos = _upYPos - 0.10f;
+        _downYPos = _upYPos - 0.001f;
 	}
 	
 	// Update is called once per frame
@@ -54,6 +54,7 @@ public class PressurePlate : MonoBehaviour {
             RemoveGrape(deadGrape);
         }
 
+        /*
         if(_currentlyColliding.Count >= requiredGrapes && transform.parent.position.y > _downYPos) {
             // Move down
             transform.parent.Translate(0f, -0.5f * Time.deltaTime, 0f, Space.World);
@@ -65,6 +66,7 @@ public class PressurePlate : MonoBehaviour {
             _done = ObjectToToggle.Activate();
             Active = true;
         }
+        */
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -81,19 +83,25 @@ public class PressurePlate : MonoBehaviour {
 
     void AddGrape(GameObject grape) {
         _currentlyColliding.Add(grape);
-        if (_currentlyColliding.Count >= requiredGrapes && !Active) {
-            _meshRenderer.material = _activeMaterial;
-        }
+        CheckGrapeCount();
     }
 
     void RemoveGrape(GameObject grape) {
         _currentlyColliding.Remove(grape);
-        if (_currentlyColliding.Count < requiredGrapes) {
+        CheckGrapeCount();
+    }
+
+    void CheckGrapeCount() {
+        if (_currentlyColliding.Count >= requiredGrapes && !Active) {
+            _done = ObjectToToggle.Activate();
+            Active = true;
+            transform.parent.Translate(0f, -0.001f, 0f, Space.World);
+            _meshRenderer.material = _activeMaterial;
+        } else  if (_currentlyColliding.Count < requiredGrapes && Active) {
             _done = ObjectToToggle.Deactivate();
-            if (!_done) {
-                _meshRenderer.material = _unactiveMaterial;
-                Active = false;
-            }
+            Active = false;
+            transform.parent.Translate(0f, 0.001f, 0f, Space.World);
+            _meshRenderer.material = _unactiveMaterial;
         }
     }
 }

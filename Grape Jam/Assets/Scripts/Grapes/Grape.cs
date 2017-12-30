@@ -148,6 +148,10 @@ public class Grape : MonoBehaviour {
     }
 
     void CheckFloor(Collision collision) {
+        if (collision.collider.tag == "Ground") {
+            _initialSpawn = false;
+        }
+
         if ((collision.collider.tag == "Ground" || collision.collider.tag == "Grape" || collision.collider.tag == "Slide") && 
             _jumpTimer >= _jumpTime) {
             // Make sure we collided from the bottom
@@ -161,7 +165,7 @@ public class Grape : MonoBehaviour {
                     _rigidbody.angularDrag = _groundAngularDrag;
                     _onSlide = false;
                     _leftGround = false;
-                    _initialSpawn = false;
+
                 }
             }
         }
