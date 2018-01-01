@@ -2951,6 +2951,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2.7294567
       objectReference: {fileID: 0}
+    - target: {fileID: 114199839527278976, guid: a1f60df083dce47408963285cad1a5de,
+        type: 2}
+      propertyPath: nextLevel
+      value: BigMaze
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1f60df083dce47408963285cad1a5de, type: 2}
   m_IsPrefabParent: 0

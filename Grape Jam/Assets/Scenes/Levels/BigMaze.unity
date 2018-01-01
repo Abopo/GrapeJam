@@ -88,7 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-  m_LightingDataAsset: {fileID: 112000002, guid: eaa445af3fe133a42ab194241192e751,
+  m_LightingDataAsset: {fileID: 112000002, guid: 80c271ba971801e4591604029fe70eb9,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -2131,7 +2131,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.078404024, y: 0.5515052, z: 0.00000033527613}
+  m_ConnectedAnchor: {x: 0.078404024, y: 0.5515052, z: 0.000000065615005}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -5991,6 +5991,11 @@ Prefab:
     - target: {fileID: 4374619653574722, guid: a1f60df083dce47408963285cad1a5de, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114199839527278976, guid: a1f60df083dce47408963285cad1a5de,
+        type: 2}
+      propertyPath: nextLevel
+      value: InitialTesting
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1f60df083dce47408963285cad1a5de, type: 2}
@@ -16400,7 +16405,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.078404024, y: 0.5515051, z: -0.0000051669776}
+  m_ConnectedAnchor: {x: 0.078404024, y: 0.5515051, z: -0.0000010568072}
   m_UseSpring: 0
   m_Spring:
     spring: 0

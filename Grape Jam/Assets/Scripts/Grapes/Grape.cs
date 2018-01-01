@@ -152,7 +152,7 @@ public class Grape : MonoBehaviour {
             _initialSpawn = false;
         }
 
-        if ((collision.collider.tag == "Ground" || collision.collider.tag == "Grape" || collision.collider.tag == "Slide") && 
+        if ((collision.collider.tag == "Ground" || collision.collider.tag == "Slide") && 
             _jumpTimer >= _jumpTime) {
             // Make sure we collided from the bottom
             foreach (ContactPoint cp in collision.contacts) {
@@ -168,6 +168,12 @@ public class Grape : MonoBehaviour {
 
                 }
             }
+        }
+
+        if(collision.collider.tag == "Grape" &&
+            _jumpTimer >= _jumpTime) {
+            _canJump = true;
+            _justJumped = false;
         }
     }
 

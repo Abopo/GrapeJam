@@ -497,6 +497,11 @@ Prefab:
       propertyPath: m_Name
       value: Level End
       objectReference: {fileID: 0}
+    - target: {fileID: 114199839527278976, guid: a1f60df083dce47408963285cad1a5de,
+        type: 2}
+      propertyPath: nextLevel
+      value: TutorialLevel2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1f60df083dce47408963285cad1a5de, type: 2}
   m_IsPrefabParent: 0
@@ -2150,7 +2155,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 997503349}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 108.1, z: 0}
+  m_LocalPosition: {x: 0, y: 113.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 872343565}

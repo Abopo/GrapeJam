@@ -2574,6 +2574,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 59531627883941554, guid: 60642e55cfb900f4ba39302c557fcdfc,
+        type: 2}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.078398764
+      objectReference: {fileID: 0}
+    - target: {fileID: 59531627883941554, guid: 60642e55cfb900f4ba39302c557fcdfc,
+        type: 2}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.00000033527613
+      objectReference: {fileID: 0}
+    - target: {fileID: 59349223753932870, guid: 60642e55cfb900f4ba39302c557fcdfc,
+        type: 2}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.078398764
+      objectReference: {fileID: 0}
+    - target: {fileID: 59349223753932870, guid: 60642e55cfb900f4ba39302c557fcdfc,
+        type: 2}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.0000046752393
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60642e55cfb900f4ba39302c557fcdfc, type: 2}
   m_IsPrefabParent: 0
@@ -3539,6 +3559,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!4 &1290048771 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792,
+    type: 2}
+  m_PrefabInternal: {fileID: 1928739432}
 --- !u!1001 &1318522530
 Prefab:
   m_ObjectHideFlags: 0
@@ -3827,6 +3852,7 @@ Transform:
   - {fileID: 1075169308}
   - {fileID: 921472464}
   - {fileID: 3575731}
+  - {fileID: 1290048771}
   m_Father: {fileID: 589592628}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4863,6 +4889,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1834836689}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1928739432
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1379063767}
+    m_Modifications:
+    - target: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 37.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 12.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025707932574144, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775066641643796, guid: 0515387f91b424340a28819861592792, type: 2}
+      propertyPath: m_Name
+      value: Seesaw Bridge
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0515387f91b424340a28819861592792, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1980494978
 Prefab:
   m_ObjectHideFlags: 0
@@ -4955,6 +5027,11 @@ Prefab:
     - target: {fileID: 1949344330696110, guid: 08c37d019324ddb488f5fa0a3a55adaf, type: 2}
       propertyPath: m_Name
       value: Seesaw (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 59839448442034944, guid: 08c37d019324ddb488f5fa0a3a55adaf,
+        type: 2}
+      propertyPath: m_ConnectedAnchor.z
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 08c37d019324ddb488f5fa0a3a55adaf, type: 2}

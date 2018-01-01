@@ -15,11 +15,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Options.unity
     guid: a49752a27c619fd40beea4a20e324697
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/Levels/TutorialLevel1.unity
     guid: 45dbe3e208dbf49478d3928b1025c3bc
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
+    path: Assets/Scenes/Levels/TutorialLevel2.unity
     guid: 1713109a14030d847a53d282d2783aa0
   - enabled: 1
-    path: Assets/Scenes/Level4.unity
+    path: Assets/Scenes/Levels/2GrapeAdvancedLevel.unity
     guid: bb7add15fee18b044a801dc62da62d93
+  - enabled: 1
+    path: Assets/Scenes/Levels/BigMaze.unity
+    guid: 1a7c07682c98669409a98e22cd2d1934
+  - enabled: 1
+    path: Assets/Scenes/Levels/SeesawBridgesLevel.unity
+    guid: 4b6729069c879ad4a90cf0a4f5fdd67c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Splits&SpikesLevel.unity
+    guid: f86d70e2090fdd1458202b66be99bd8c

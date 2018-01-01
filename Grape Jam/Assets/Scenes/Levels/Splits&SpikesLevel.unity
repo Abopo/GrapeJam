@@ -10595,6 +10595,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3affabde90bf3b741826ace80532d436, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1360717575
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4253642008947436, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 366.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253642008947436, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 206
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253642008947436, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253642008947436, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253642008947436, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253642008947436, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253642008947436, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253642008947436, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1366829537
 Prefab:
   m_ObjectHideFlags: 0
@@ -13169,6 +13211,11 @@ Prefab:
     - target: {fileID: 4374619653574722, guid: a1f60df083dce47408963285cad1a5de, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114199839527278976, guid: a1f60df083dce47408963285cad1a5de,
+        type: 2}
+      propertyPath: nextLevel
+      value: SeesawBridgesLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1f60df083dce47408963285cad1a5de, type: 2}
