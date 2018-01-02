@@ -11,6 +11,7 @@ public class GrapeSpawner : MonoBehaviour {
     [SerializeField] Collider topCollider;
 
     AudioManager _audioManager = null;
+    AudioSource _audioSource;
 
     float _timer = 0.0f;
 
@@ -18,6 +19,8 @@ public class GrapeSpawner : MonoBehaviour {
         _timer = 0.0f;
         Swarm = GameObject.FindGameObjectWithTag("GrapeSwarm").GetComponent<GrapeSwarm>();
         _audioManager = FindObjectOfType<AudioManager>();
+        _audioSource = GetComponent<AudioSource>();
+        _audioManager.AddAudioSource(_audioSource);
     }
 
     // Use this for initialization
@@ -33,7 +36,10 @@ public class GrapeSpawner : MonoBehaviour {
         if (other.tag == "Grape") {
             ShootGrape(other);
 
-            Swarm.respawnPoint = this;
+            if (Swarm.respawnPoint != this) {
+                Swarm.respawnPoint = this;
+                _audioSource.Play();
+            }
         }
     }
 

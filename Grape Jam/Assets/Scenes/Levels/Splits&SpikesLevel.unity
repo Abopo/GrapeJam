@@ -494,7 +494,7 @@ Prefab:
         type: 2}
       propertyPath: respawnPoint
       value: 
-      objectReference: {fileID: 1748871584}
+      objectReference: {fileID: 559239316}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63d5bac607ef0c746b9326208185a54a, type: 2}
   m_IsPrefabParent: 0
@@ -4101,6 +4101,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78dcaec96431053469792a63944ba13f, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &559239316 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114223925140136340, guid: 78dcaec96431053469792a63944ba13f,
+    type: 2}
+  m_PrefabInternal: {fileID: 559239315}
+  m_Script: {fileID: 11500000, guid: ec743b451cbeb624397c5c9e8c39b219, type: 3}
 --- !u!1001 &562363080
 Prefab:
   m_ObjectHideFlags: 0
@@ -13108,7 +13114,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1594096226}
   m_LocalRotation: {x: -0.60860276, y: 0.36000377, z: 0.3600037, w: 0.60860276}
-  m_LocalPosition: {x: 114.86, y: 17.5, z: -74.63}
+  m_LocalPosition: {x: 114.88, y: 17.5, z: -74.56}
   m_LocalScale: {x: 16.360142, y: 16.699919, z: 16.204168}
   m_Children: []
   m_Father: {fileID: 28603499}
@@ -15003,12 +15009,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3affabde90bf3b741826ace80532d436, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1748871584 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114223925140136340, guid: 78dcaec96431053469792a63944ba13f,
-    type: 2}
-  m_PrefabInternal: {fileID: 559239315}
-  m_Script: {fileID: 11500000, guid: ec743b451cbeb624397c5c9e8c39b219, type: 3}
 --- !u!4 &1757877574 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4723654282283878, guid: 3affabde90bf3b741826ace80532d436,
