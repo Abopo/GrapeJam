@@ -9,7 +9,7 @@ public class LevelEnd : MonoBehaviour {
     GrapeSwarm _swarm;
     int _counter;
 
-    float _time = 1.0f;
+    float _time = 8.0f;
     float _timer = 0f;
 
 	// Use this for initialization

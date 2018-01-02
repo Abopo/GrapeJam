@@ -56,9 +56,11 @@ GameObject:
   - component: {fileID: 33915402487194328}
   - component: {fileID: 23333547911948560}
   - component: {fileID: 64800503070132914}
+  - component: {fileID: 114864644635796358}
+  - component: {fileID: 114493126452185106}
   m_Layer: 0
   m_Name: LevelEnd
-  m_TagString: Untagged
+  m_TagString: ObiSolver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780058389564346}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -259.07, y: 4.84, z: 132.97}
+  m_LocalPosition: {x: -27.04, y: 2.61, z: -16.66}
   m_LocalScale: {x: 2.2522852, y: 2.2522852, z: 2.729455}
   m_Children:
   - {fileID: 4224520126449350}
@@ -98,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1612926036685386}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0, z: 0.318}
+  m_LocalPosition: {x: 0, y: 0, z: -0.057}
   m_LocalScale: {x: 0.44399348, y: 0.3663736, z: 0.4439936}
   m_Children: []
   m_Father: {fileID: 4374619653574722}
@@ -170,7 +172,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7985214fb016a345b0d7ddd3af74f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: Level2
+  nextLevel: InitialTesting
+--- !u!114 &114493126452185106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1780058389564346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d174fab52f0c4b8399f25d5c3ea524c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxParticles: 2500
+  simulateWhenInvisible: 1
+  simulateInLocalSpace: 0
+  simulationOrder: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  parameters:
+    mode: 0
+    interpolation: 0
+    gravity: {x: 0, y: -9.81, z: 0}
+    damping: 0
+    fluidDenoising: 0
+    advectionRadius: 0.5
+    sleepThreshold: 0.001
+  constraintsOrder: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
+  distanceConstraintParameters:
+    enabled: 0
+    evaluationOrder: 0
+    iterations: 3
+    SORFactor: 1
+  bendingConstraintParameters:
+    enabled: 0
+    evaluationOrder: 1
+    iterations: 3
+    SORFactor: 1
+  particleCollisionConstraintParameters:
+    enabled: 0
+    evaluationOrder: 1
+    iterations: 3
+    SORFactor: 1
+  collisionConstraintParameters:
+    enabled: 1
+    evaluationOrder: 1
+    iterations: 3
+    SORFactor: 1
+  skinConstraintParameters:
+    enabled: 0
+    evaluationOrder: 0
+    iterations: 3
+    SORFactor: 1
+  volumeConstraintParameters:
+    enabled: 0
+    evaluationOrder: 1
+    iterations: 3
+    SORFactor: 1
+  tetherConstraintParameters:
+    enabled: 0
+    evaluationOrder: 1
+    iterations: 3
+    SORFactor: 1
+  pinConstraintParameters:
+    enabled: 0
+    evaluationOrder: 1
+    iterations: 3
+    SORFactor: 1
+  stitchConstraintParameters:
+    enabled: 1
+    evaluationOrder: 1
+    iterations: 2
+    SORFactor: 1
+  densityConstraintParameters:
+    enabled: 1
+    evaluationOrder: 1
+    iterations: 2
+    SORFactor: 1
 --- !u!114 &114774571124710876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,6 +261,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8987bbff08cf846a736e1131ef66fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114864644635796358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1780058389564346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6757b231cedd544c583ef8aeaf773b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 0}
+  phase: 0
+  thickness: 0.1
+  unityCollider: {fileID: 64800503070132914}
 --- !u!135 &135220091115829228
 SphereCollider:
   m_ObjectHideFlags: 1

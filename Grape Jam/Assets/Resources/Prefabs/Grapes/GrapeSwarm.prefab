@@ -70,12 +70,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4216112488641416}
   - component: {fileID: 20340668103371076}
-  - component: {fileID: 92604027299660320}
   - component: {fileID: 124537671461059014}
   - component: {fileID: 114769481799097766}
   - component: {fileID: 114318761613720592}
   - component: {fileID: 114373222881970836}
   - component: {fileID: 82377620373863616}
+  - component: {fileID: 114621921217412844}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -145,8 +145,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1012237680591766}
-  m_LocalRotation: {x: -0, y: -0.64257425, z: -0, w: 0.76622343}
-  m_LocalPosition: {x: 4.64, y: 5.62, z: -0.21}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.1243725, y: 1.4499989, z: -4.3944454}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4216112488641416}
@@ -199,7 +199,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -254,11 +254,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 98cc4c101b7610248b3ac566891b66a6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: adbb2a44d61a82345950a064c89b71c1, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -312,7 +312,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -325,13 +325,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!92 &92604027299660320
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1565531632382390}
-  m_Enabled: 1
 --- !u!114 &114094301023770250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -394,6 +387,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc174b24c21a50499a6dfe36555f169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114621921217412844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1565531632382390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d1945bbd58b4cf98eb19621dd83cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleRenderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  blurRadius: 0.02
+  thicknessCutoff: 1.2
+  colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
+  fluidMaterial: {fileID: 2100000, guid: 29a7ed8ac869b4177a79933287fb9de8, type: 2}
 --- !u!114 &114769481799097766
 MonoBehaviour:
   m_ObjectHideFlags: 1

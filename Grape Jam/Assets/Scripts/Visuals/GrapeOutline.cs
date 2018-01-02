@@ -9,6 +9,8 @@ public class GrapeOutline : MonoBehaviour {
     Ray _toCamera;
     SpriteRenderer _spriteRenderer;
 
+    bool _enabled = true;
+
 	// Use this for initialization
 	void Start () {
         _cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
@@ -19,6 +21,10 @@ public class GrapeOutline : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(!_enabled) {
+            return;
+        }
+
         _toCamera.origin = transform.position;
         Vector3 toCam = _cameraTransform.position - transform.position;
         _toCamera.direction = toCam.normalized;
@@ -31,4 +37,9 @@ public class GrapeOutline : MonoBehaviour {
             _spriteRenderer.enabled = false;
         }
 	}
+
+    public void Disable() {
+        _spriteRenderer.enabled = false;
+        _enabled = false;
+    }
 }

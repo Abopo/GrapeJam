@@ -12,6 +12,7 @@ TagManager:
   - Trampoline
   - Slide
   - LevelEnd
+  - ObiSolver
   layers:
   - Default
   - TransparentFX

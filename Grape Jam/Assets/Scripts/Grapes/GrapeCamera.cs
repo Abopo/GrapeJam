@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Obi;
 
 public class GrapeCamera : MonoBehaviour {
     Transform _grapeSwarm;
@@ -22,7 +23,6 @@ public class GrapeCamera : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
         _xInverted = PlayerPrefs.GetInt("XInverted", 1);
         _yInverted = PlayerPrefs.GetInt("YInverted", 1);
         _rotateSpeed = PlayerPrefs.GetFloat("CameraSpeed", 50);
@@ -44,8 +44,18 @@ public class GrapeCamera : MonoBehaviour {
         transform.Translate(0f, 5f, -15f, Space.World);
     }
 
+    void SetupObi() {
+        ObiFluidRenderer fluidRenderer = GetComponent<ObiFluidRenderer>();
+        List<Grape> grapes = _grapeSwarm.GetComponent<GrapeSwarm>().Grapes;
+        for(int i = 0; i < grapes.Count; ++i) {
+            fluidRenderer.particleRenderers[i] = grapes[i].ParticleRenderer;
+        }
+    }
+
     // Update is called once per frame
     void Update () {
+        SetupObi();
+
         CheckInput();
 
         // Invert horizontal rotation

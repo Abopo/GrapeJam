@@ -8,6 +8,7 @@ public class GrapeAudio : MonoBehaviour {
 
     AudioClip _jumpClip;
     AudioClip _pipeClip;
+    AudioClip _deathClip;
 
     private void Awake() {
         _audioSource = GetComponent<AudioSource>();
@@ -15,8 +16,9 @@ public class GrapeAudio : MonoBehaviour {
 
         _audioManager.AddAudioSource(_audioSource);
 
-        _jumpClip = Resources.Load<AudioClip>("Audio/Jump10");
-        _pipeClip = Resources.Load<AudioClip>("Audio/pipe");
+        _jumpClip = Resources.Load<AudioClip>("Audio/SFX/Jump10");
+        _pipeClip = Resources.Load<AudioClip>("Audio/SFX/pipe");
+        _deathClip = Resources.Load<AudioClip>("Audio/SFX/Pop1");
     }
 
     // Use this for initialization
@@ -29,13 +31,28 @@ public class GrapeAudio : MonoBehaviour {
 	}
 
     public void PlayJump() {
-        _audioSource.clip = _jumpClip;
-        _audioSource.Play();
+        if (!_audioSource.isPlaying) {
+            _audioSource.clip = _jumpClip;
+            _audioSource.Play();
+        }
     }
 
     public void PlayPipe() {
-        _audioSource.clip = _pipeClip;
-        _audioSource.Play();
+        if (!_audioSource.isPlaying) {
+            _audioSource.clip = _pipeClip;
+            _audioSource.Play();
+        }
+    }
+
+    public void PlayDeathSound() {
+        if (!_audioSource.isPlaying) {
+            _audioSource.clip = _deathClip;
+            _audioSource.Play();
+        }
+    }
+
+    public bool IsPlaying() {
+        return _audioSource.isPlaying;
     }
 
     public void Remove() {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Obi;
 
 public class Grape : MonoBehaviour {
     public float groundMoveForce;
@@ -17,6 +18,8 @@ public class Grape : MonoBehaviour {
     public Rigidbody Rigidbody {
         get { return _rigidbody; }
     }
+
+
     GrapeAudio _grapeAudio;
 
     Transform _swarmCenter;
@@ -40,6 +43,23 @@ public class Grape : MonoBehaviour {
 
     bool _jumpingIntoJar = false;
     Transform _jar;
+
+    bool _isDead = false;
+
+    Transform obiStuff;
+    ObiParticleRenderer _obiParticleRenderer;
+    public ObiParticleRenderer ParticleRenderer {
+        get { return _obiParticleRenderer; }
+    }
+
+    private void Awake() {
+        // Obi stuff
+        ObiSolver solver = GameObject.FindGameObjectWithTag("ObiSolver").GetComponent<ObiSolver>();
+        obiStuff = transform.GetChild(1);
+        obiStuff.GetComponent<ObiEmitter>().Solver = solver;
+        obiStuff.GetComponent<ObiEmitter>().speed = 0;
+        _obiParticleRenderer = obiStuff.GetComponent<ObiParticleRenderer>();
+    }
 
     // Use this for initialization
     void Start () {
@@ -71,6 +91,14 @@ public class Grape : MonoBehaviour {
         }
 
         UpdateTimers();
+
+        // If we died and the SFX is done
+        if (_isDead && !_grapeAudio.IsPlaying()) {
+            _grapeAudio.Remove();
+
+            // Destroy this grape
+            DestroyObject(this.gameObject);
+        }
 
         _appliedForce = Vector3.zero;
 	}
@@ -124,6 +152,11 @@ public class Grape : MonoBehaviour {
         if(other.tag == "LevelEnd") {
             _jumpingIntoJar = false;
             _takeInput = false;
+
+            // Burst into jelly
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponentInChildren<GrapeOutline>().Disable();
+            obiStuff.GetComponent<ObiEmitter>().speed = 5;
         }
     }    
 
@@ -133,6 +166,9 @@ public class Grape : MonoBehaviour {
         if(collision.collider.tag == "Slide") {
             // Don't apply any movement forces while in a slide
             _onSlide = true;
+        }
+        if (collision.collider.tag == "Death Plane") {
+            Die();
         }
     }
 
@@ -165,7 +201,6 @@ public class Grape : MonoBehaviour {
                     _rigidbody.angularDrag = _groundAngularDrag;
                     _onSlide = false;
                     _leftGround = false;
-
                 }
             }
         }
@@ -287,12 +322,11 @@ public class Grape : MonoBehaviour {
 
     public void Die() {
         // Remove self from swarm
-        _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
-
-        _grapeAudio.Remove();
-
-        // Destroy this grape
-        DestroyObject(this.gameObject);
+        if (!_isDead) {
+            _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
+            _grapeAudio.PlayDeathSound();
+            _isDead = true;
+        }
     }
 
     public void SetTakeInput(bool takeInput) {

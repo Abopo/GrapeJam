@@ -26,6 +26,10 @@ public class GrapeSwarm : MonoBehaviour {
 
     bool _usingController = false;
 
+    public List<Grape> Grapes {
+        get { return _grapes; }
+    }
+
     // Use this for initialization
     void Start () {
         _camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
