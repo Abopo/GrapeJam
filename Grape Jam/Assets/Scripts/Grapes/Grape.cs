@@ -104,8 +104,8 @@ public class Grape : MonoBehaviour {
 	}
 
     void DetermineForce() {
-        _appliedForce += forceDirX * (_curMoveForce * Input.GetAxis("Vertical"));
-        _appliedForce += forceDirZ * (_curMoveForce * Input.GetAxis("Horizontal"));
+        _appliedForce += forceDirX * (_curMoveForce * Input.GetAxis("Vertical")) * Time.deltaTime;
+        _appliedForce += forceDirZ * (_curMoveForce * Input.GetAxis("Horizontal")) * Time.deltaTime;
         
         // Don't add force if we've exceeded the max speed
         if(Mathf.Abs(_rigidbody.velocity.x) > _curMaxMoveSpeed && 
@@ -152,6 +152,8 @@ public class Grape : MonoBehaviour {
         if(other.tag == "LevelEnd") {
             _jumpingIntoJar = false;
             _takeInput = false;
+
+            GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().IncrementGrapesJammed();
 
             // Burst into jelly
             GetComponent<MeshRenderer>().enabled = false;
@@ -207,8 +209,12 @@ public class Grape : MonoBehaviour {
 
         if(collision.collider.tag == "Grape" &&
             _jumpTimer >= _jumpTime) {
-            _canJump = true;
-            _justJumped = false;
+            foreach (ContactPoint cp in collision.contacts) {
+                if (transform.position.y - cp.point.y > 0.15f) {
+                    _canJump = true;
+                    _justJumped = false;
+                }
+            }
         }
     }
 
@@ -251,14 +257,14 @@ public class Grape : MonoBehaviour {
 
         Vector3 towardCenter = (_swarmCenter.position - transform.position).normalized;
         Vector3 right = Vector3.Cross(towardCenter, Vector3.up);
-        _rigidbody.AddForce(right * (_curMoveForce/2) * dir);
+        _rigidbody.AddForce(right * (_curMoveForce/2.5f) * dir * Time.deltaTime);
         // Force is increased based on distance to center point to keep orbit consistent
         float inwardForce = _curMoveForce;
         float centerDist = (_swarmCenter.position - transform.position).magnitude;
         if (centerDist > 1) {
             inwardForce = inwardForce / centerDist;
         }
-        _rigidbody.AddForce(towardCenter * inwardForce);
+        _rigidbody.AddForce(towardCenter * inwardForce * Time.deltaTime);
     }
 
     public void CutOrbit() {
@@ -276,7 +282,7 @@ public class Grape : MonoBehaviour {
 
         Vector3 dir = (transform.position - _swarmCenter.position).normalized;
         dir.y = 0;
-        _appliedForce += dir * _curMoveForce/1.5f;
+        _appliedForce += (dir * _curMoveForce/1.5f) * Time.deltaTime;
     }
 
     public void Contract() {
@@ -286,7 +292,7 @@ public class Grape : MonoBehaviour {
 
         Vector3 dir = (_swarmCenter.position - transform.position).normalized;
         dir.y = 0;
-        _appliedForce += dir * _curMoveForce/1.5f;
+        _appliedForce += (dir * _curMoveForce / 1.5f) * Time.deltaTime;
     }
 
     public void Trim() {
@@ -326,6 +332,7 @@ public class Grape : MonoBehaviour {
             _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
             _grapeAudio.PlayDeathSound();
             _isDead = true;
+            GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().IncrementGrapesLost();
         }
     }
 

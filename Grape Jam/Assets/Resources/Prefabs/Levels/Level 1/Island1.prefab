@@ -123,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388205423133324}
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 2.13, y: 1.6365213, z: 1.1303425}
+  m_LocalPosition: {x: 2.13, y: 0.7633643, z: 1.1303425}
   m_LocalScale: {x: 6.2570086, y: 5.9323087, z: 4.8338394}
   m_Children: []
   m_Father: {fileID: 4880172359755472}
@@ -136,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1685635749940300}
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 5.78404, y: -2.0968628, z: -7.7836456}
+  m_LocalPosition: {x: 5.78404, y: -2.48, z: -7.7836456}
   m_LocalScale: {x: 2.879603, y: 3.3824735, z: 2.8795998}
   m_Children: []
   m_Father: {fileID: 4880172359755472}
@@ -175,7 +175,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1007619480818764}
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -1.2855418, y: -0.99336433, z: -5.365452}
+  m_LocalPosition: {x: -1.2855418, y: -1.59, z: -5.365452}
   m_LocalScale: {x: 4.8338428, y: 5.6779857, z: 4.83384}
   m_Children: []
   m_Father: {fileID: 4880172359755472}
@@ -414,7 +414,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300012, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -428,7 +428,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300006, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -442,7 +442,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -452,11 +452,11 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388205423133324}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09652e6311486d949a10ecc32e6bf21f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300008, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -470,7 +470,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 6661abbb91004304b946bac5238fcf40, type: 3}

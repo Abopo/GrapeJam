@@ -483,11 +483,11 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1445532787680758}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09652e6311486d949a10ecc32e6bf21f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300062, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -497,11 +497,11 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1071132187344188}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09652e6311486d949a10ecc32e6bf21f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300060, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -511,11 +511,11 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767803584437862}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09652e6311486d949a10ecc32e6bf21f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300058, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -529,7 +529,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300040, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -539,11 +539,11 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1248865253060806}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09652e6311486d949a10ecc32e6bf21f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300064, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -553,11 +553,11 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1961203648050118}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09652e6311486d949a10ecc32e6bf21f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300066, guid: 6661abbb91004304b946bac5238fcf40, type: 3}

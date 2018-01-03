@@ -145,8 +145,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1012237680591766}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1243725, y: 1.4499989, z: -4.3944454}
+  m_LocalRotation: {x: -0, y: -0.64257425, z: -0, w: 0.76622343}
+  m_LocalPosition: {x: 4.64, y: 5.62, z: -0.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4216112488641416}
@@ -336,8 +336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84021b9b5baf62d4ba6029aa9976ea3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMoveForce: 17
-  airMoveForce: 6
+  groundMoveForce: 1000
+  airMoveForce: 335
   jumpForce: 500
   respawnPoint: {fileID: 0}
 --- !u!114 &114318761613720592
@@ -424,6 +424,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caa7d564316d064babbbc26bd806a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevel: 
+  parCompletionTimeInSeconds: 0
+  levelEndMenu: {fileID: 0}
+  levelTime: {fileID: 0}
+  grapesJammedText: {fileID: 0}
+  grapesLostText: {fileID: 0}
+  scoreText: {fileID: 0}
 --- !u!124 &124537671461059014
 Behaviour:
   m_ObjectHideFlags: 1

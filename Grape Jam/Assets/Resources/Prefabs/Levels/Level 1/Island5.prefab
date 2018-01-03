@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 33407782467502522}
   - component: {fileID: 23669491810086582}
   - component: {fileID: 64273644143122026}
-  - component: {fileID: 114139708480704904}
   m_Layer: 11
   m_Name: Sphere_030
   m_TagString: Ground
@@ -342,7 +341,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300074, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -370,7 +369,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300076, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
@@ -384,25 +383,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300078, guid: 6661abbb91004304b946bac5238fcf40, type: 3}
---- !u!114 &114139708480704904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1603655885843882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fbddf4b61ce1754b9bf9c082e1723f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outputTimeMeasurements: 0
-  createChildGameObject: 1
-  avoidGapsInside: 1
-  avoidExceedingMesh: 0
-  boxesPerEdge: 60
-  physicsMaterialForColliders: {fileID: 13400000, guid: 09652e6311486d949a10ecc32e6bf21f,
-    type: 2}

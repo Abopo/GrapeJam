@@ -13,6 +13,7 @@ TagManager:
   - Slide
   - LevelEnd
   - ObiSolver
+  - LevelManager
   layers:
   - Default
   - TransparentFX

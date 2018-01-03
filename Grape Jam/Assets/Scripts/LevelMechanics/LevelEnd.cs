@@ -7,14 +7,16 @@ public class LevelEnd : MonoBehaviour {
     public string nextLevel;
 
     GrapeSwarm _swarm;
+    LevelManager _levelManager;
     int _counter;
 
-    float _time = 8.0f;
+    float _time = 5.0f;
     float _timer = 0f;
 
 	// Use this for initialization
 	void Start () {
         _swarm = GameObject.FindGameObjectWithTag("GrapeSwarm").GetComponent<GrapeSwarm>();
+        _levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         _counter = 0;
 	}
 	
@@ -23,7 +25,7 @@ public class LevelEnd : MonoBehaviour {
         if(_counter >= _swarm.GetGrapeCount()) {
             _timer += Time.deltaTime;
             if (_timer >= _time) {
-                EndLevel();
+                _levelManager.LevelEnd();
             }
         }
 	}
