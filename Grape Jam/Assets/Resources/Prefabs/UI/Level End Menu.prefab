@@ -604,7 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8455882, g: 0.4833403, b: 0.024870265, a: 1}
+  m_Color: {r: 0.8455882, g: 0.4833403, b: 0.024870265, a: 0.784}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -766,7 +766,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10000
+  m_Text: 6
 --- !u!222 &222110634542716220
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -927,7 +927,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1398881085558676}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -57.922836, y: 12.6644535, z: -62.689644}
+  m_LocalPosition: {x: -70.67, y: 12.6644535, z: -62.689644}
   m_LocalScale: {x: 0.6737499, y: 0.6737499, z: 0.6737499}
   m_Children: []
   m_Father: {fileID: 4325249607539572}
@@ -935,8 +935,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -57.922836, y: 12.6644535}
-  m_SizeDelta: {x: 221.44, y: 36.18}
+  m_AnchoredPosition: {x: -70.67, y: 12.6644535}
+  m_SizeDelta: {x: 259.28, y: 36.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224266747966431094
 RectTransform:

@@ -41,6 +41,11 @@ public class LevelManager : MonoBehaviour {
         } else {
             _levelPlayTime += Time.deltaTime;
         }
+
+        // Testing buttons
+        if(Input.GetKeyDown(KeyCode.N)) {
+            SceneManager.LoadScene(nextLevel);
+        }
     }
 
     public void IncrementGrapesLost() {

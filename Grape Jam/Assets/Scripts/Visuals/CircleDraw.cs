@@ -21,8 +21,8 @@ public class CircleDraw : MonoBehaviour {
         //lineRenderer.SetWidth(0.02f, 0.02f); //thickness of line
         lineRenderer.positionCount = size;
         //lineRenderer.SetVertexCount(size);
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red;
+        lineRenderer.startColor = Color.magenta;
+        lineRenderer.endColor = Color.magenta;
 
         _grapeSwarm = GetComponent<GrapeSwarm>();
         radius = _grapeSwarm.AverageDistance();

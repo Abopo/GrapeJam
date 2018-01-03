@@ -313,10 +313,10 @@ public class Grape : MonoBehaviour {
 
     public void Shoot() {
         Vector3 shootForce;
-        shootForce.x = Random.Range(75f, 100f);
+        shootForce.x = Random.Range(75f, 90f);
         shootForce.x *= Mathf.Sign(Random.Range(-1, 1));
         shootForce.y = Random.Range(800f, 900f);
-        shootForce.z = Random.Range(75f, 100f);
+        shootForce.z = Random.Range(75f, 90f);
         shootForce.z *= Mathf.Sign(Random.Range(-1, 1));
 
         if (_rigidbody == null) {

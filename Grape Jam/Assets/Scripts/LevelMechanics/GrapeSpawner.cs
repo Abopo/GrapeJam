@@ -49,31 +49,8 @@ public class GrapeSpawner : MonoBehaviour {
         }
     }
 
-    private void SpawnGrape(Collider other) {
-        if (_timer > SpawnRate && Swarm.GetGrapeCount() < MaxGrapes) {
-            Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 4, 0), Quaternion.identity);
-            Swarm.AddGrape(newGrape);
-
-            if (_audioManager != null)
-                _audioManager.AddAudioSource(newGrape.GetComponents<AudioSource>());
-
-            _timer = 0.0f;
-        }
-    }
-
-
-    private void SpawnGrape() {
-        Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 4, 0), Quaternion.identity);
-        Swarm.AddGrape(newGrape);
-
-        if (_audioManager != null)
-            _audioManager.AddAudioSource(newGrape.GetComponents<AudioSource>());
-
-        _timer = 0.0f;
-    }
-
     private void ShootGrape(Collider other) {
-        if (_timer > SpawnRate && Swarm.GetGrapeCount() < MaxGrapes) {
+        if (_timer > SpawnRate && TotalGrapeCount() < MaxGrapes) {
             Grape newGrape = Instantiate(Grape, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
             newGrape.Shoot();
             Physics.IgnoreCollision(newGrape.GetComponent<SphereCollider>(), topCollider, true);
@@ -98,6 +75,12 @@ public class GrapeSpawner : MonoBehaviour {
             _audioManager.AddAudioSource(newGrape.GetComponents<AudioSource>());
 
         _timer = 0.0f;
+    }
+
+    // This counts up all the grapes not dead in the level
+    int TotalGrapeCount() {
+        GameObject[] allGrapes = GameObject.FindGameObjectsWithTag("Grape");
+        return allGrapes.Length;
     }
 
 
