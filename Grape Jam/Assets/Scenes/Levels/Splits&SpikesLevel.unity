@@ -17454,7 +17454,7 @@ Prefab:
     - target: {fileID: 114223925140136340, guid: 78dcaec96431053469792a63944ba13f,
         type: 2}
       propertyPath: MaxGrapes
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4417310380931458, guid: 78dcaec96431053469792a63944ba13f, type: 2}
       propertyPath: m_LocalScale.x

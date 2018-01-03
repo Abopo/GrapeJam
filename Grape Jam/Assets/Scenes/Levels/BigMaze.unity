@@ -2874,7 +2874,7 @@ Prefab:
     - target: {fileID: 114223925140136340, guid: 78dcaec96431053469792a63944ba13f,
         type: 2}
       propertyPath: MaxGrapes
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78dcaec96431053469792a63944ba13f, type: 2}
