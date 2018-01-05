@@ -158,6 +158,7 @@ public class Grape : MonoBehaviour {
             // Burst into jelly
             GetComponent<MeshRenderer>().enabled = false;
             GetComponentInChildren<GrapeOutline>().Disable();
+            obiStuff.GetComponent<ObiEmitter>().enabled = true;
             obiStuff.GetComponent<ObiEmitter>().speed = 5;
 
             _grapeAudio.PlayJamSound();

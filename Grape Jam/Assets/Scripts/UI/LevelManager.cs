@@ -42,7 +42,8 @@ public class LevelManager : MonoBehaviour {
         if(_levelEnded) {
             _bufferTimer += Time.deltaTime;
             if(Input.GetButtonDown("Jump") && _bufferTimer >= _bufferTime) {
-                SceneManager.LoadScene(nextLevel);
+                GameObject.FindGameObjectWithTag("ScreenWipe").GetComponent<ScreenWipe>().Wipe(nextLevel);
+                //SceneManager.LoadScene(nextLevel);
             }
         } else {
             _levelPlayTime += Time.deltaTime;
@@ -50,7 +51,8 @@ public class LevelManager : MonoBehaviour {
 
         // Testing buttons
         if(Input.GetKeyDown(KeyCode.N)) {
-            SceneManager.LoadScene(nextLevel);
+            GameObject.FindGameObjectWithTag("ScreenWipe").GetComponent<ScreenWipe>().Wipe(nextLevel);
+            //SceneManager.LoadScene(nextLevel);
         }
     }
 

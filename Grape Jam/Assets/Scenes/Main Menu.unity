@@ -638,6 +638,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &996301944 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114362576461462764, guid: c144aa1109d6681499459da5785ce3c1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1918595897}
+  m_Script: {fileID: 11500000, guid: 318fa2d4e20dedf4db188324719afc8b, type: 3}
 --- !u!1 &1104506933
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,8 +903,8 @@ Canvas:
   m_GameObject: {fileID: 1256890302}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1744681280}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -916,8 +922,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1256890302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 269.5, y: 176.5, z: 0}
-  m_LocalScale: {x: 0.67375, y: 0.67375, z: 0.67375}
+  m_LocalPosition: {x: 0, y: 1, z: 90}
+  m_LocalScale: {x: 0.2203908, y: 0.2203908, z: 0.2203908}
   m_Children:
   - {fileID: 1468594919}
   - {fileID: 644713350}
@@ -1078,6 +1084,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1918595897
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4991389496108814, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 9.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991389496108814, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991389496108814, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -2.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991389496108814, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991389496108814, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991389496108814, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991389496108814, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991389496108814, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004424477346188, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+      propertyPath: m_Name
+      value: Screen Wipe
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c144aa1109d6681499459da5785ce3c1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1935605238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,6 +1220,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1935605240}
         m_MethodName: LevelSelect_OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 996301944}
+        m_MethodName: Wipe
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

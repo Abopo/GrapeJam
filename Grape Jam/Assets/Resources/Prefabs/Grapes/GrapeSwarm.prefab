@@ -71,7 +71,6 @@ GameObject:
   - component: {fileID: 4216112488641416}
   - component: {fileID: 20340668103371076}
   - component: {fileID: 124537671461059014}
-  - component: {fileID: 114769481799097766}
   - component: {fileID: 114318761613720592}
   - component: {fileID: 114373222881970836}
   - component: {fileID: 82377620373863616}
@@ -413,24 +412,6 @@ MonoBehaviour:
   thicknessCutoff: 1.2
   colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
   fluidMaterial: {fileID: 2100000, guid: 29a7ed8ac869b4177a79933287fb9de8, type: 2}
---- !u!114 &114769481799097766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1565531632382390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3caa7d564316d064babbbc26bd806a94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextLevel: 
-  parCompletionTimeInSeconds: 0
-  levelEndMenu: {fileID: 0}
-  levelTime: {fileID: 0}
-  grapesJammedText: {fileID: 0}
-  grapesLostText: {fileID: 0}
-  scoreText: {fileID: 0}
 --- !u!124 &124537671461059014
 Behaviour:
   m_ObjectHideFlags: 1
