@@ -159,6 +159,8 @@ public class Grape : MonoBehaviour {
             GetComponent<MeshRenderer>().enabled = false;
             GetComponentInChildren<GrapeOutline>().Disable();
             obiStuff.GetComponent<ObiEmitter>().speed = 5;
+
+            _grapeAudio.PlayJamSound();
         }
     }    
 
@@ -353,6 +355,7 @@ public class Grape : MonoBehaviour {
         //force.z = toJar.z * (toJar.magnitude * 20f);
         force.y = 900f;
 
+        _rigidbody.velocity = new Vector3(0, 0, 0);
         _rigidbody.AddForce(force);
         _rigidbody.velocity = new Vector3(toJar.x * toJar.magnitude, _rigidbody.velocity.y, toJar.z * toJar.magnitude);
 

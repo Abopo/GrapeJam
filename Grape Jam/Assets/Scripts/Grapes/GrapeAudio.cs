@@ -6,9 +6,10 @@ public class GrapeAudio : MonoBehaviour {
     AudioManager _audioManager;
     AudioSource _audioSource;
 
-    AudioClip _jumpClip;
+    AudioClip[] _jumpClips;
     AudioClip _pipeClip;
     AudioClip _deathClip;
+    AudioClip[] _jamClips;
 
     private void Awake() {
         _audioSource = GetComponent<AudioSource>();
@@ -16,9 +17,10 @@ public class GrapeAudio : MonoBehaviour {
 
         _audioManager.AddAudioSource(_audioSource);
 
-        _jumpClip = Resources.Load<AudioClip>("Audio/SFX/Jump10");
+        _jumpClips = Resources.LoadAll<AudioClip>("Audio/SFX/JumpSounds");
         _pipeClip = Resources.Load<AudioClip>("Audio/SFX/pipe");
         _deathClip = Resources.Load<AudioClip>("Audio/SFX/Pop1");
+        _jamClips = Resources.LoadAll<AudioClip>("Audio/SFX/JamSounds");
     }
 
     // Use this for initialization
@@ -32,7 +34,8 @@ public class GrapeAudio : MonoBehaviour {
 
     public void PlayJump() {
         if (!_audioSource.isPlaying) {
-            _audioSource.clip = _jumpClip;
+            int r = Random.Range(0, _jumpClips.Length);
+            _audioSource.clip = _jumpClips[r];
             _audioSource.Play();
         }
     }
@@ -47,6 +50,14 @@ public class GrapeAudio : MonoBehaviour {
     public void PlayDeathSound() {
         if (!_audioSource.isPlaying) {
             _audioSource.clip = _deathClip;
+            _audioSource.Play();
+        }
+    }
+
+    public void PlayJamSound() {
+        if(!_audioSource.isPlaying) {
+            int r = Random.Range(0, _jamClips.Length);
+            _audioSource.clip = _jamClips[r];
             _audioSource.Play();
         }
     }
