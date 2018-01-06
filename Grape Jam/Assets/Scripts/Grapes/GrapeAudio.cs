@@ -13,7 +13,8 @@ public class GrapeAudio : MonoBehaviour {
 
     private void Awake() {
         _audioSource = GetComponent<AudioSource>();
-        _audioManager = (AudioManager)GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>();
+        //_audioManager = (AudioManager)GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        _audioManager = FindObjectOfType<AudioManager>();
 
         _audioManager.AddAudioSource(_audioSource);
 

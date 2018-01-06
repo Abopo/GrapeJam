@@ -8,6 +8,7 @@ public class LevelSelectMenu : MonoBehaviour {
     public LevelIcon[] levels;
     public Text levelNameText;
     ScreenWipe _screenWipe;
+    AudioSource _audioSource;
 
     int _curSelection;
     bool _justMoved;
@@ -15,6 +16,7 @@ public class LevelSelectMenu : MonoBehaviour {
     // Use this for initialization
     void Start() {
         _screenWipe = GameObject.FindGameObjectWithTag("ScreenWipe").GetComponent<ScreenWipe>();
+        _audioSource = GetComponent<AudioSource>();
 
         _curSelection = 0;
         _justMoved = false;
@@ -37,8 +39,10 @@ public class LevelSelectMenu : MonoBehaviour {
         }
 
         if(Input.GetButton("Jump")) {
-            // Load level
-            _screenWipe.Wipe(levels[_curSelection].sceneName);
+            LoadLevel();
+        }
+        if(Input.GetButton("Cancel")) {
+            _screenWipe.Wipe("Main Menu");
         }
     }
 
@@ -47,6 +51,7 @@ public class LevelSelectMenu : MonoBehaviour {
         if(_curSelection >= levels.Length) {
             _curSelection = 0;
         }
+        _audioSource.Play();
         UpdateSelection();
     }
 
@@ -55,11 +60,22 @@ public class LevelSelectMenu : MonoBehaviour {
         if(_curSelection < 0) {
             _curSelection = levels.Length - 1;
         }
+        _audioSource.Play();
         UpdateSelection();
     }
 
     void UpdateSelection() {
         levelNameText.text = "\"" + levels[_curSelection].levelName + "\"";
         selectionBorder.position = levels[_curSelection].transform.position;
+    }
+
+    public void SetSelection(int index) {
+        _curSelection = index;
+        _audioSource.Play();
+        UpdateSelection();
+    }
+
+    public void LoadLevel() {
+        _screenWipe.Wipe(levels[_curSelection].sceneName);
     }
 }

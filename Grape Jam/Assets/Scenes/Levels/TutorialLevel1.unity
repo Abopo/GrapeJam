@@ -703,7 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textUI: {fileID: 872343566}
-  tutorialText: Right Trigger to Contract
+  controllerTutorialText: Right Trigger to Contract
+  keyboardTutorialText: Right Mouse to Contract
   axisName: Contract
 --- !u!4 &528509407
 Transform:
@@ -1208,7 +1209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textUI: {fileID: 872343566}
-  tutorialText: Left Trigger to Expand
+  controllerTutorialText: Left Trigger to Expand
+  keyboardTutorialText: Left Mouse to Expand
   axisName: Expand
 --- !u!65 &721238966
 BoxCollider:
@@ -1235,12 +1237,6 @@ Transform:
   m_Father: {fileID: 1595061384}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -7.3710003, z: 0}
---- !u!114 &779098887 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114699667240394742, guid: 1f727ddc844e20d47ba5b5a1041f822f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1611289018}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &789069096
 Prefab:
   m_ObjectHideFlags: 0
@@ -2150,38 +2146,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 1088700562034080, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1275357348271162, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1038864771441114, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224684386444546624, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -97
-      objectReference: {fileID: 0}
-    - target: {fileID: 224684386444546624, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -32.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224274557058493104, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -97
-      objectReference: {fileID: 0}
-    - target: {fileID: 224274557058493104, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -32.5
-      objectReference: {fileID: 0}
     - target: {fileID: 224677129813688380, guid: 58a19d4572715b74c872b06b0ba09f8f,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -2190,47 +2154,27 @@ Prefab:
     - target: {fileID: 224677129813688380, guid: 58a19d4572715b74c872b06b0ba09f8f,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -32.5
+      value: -29.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224540983355566614, guid: 58a19d4572715b74c872b06b0ba09f8f,
+    - target: {fileID: 224274557058493104, guid: 58a19d4572715b74c872b06b0ba09f8f,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -99
       objectReference: {fileID: 0}
-    - target: {fileID: 224668078718872280, guid: 58a19d4572715b74c872b06b0ba09f8f,
+    - target: {fileID: 224274557058493104, guid: 58a19d4572715b74c872b06b0ba09f8f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 267.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224684386444546624, guid: 58a19d4572715b74c872b06b0ba09f8f,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -99
       objectReference: {fileID: 0}
-    - target: {fileID: 224439464018793716, guid: 58a19d4572715b74c872b06b0ba09f8f,
+    - target: {fileID: 224684386444546624, guid: 58a19d4572715b74c872b06b0ba09f8f,
         type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224209438776670574, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224690884651964878, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224830988710345216, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224396466755408582, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224395717407755568, guid: 58a19d4572715b74c872b06b0ba09f8f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
+      propertyPath: m_LocalPosition.y
+      value: 267.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58a19d4572715b74c872b06b0ba09f8f, type: 2}
@@ -2302,12 +2246,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4072682754301950, guid: 2b2a5e009e62e5c4baf33f4e15c7435a,
     type: 2}
   m_PrefabInternal: {fileID: 1125314481}
---- !u!114 &1129530337 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114047864853994214, guid: 1f727ddc844e20d47ba5b5a1041f822f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1611289018}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1138519771
 Prefab:
   m_ObjectHideFlags: 0
@@ -2548,7 +2486,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textUI: {fileID: 872343566}
-  tutorialText: A to Jump
+  controllerTutorialText: A to Jump
+  keyboardTutorialText: Spacebar to Jump
   buttonName: Jump
 --- !u!65 &1213831432
 BoxCollider:
@@ -3214,11 +3153,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4794483344072430, guid: 510f1ae16f4b5914bb1beaaeb2de7a7d,
     type: 2}
   m_PrefabInternal: {fileID: 1466620582}
---- !u!1 &1524121902 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1650330408266938, guid: 1f727ddc844e20d47ba5b5a1041f822f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1611289018}
 --- !u!114 &1539839722 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114756035803722614, guid: 054f8ab9e1ed56a4db4bd2ec3f85520d,
@@ -3504,16 +3438,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114272738919696936, guid: 1f727ddc844e20d47ba5b5a1041f822f,
-        type: 2}
-      propertyPath: parCompletionTimeInSeconds
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 114272738919696936, guid: 1f727ddc844e20d47ba5b5a1041f822f,
-        type: 2}
-      propertyPath: nextLevel
-      value: TutorialLevel2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f727ddc844e20d47ba5b5a1041f822f, type: 2}
   m_IsPrefabParent: 0
@@ -3733,12 +3657,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4919188475751414, guid: c2aab70cd820d554fb8348381072b65b,
     type: 2}
   m_PrefabInternal: {fileID: 1735042107}
---- !u!114 &1736994258 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114977660944890810, guid: 1f727ddc844e20d47ba5b5a1041f822f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1611289018}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1756456576
 Prefab:
   m_ObjectHideFlags: 0
@@ -4591,27 +4509,6 @@ Prefab:
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 2137084304}
-    - target: {fileID: 114769481799097766, guid: 63d5bac607ef0c746b9326208185a54a,
-        type: 2}
-      propertyPath: levelTime
-      value: 
-      objectReference: {fileID: 779098887}
-    - target: {fileID: 114769481799097766, guid: 63d5bac607ef0c746b9326208185a54a,
-        type: 2}
-      propertyPath: grapesJammedText
-      value: 
-      objectReference: {fileID: 1736994258}
-    - target: {fileID: 114769481799097766, guid: 63d5bac607ef0c746b9326208185a54a,
-        type: 2}
-      propertyPath: grapesLostText
-      value: 
-      objectReference: {fileID: 1129530337}
-    - target: {fileID: 114769481799097766, guid: 63d5bac607ef0c746b9326208185a54a,
-        type: 2}
-      propertyPath: levelEndMenu
-      value: 
-      objectReference: {fileID: 1524121902}
-    m_RemovedComponents:
-    - {fileID: 114769481799097766, guid: 63d5bac607ef0c746b9326208185a54a, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63d5bac607ef0c746b9326208185a54a, type: 2}
   m_IsPrefabParent: 0

@@ -18,13 +18,13 @@ public class GrapeSpawner : MonoBehaviour {
     private void Awake() {
         _timer = 0.0f;
         Swarm = GameObject.FindGameObjectWithTag("GrapeSwarm").GetComponent<GrapeSwarm>();
-        _audioManager = FindObjectOfType<AudioManager>();
         _audioSource = GetComponent<AudioSource>();
-        _audioManager.AddAudioSource(_audioSource);
     }
 
     // Use this for initialization
     void Start () {
+        _audioManager = FindObjectOfType<AudioManager>();
+        _audioManager.AddAudioSource(_audioSource);
     }
 
     // Update is called once per frame

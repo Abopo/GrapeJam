@@ -15,6 +15,7 @@ TagManager:
   - ObiSolver
   - LevelManager
   - ScreenWipe
+  - AudioManager
   layers:
   - Default
   - TransparentFX

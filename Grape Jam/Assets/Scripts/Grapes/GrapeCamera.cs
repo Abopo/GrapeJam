@@ -92,6 +92,13 @@ public class GrapeCamera : MonoBehaviour {
                 transform.Translate(transform.forward * -5f * Time.deltaTime, Space.World);
             }
         } else {
+            _rotateAxis.y = Input.GetAxis("Mouse X");
+            _speedOffset = Mathf.Abs(Input.GetAxis("Mouse X"));
+            if (Input.GetAxis("Mouse Y") != 0) {
+                transform.Translate(0f, (_moveSpeed * Input.GetAxis("Mouse Y")) * Time.deltaTime * _yInverted, 0f, Space.World);
+            }
+
+
             if (Input.GetKey(KeyCode.LeftArrow)) {
                 _rotateAxis.y = 1.0f;
             }

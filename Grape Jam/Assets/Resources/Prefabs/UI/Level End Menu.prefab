@@ -432,14 +432,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caa7d564316d064babbbc26bd806a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: InitialTesting
-  parCompletionTimeInSeconds: 100
+  nextLevel: TutorialLevel2
+  parCompletionTimeInSeconds: 300
   levelEndMenu: {fileID: 1321445299554210}
   ratingText: {fileID: 114276107501682522}
   levelTime: {fileID: 114699667240394742}
   grapesJammedText: {fileID: 114977660944890810}
   grapesLostText: {fileID: 114047864853994214}
   scoreText: {fileID: 114499607043572164}
+  continueText: {fileID: 114953886774177658}
 --- !u!114 &114276107501682522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -712,13 +713,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A to Continue
+  m_Text: Spacebar to Continue
 --- !u!114 &114954161534972814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -892,7 +893,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1030639204942934}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.153976, y: -110.22757, z: -62.689644}
+  m_LocalPosition: {x: -4.100006, y: -108, z: -62.7}
   m_LocalScale: {x: 0.6737499, y: 0.6737499, z: 0.6737499}
   m_Children: []
   m_Father: {fileID: 4325249607539572}
@@ -900,8 +901,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.153974, y: -110.22756}
-  m_SizeDelta: {x: 204.96, y: 36.18}
+  m_AnchoredPosition: {x: -4.1, y: -108}
+  m_SizeDelta: {x: 334.31, y: 36.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224255328184599822
 RectTransform:

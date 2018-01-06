@@ -10,7 +10,7 @@ public class ScreenWipe : MonoBehaviour {
     Transform _mainCamera;
     AudioSource _audioSource;
 
-    float _transitionTime = 0.4f;
+    float _transitionTime = 0.35f;
     float _transitionTimer = 0f;
     bool _transtitioning = false;
     string levelName;

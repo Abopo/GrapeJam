@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour {
     public Text grapesJammedText; // Shows how many grapes made it to the jar
     public Text grapesLostText; // Shows how many grapes died
     public Text scoreText; // Shows total score
+    public Text continueText; // Shows how to continue
 
     float _levelPlayTime;
     int _grapesJammedCount;
@@ -20,6 +21,7 @@ public class LevelManager : MonoBehaviour {
     int _finalScore;
 
     bool _levelEnded;
+    bool _usingController;
 
     // Buffer to make sure player doesn't skip through end screen.
     float _bufferTime = 1.0f;
@@ -35,6 +37,12 @@ public class LevelManager : MonoBehaviour {
         _finalScore = 0;
 
         _levelEnded = false;
+
+        if (Input.GetJoystickNames().Length > 0) {
+            _usingController = true;
+        } else {
+            _usingController = false;
+        }
     }
 
     // Update is called once per frame
@@ -81,6 +89,12 @@ public class LevelManager : MonoBehaviour {
             grapesJammedText.text = _grapesJammedCount.ToString();
 
             CalculateScore();
+
+            if (_usingController) {
+                continueText.text = "A to Continue";
+            } else {
+                continueText.text = "Spacebar to Continue";
+            }
 
             levelEndMenu.SetActive(true);
             _levelEnded = true;
