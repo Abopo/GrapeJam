@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
     public Transform selectionBorder;
-    public MainMenuButtonFunctions[] buttons;
+    public Button[] buttons;
+    public Credits credits;
+
     ScreenWipe _screenWipe;
     AudioSource _audioSource;
 
@@ -22,6 +25,10 @@ public class MainMenu : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (credits.isDisplayed) {
+            return;
+        }
+
         if (Input.GetAxis("Vertical") > 0.2f && !_justMoved) {
             MoveDown();
             _justMoved = true;
@@ -32,12 +39,15 @@ public class MainMenu : MonoBehaviour {
             _justMoved = false;
         }
 
-        if (Input.GetButton("Jump")) {
+        if (Input.GetButtonDown("Jump")) {
+            /*
             if (buttons[_curSelection].sceneName == "Exit") {
                 Application.Quit();
             } else {
                 _screenWipe.Wipe(buttons[_curSelection].sceneName);
             }
+            */
+            buttons[_curSelection].onClick.Invoke();
         }
     }
 

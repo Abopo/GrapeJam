@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuButtonFunctions : MonoBehaviour {
     public int index;
-    public string sceneName;
+    public Credits creditsObj;
 
     ScreenWipe _screenWipe;
     MainMenu _mainMenu;
@@ -25,6 +25,11 @@ public class MainMenuButtonFunctions : MonoBehaviour {
     {
         _screenWipe.Wipe("Options");
         //SceneManager.LoadScene("Options");
+    }
+
+    public void Credits_OnClick() {
+        // Show the credits
+        creditsObj.Display();
     }
 
     public void Exit_OnClick()

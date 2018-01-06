@@ -12,7 +12,11 @@ public class OptionsMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetButtonDown("Cancel")) {
-            GameObject.FindObjectOfType<ScreenWipe>().Wipe("Main Menu");
+            MainMenu();
         }
 	}
+
+    public void MainMenu() {
+        GameObject.FindObjectOfType<ScreenWipe>().Wipe("Main Menu");
+    }
 }

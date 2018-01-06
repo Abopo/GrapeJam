@@ -42,7 +42,7 @@ public class LevelSelectMenu : MonoBehaviour {
             LoadLevel();
         }
         if(Input.GetButton("Cancel")) {
-            _screenWipe.Wipe("Main Menu");
+            MainMenu();
         }
     }
 
@@ -67,6 +67,10 @@ public class LevelSelectMenu : MonoBehaviour {
     void UpdateSelection() {
         levelNameText.text = "\"" + levels[_curSelection].levelName + "\"";
         selectionBorder.position = levels[_curSelection].transform.position;
+    }
+
+    public void MainMenu() {
+        _screenWipe.Wipe("Main Menu");
     }
 
     public void SetSelection(int index) {
