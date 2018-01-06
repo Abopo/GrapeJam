@@ -156,12 +156,20 @@ public class PauseManager : MonoBehaviour {
     void UnpauseGame() {
         Time.timeScale = _gameTimescale;
         PauseShadow.SetActive(false);
+
+        // Hide cursor and keep it in the window
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
 
     void PauseGame() {
         _gameTimescale = Time.timeScale;
         Time.timeScale = 0;
         PauseShadow.SetActive(true);
+
+        // Make sure the cursor is visible
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void DisplaySettingsMenu() {

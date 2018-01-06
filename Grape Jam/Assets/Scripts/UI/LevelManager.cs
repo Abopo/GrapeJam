@@ -43,6 +43,10 @@ public class LevelManager : MonoBehaviour {
         } else {
             _usingController = false;
         }
+
+        // Hide cursor and keep it in the window
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

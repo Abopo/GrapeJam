@@ -21,6 +21,10 @@ public class MainMenu : MonoBehaviour {
 
         _curSelection = 0;
         _justMoved = false;
+
+        // Make sure the cursor is visible
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Update is called once per frame
