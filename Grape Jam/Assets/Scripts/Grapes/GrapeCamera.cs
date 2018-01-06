@@ -33,7 +33,7 @@ public class GrapeCamera : MonoBehaviour {
 
         _rotateAxis = Vector3.zero;
 
-        if (Input.GetJoystickNames().Length > 0) {
+        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
             _usingController = true;
         }
 

@@ -45,7 +45,7 @@ public class GrapeSwarm : MonoBehaviour {
         _expand = false;
         _contract = false;
 
-        if(Input.GetJoystickNames().Length > 0) {
+        if(Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
             _usingController = true;
         }
 	}

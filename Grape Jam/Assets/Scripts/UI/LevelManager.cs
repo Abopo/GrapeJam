@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour {
 
         _levelEnded = false;
 
-        if (Input.GetJoystickNames().Length > 0) {
+        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
             _usingController = true;
         } else {
             _usingController = false;
@@ -121,5 +121,12 @@ public class LevelManager : MonoBehaviour {
         }
 
         ratingText.transform.GetChild(0).GetComponent<Text>().text = ratingText.text;
+
+        // Save score if it's the best one
+        string pref = "Level" + (SceneManager.GetActiveScene().buildIndex - 3) + "Score";
+        int highScore = PlayerPrefs.GetInt(pref);
+        if(_finalScore > highScore) {
+            PlayerPrefs.SetInt(pref, _finalScore);
+        }
     }
 }
