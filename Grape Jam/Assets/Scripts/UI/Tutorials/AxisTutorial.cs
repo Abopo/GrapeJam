@@ -27,7 +27,7 @@ public class AxisTutorial : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetAxis(axisName) > 0 || Input.GetMouseButtonDown(0) && textUI.gameObject.activeSelf && !_finished) {
+        if ((Input.GetAxis(axisName) > 0 || Input.GetMouseButtonDown(0)) && textUI.gameObject.activeSelf && !_finished) {
             textUI.gameObject.SetActive(false);
             _finished = true;
         }

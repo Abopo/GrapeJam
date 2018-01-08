@@ -68,6 +68,10 @@ public class Grape : MonoBehaviour {
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
 
+        // Choose face
+        int r = Random.Range(1, 4);
+        GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Grape" + r);
+
         _grapeAudio.PlayPipe();
     }
 
