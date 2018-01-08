@@ -100,7 +100,7 @@ public class GrapeCamera : MonoBehaviour {
             _rotateAxis.y = Input.GetAxis("Mouse X");
             _speedOffset = Mathf.Abs(Input.GetAxis("Mouse X"));
             if (Input.GetAxis("Mouse Y") != 0) {
-                transform.Translate(0f, (_moveSpeed * Input.GetAxis("Mouse Y")) * Time.deltaTime * _yInverted, 0f, Space.World);
+                transform.Translate(0f, (_moveSpeed * Input.GetAxis("Mouse Y")) * Time.deltaTime * -_yInverted, 0f, Space.World);
             }
 
             if (Input.GetKey(KeyCode.UpArrow)) {

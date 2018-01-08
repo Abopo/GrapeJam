@@ -107,10 +107,10 @@ public class LevelManager : MonoBehaviour {
 
     void CalculateScore() {
         int time = (int)(parCompletionTimeInSeconds - _levelPlayTime);
-        _finalScore += time > 0 ? time * 10 : 0;
+        _finalScore += time > 0 ? time * 8 : 0;
         if (_grapesLostCount < _grapesJammedCount * 4) {
-            _finalScore += _grapesJammedCount * 100;
-            _finalScore -= _grapesLostCount * 25;
+            _finalScore += _grapesJammedCount * 250;
+            _finalScore -= _grapesLostCount * 50;
         }
 
         scoreText.text = _finalScore.ToString();
