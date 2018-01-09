@@ -18,7 +18,7 @@ public class AxisTutorial : MonoBehaviour {
         textUI.gameObject.SetActive(false);
         _finished = false;
 
-        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
+        if (LevelManager.UsingController()) {
             _usingController = true;
         } else {
             _usingController = false;

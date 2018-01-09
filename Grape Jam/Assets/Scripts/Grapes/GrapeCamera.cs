@@ -26,14 +26,14 @@ public class GrapeCamera : MonoBehaviour {
     void Start () {
         _xInverted = PlayerPrefs.GetInt("XInverted", 1);
         _yInverted = PlayerPrefs.GetInt("YInverted", 1);
-        _rotateSpeed = PlayerPrefs.GetFloat("CameraSpeed", 50);
+        _rotateSpeed = PlayerPrefs.GetFloat("CameraSpeed", 75);
 
 
         _grapeSwarm = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
 
         _rotateAxis = Vector3.zero;
 
-        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
+        if (LevelManager.UsingController()) {
             _usingController = true;
         }
 

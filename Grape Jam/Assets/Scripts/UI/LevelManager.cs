@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour {
 
         _levelEnded = false;
 
-        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
+        if (UsingController()) {
             _usingController = true;
         } else {
             _usingController = false;
@@ -132,5 +132,17 @@ public class LevelManager : MonoBehaviour {
         if(_finalScore > highScore) {
             PlayerPrefs.SetInt(pref, _finalScore);
         }
+    }
+
+    public static bool UsingController() {
+        string[] joys = Input.GetJoystickNames();
+        foreach(string j in joys) {
+            // If we have an actual named controller
+            if(j != "") {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
