@@ -25,7 +25,7 @@ public class TrimTutorial : MonoBehaviour {
         _finished1 = false;
         _finished2 = false;
 
-        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
+        if (LevelManager.UsingController()) {
             _usingController = true;
         } else {
             _usingController = false;

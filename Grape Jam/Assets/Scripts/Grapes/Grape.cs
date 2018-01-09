@@ -69,7 +69,7 @@ public class Grape : MonoBehaviour {
         _curMoveForce = airMoveForce;
 
         // Choose face
-        int r = Random.Range(1, 4);
+        int r = Random.Range(1, 5);
         GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Grape" + r);
 
         _grapeAudio.PlayPipe();
@@ -97,11 +97,16 @@ public class Grape : MonoBehaviour {
         UpdateTimers();
 
         // If we died and the SFX is done
-        if (_isDead && !_grapeAudio.IsPlaying()) {
-            _grapeAudio.Remove();
+        if (_isDead) {
+            obiStuff.GetComponent<ObiEmitter>().enabled = true;
+            obiStuff.GetComponent<ObiEmitter>().speed = 5;
 
-            // Destroy this grape
-            DestroyObject(this.gameObject);
+            if (!_grapeAudio.IsPlaying()) {
+                _grapeAudio.Remove();
+
+                // Destroy this grape
+                DestroyObject(this.gameObject);
+            }
         }
 
         _appliedForce = Vector3.zero;
@@ -339,6 +344,13 @@ public class Grape : MonoBehaviour {
             _swarmCenter.GetComponent<GrapeSwarm>().LoseGrape(this);
             _grapeAudio.PlayDeathSound();
             _isDead = true;
+
+            // Burst into jelly
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponentInChildren<GrapeOutline>().Disable();
+            obiStuff.GetComponent<ObiEmitter>().enabled = true;
+            obiStuff.GetComponent<ObiEmitter>().speed = 5;
+
             GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().IncrementGrapesLost();
         }
     }
