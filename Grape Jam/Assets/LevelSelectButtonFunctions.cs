@@ -11,7 +11,6 @@ public class LevelSelectButtonFunctions : MonoBehaviour {
 
     public void Level1_OnClick()
     {
-
     }
 
     public void Level2_OnClick()

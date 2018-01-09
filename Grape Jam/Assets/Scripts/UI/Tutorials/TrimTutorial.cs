@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class TrimTutorial : MonoBehaviour {
     public Text textUI;
     string trimTutorialText = "B to Trim";
+    string trimTutorialText2 = "C to Trim";
     string addTutorialText = "B to Join";
+    string addTutorialText2 = "C to Join";
 
     bool _finished1, _finished2;
+    bool _usingController;
 
     PressurePlate _pressurePlate;
     GrapeSwarm _grapeSwarm;
@@ -21,16 +24,32 @@ public class TrimTutorial : MonoBehaviour {
         textUI.gameObject.SetActive(false);
         _finished1 = false;
         _finished2 = false;
+
+        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
+            _usingController = true;
+        } else {
+            _usingController = false;
+        }
     }
 
     // Update is called once per frame
     void Update () {
 	    if(_pressurePlate.CurrentlyColliding.Count > 0) {
             if (GrapeIsOut() && !_finished1) {
-                textUI.text = trimTutorialText;
+                //textUI.text = trimTutorialText;
+                if (_usingController) {
+                    textUI.text = trimTutorialText;
+                } else {
+                    textUI.text = trimTutorialText2;
+                }
                 textUI.gameObject.SetActive(true);
             } else if(_finished1 && GrapeIsBackIn() && !_finished2) {
-                textUI.text = addTutorialText;
+                //textUI.text = addTutorialText;
+                if (_usingController) {
+                    textUI.text = addTutorialText;
+                } else {
+                    textUI.text = addTutorialText2;
+                }
                 textUI.gameObject.SetActive(true);
             }
         }

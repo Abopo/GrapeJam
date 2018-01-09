@@ -12,10 +12,11 @@ public class GrapeCamera : MonoBehaviour {
     int _xInverted = 1;
     int _yInverted = 1;
 
-
     float _moveSpeed = 10f;
-    float _minHeight = 4.5f;
+    float _minHeight = 2f;
     float _maxHeight = 20f;
+
+    float _zoomLevel = 2.5f;
 
     bool _usingController = false;
 
@@ -32,7 +33,7 @@ public class GrapeCamera : MonoBehaviour {
 
         _rotateAxis = Vector3.zero;
 
-        if (Input.GetJoystickNames().Length > 0) {
+        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
             _usingController = true;
         }
 
@@ -84,14 +85,38 @@ public class GrapeCamera : MonoBehaviour {
             }
 
             if (Input.GetAxis("CameraZoom") > 0) {
-                Vector3 dir = (_grapeSwarm.position - transform.position).normalized;
-                transform.Translate(transform.forward * 5f * Time.deltaTime, Space.World);
+                _zoomLevel -= 0.6f * Time.deltaTime;
+                if(_zoomLevel < 1f) {
+                    _zoomLevel = 1f;
+                }
             }
             if(Input.GetAxis("CameraZoom") < 0) {
-                Vector3 dir = (_grapeSwarm.position - transform.position).normalized;
-                transform.Translate(transform.forward * -5f * Time.deltaTime, Space.World);
+                _zoomLevel += 0.6f * Time.deltaTime;
+                if(_zoomLevel > 3.5f) {
+                    _zoomLevel = 3.5f;
+                }
             }
         } else {
+            _rotateAxis.y = Input.GetAxis("Mouse X");
+            _speedOffset = Mathf.Abs(Input.GetAxis("Mouse X"));
+            if (Input.GetAxis("Mouse Y") != 0) {
+                transform.Translate(0f, (_moveSpeed * Input.GetAxis("Mouse Y")) * Time.deltaTime * -_yInverted, 0f, Space.World);
+            }
+
+            if (Input.GetKey(KeyCode.UpArrow)) {
+                _zoomLevel -= 0.6f * Time.deltaTime;
+                if (_zoomLevel < 1f) {
+                    _zoomLevel = 1f;
+                }
+            }
+            if (Input.GetKey(KeyCode.DownArrow)) {
+                _zoomLevel += 0.6f * Time.deltaTime;
+                if (_zoomLevel > 3.5f) {
+                    _zoomLevel = 3.5f;
+                }
+            }
+
+            /*
             if (Input.GetKey(KeyCode.LeftArrow)) {
                 _rotateAxis.y = 1.0f;
             }
@@ -110,9 +135,10 @@ public class GrapeCamera : MonoBehaviour {
                     transform.localPosition = new Vector3(transform.localPosition.x, _minHeight, transform.localPosition.z);
                 }
             }
+            */
         }
 
-        if(Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetKeyDown(KeyCode.Return)) {
             transform.LookAt(_grapeSwarm);
         }
     }
@@ -127,11 +153,12 @@ public class GrapeCamera : MonoBehaviour {
         if(_maxHeight < 20f) {
             _maxHeight = 20f;
         }
-        float wantDistance = 2.5f * furthestGrape;
+
+        float wantDistance = _zoomLevel * furthestGrape;
         float curDist = (transform.position - _grapeSwarm.transform.position).magnitude;
 
-        if(wantDistance < 15f) {
-            wantDistance = 15f;
+        if(wantDistance < _zoomLevel * 6) {
+            wantDistance = _zoomLevel * 6;
         }
 
         if (Mathf.Abs(Mathf.Abs(curDist) - Mathf.Abs(wantDistance)) > 1f) {

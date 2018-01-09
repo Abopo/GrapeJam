@@ -45,7 +45,7 @@ public class GrapeSwarm : MonoBehaviour {
         _expand = false;
         _contract = false;
 
-        if(Input.GetJoystickNames().Length > 0) {
+        if(Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
             _usingController = true;
         }
 	}
@@ -102,11 +102,11 @@ public class GrapeSwarm : MonoBehaviour {
             // cancel rotation momentum
             _endRotate = true;
         }
-        if (Input.GetKey(KeyCode.R) || (Input.GetAxis("Expand") > 0)) {
+        if (Input.GetMouseButton(0) || (Input.GetAxis("Expand") > 0)) {
             // Expand the swarm
             _expand = true;
         }
-        if (Input.GetKey(KeyCode.F) || (Input.GetAxis("Contract") > 0)) {
+        if (Input.GetMouseButton(1) || (Input.GetAxis("Contract") > 0)) {
             // Contract the swarm
             _contract = true;
         }

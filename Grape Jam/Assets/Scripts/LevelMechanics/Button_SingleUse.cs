@@ -19,7 +19,8 @@ public class Button_SingleUse : MonoBehaviour {
         _deadGrapes = new List<GameObject>();
 
         _audioSource = GetComponent<AudioSource>();
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>().AddAudioSource(_audioSource);
+        //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>().AddAudioSource(_audioSource);
+        FindObjectOfType<AudioManager>().AddAudioSource(_audioSource);
     }
 
     // Update is called once per frame

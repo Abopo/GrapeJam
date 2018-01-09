@@ -40,7 +40,10 @@ public class PauseMenuButtonFunctions : MonoBehaviour {
         if (_pauseManager == null)
             return;
 
+        _pauseManager.SetState(PauseManager.PauseState.NotPaused);
+
         // TODO: Send player back to the main menu
+        GameObject.FindGameObjectWithTag("ScreenWipe").GetComponent<ScreenWipe>().Wipe("Main Menu");
     }
 
     public void OnClick_Back()

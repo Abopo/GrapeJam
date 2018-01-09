@@ -15,7 +15,8 @@ public class PressurePlateSet : ActivateableObject {
 	// Use this for initialization
 	void Start () {
         _audioSource = GetComponent<AudioSource>();
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>().AddAudioSource(_audioSource);
+        //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioManager>().AddAudioSource(_audioSource);
+        FindObjectOfType<AudioManager>().AddAudioSource(_audioSource);
     }
 
     // Update is called once per frame

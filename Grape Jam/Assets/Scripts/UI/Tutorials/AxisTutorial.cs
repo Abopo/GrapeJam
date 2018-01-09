@@ -6,20 +6,28 @@ using UnityEngine.UI;
 public class AxisTutorial : MonoBehaviour {
 
     public Text textUI;
-    public string tutorialText;
+    public string controllerTutorialText;
+    public string keyboardTutorialText;
     public string axisName;
 
     bool _finished;
+    bool _usingController;
 
     // Use this for initialization
     void Start() {
         textUI.gameObject.SetActive(false);
         _finished = false;
+
+        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "") {
+            _usingController = true;
+        } else {
+            _usingController = false;
+        }
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetAxis(axisName) > 0 && textUI.gameObject.activeSelf && !_finished) {
+        if ((Input.GetAxis(axisName) > 0 || Input.GetMouseButtonDown(0)) && textUI.gameObject.activeSelf && !_finished) {
             textUI.gameObject.SetActive(false);
             _finished = true;
         }
@@ -27,7 +35,11 @@ public class AxisTutorial : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Grape" && !_finished) {
-            textUI.text = tutorialText;
+            if (_usingController) {
+                textUI.text = controllerTutorialText;
+            } else {
+                textUI.text = keyboardTutorialText;
+            }
             textUI.gameObject.SetActive(true);
         }
     }

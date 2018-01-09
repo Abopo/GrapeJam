@@ -68,6 +68,10 @@ public class Grape : MonoBehaviour {
         _swarmCenter = GameObject.FindGameObjectWithTag("GrapeSwarm").transform;
         _curMoveForce = airMoveForce;
 
+        // Choose face
+        int r = Random.Range(1, 4);
+        GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Grape" + r);
+
         _grapeAudio.PlayPipe();
     }
 
@@ -158,6 +162,7 @@ public class Grape : MonoBehaviour {
             // Burst into jelly
             GetComponent<MeshRenderer>().enabled = false;
             GetComponentInChildren<GrapeOutline>().Disable();
+            obiStuff.GetComponent<ObiEmitter>().enabled = true;
             obiStuff.GetComponent<ObiEmitter>().speed = 5;
 
             _grapeAudio.PlayJamSound();
@@ -353,11 +358,21 @@ public class Grape : MonoBehaviour {
         toJar.Normalize();
         //force.x = toJar.x * (toJar.magnitude * 20f);
         //force.z = toJar.z * (toJar.magnitude * 20f);
-        force.y = 900f;
+        force.y = 1000f;
 
         _rigidbody.velocity = new Vector3(0, 0, 0);
         _rigidbody.AddForce(force);
-        _rigidbody.velocity = new Vector3(toJar.x * toJar.magnitude, _rigidbody.velocity.y, toJar.z * toJar.magnitude);
+
+        float velX = toJar.x * toJar.magnitude;
+        float velZ = toJar.z * toJar.magnitude;
+
+        if(velX < 10.0f) {
+            velX = 10.0f;
+        }
+        if(velZ < 10.0f) {
+            velZ = 10.0f;
+        }
+        _rigidbody.velocity = new Vector3(velX, _rigidbody.velocity.y, velZ);
 
         _grapeAudio.PlayJump();
 

@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelEnd : MonoBehaviour {
-    public string nextLevel;
-
     GrapeSwarm _swarm;
     LevelManager _levelManager;
     int _counter;
@@ -34,9 +32,5 @@ public class LevelEnd : MonoBehaviour {
         if(other.tag == "Grape") {
             _counter++;
         }
-    }
-
-    void EndLevel() {
-        SceneManager.LoadScene(nextLevel);
     }
 }
