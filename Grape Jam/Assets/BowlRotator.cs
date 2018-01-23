@@ -22,7 +22,7 @@ public class BowlRotator : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         _xElapsedTime += Time.deltaTime;
         _zElapsedTime += Time.deltaTime;
