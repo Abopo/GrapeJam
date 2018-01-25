@@ -7,13 +7,13 @@ public class BowlRotator : MonoBehaviour {
 
     [SerializeField] float XCycleDuration = 10.0f;
     [SerializeField] float ZCycleCuration = 8.0f;
+    [SerializeField] Quaternion _targetRotation = new Quaternion(0.1f, 0.0f, 0.1f, 1.0f);
 
     float _xElapsedTime = 0.0f;
     float _zElapsedTime = 0.0f;
 
     Transform _transform;
     Quaternion _initialRotation;
-    Quaternion _targetRotation = new Quaternion(0.125f, 0.0f, 0.125f, 1.0f);
 
     // Use this for initialization
     void Start () {
