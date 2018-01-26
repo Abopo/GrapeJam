@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BowlRotator : MonoBehaviour {
 
-
     [SerializeField] float XCycleDuration = 10.0f;
     [SerializeField] float ZCycleCuration = 8.0f;
     [SerializeField] Quaternion _targetRotation = new Quaternion(0.1f, 0.0f, 0.1f, 1.0f);
@@ -13,12 +12,10 @@ public class BowlRotator : MonoBehaviour {
     float _zElapsedTime = 0.0f;
 
     Transform _transform;
-    Quaternion _initialRotation;
 
     // Use this for initialization
     void Start () {
         _transform = GetComponent<Transform>();
-        _initialRotation = _transform.rotation;
     }
 	
 	// Update is called once per frame
@@ -39,17 +36,6 @@ public class BowlRotator : MonoBehaviour {
             _targetRotation.z *= -1;
         }
 
-
-        Debug.Log(_targetRotation);
-
-        Debug.Log(string.Format("Progress: {0}", _xElapsedTime / XCycleDuration));
-
         _transform.rotation =  Quaternion.Slerp(_transform.rotation, _targetRotation, _xElapsedTime / XCycleDuration * Time.deltaTime);
 	}
-
-
-    private void DeathReset()
-    {
-        _transform.rotation = _initialRotation;
-    }
 }

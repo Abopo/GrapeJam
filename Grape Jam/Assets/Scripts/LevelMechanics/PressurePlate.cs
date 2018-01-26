@@ -6,7 +6,7 @@ public class PressurePlate : MonoBehaviour {
 
     [SerializeField] bool Active = false;
     [SerializeField] ActivateableObject ObjectToToggle = null;
-    [SerializeField] int requiredGrapes = 1;
+    [SerializeField] int RequiredGrapes = 1;
 
     List<GameObject> _currentlyColliding;
     List<GameObject> _deadGrapes;
@@ -92,12 +92,12 @@ public class PressurePlate : MonoBehaviour {
     }
 
     void CheckGrapeCount() {
-        if (_currentlyColliding.Count >= requiredGrapes && !Active) {
+        if (_currentlyColliding.Count >= RequiredGrapes && !Active) {
             _done = ObjectToToggle.Activate();
             Active = true;
             transform.parent.Translate(0f, -0.001f, 0f, Space.World);
             _meshRenderer.material = _activeMaterial;
-        } else  if (_currentlyColliding.Count < requiredGrapes && Active) {
+        } else  if (_currentlyColliding.Count < RequiredGrapes && Active) {
             _done = ObjectToToggle.Deactivate();
             Active = false;
             transform.parent.Translate(0f, 0.001f, 0f, Space.World);
