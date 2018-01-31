@@ -24,6 +24,9 @@ public class GrapeSwarm : MonoBehaviour {
     bool _expand;
     bool _contract;
 
+    float _spawnTime = 0.8f;
+    float _spawnTimer = 0;
+
     bool _usingController = false;
 
     public List<Grape> Grapes {
@@ -35,8 +38,8 @@ public class GrapeSwarm : MonoBehaviour {
         _camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
         InitializeGrapes();
-        if(_grapes.Count == 0) {
-            respawnPoint.RespawnSwarm();
+        if (_grapes.Count == 0) {
+            _spawnTimer = 0f;
         }
 
         _tryJump = false;
@@ -63,6 +66,11 @@ public class GrapeSwarm : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        _spawnTimer += Time.deltaTime;
+        if(_spawnTimer >= _spawnTime && _grapes.Count == 0) {
+            respawnPoint.RespawnSwarm();
+        }
+
         CheckInput();
 
         CommandSwarm();
@@ -162,6 +170,10 @@ public class GrapeSwarm : MonoBehaviour {
     }
 
     void FollowSwarm() {
+        if(_grapes.Count == 0) {
+            return;
+        }
+
         Vector3 totalPosition = Vector3.zero;
         foreach(Grape grape in _grapes) {
             totalPosition += grape.transform.position;
@@ -243,7 +255,8 @@ public class GrapeSwarm : MonoBehaviour {
         _grapes.Remove(grape);
         grape.SetTakeInput(false);
         if(_grapes.Count <= 0) {
-            respawnPoint.RespawnSwarm();
+           // respawnPoint.RespawnSwarm();
+            _spawnTimer = 0f;
         }
     }
 

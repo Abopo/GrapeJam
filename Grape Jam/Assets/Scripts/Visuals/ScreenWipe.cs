@@ -15,6 +15,8 @@ public class ScreenWipe : MonoBehaviour {
     bool _transtitioning = false;
     string levelName;
 
+    private AsyncOperation operation;
+
     private void Awake() {
         if(instance != null) {
             Destroy(gameObject);
@@ -42,7 +44,8 @@ public class ScreenWipe : MonoBehaviour {
             if(_transitionTimer >= _transitionTime) {
                 // Load the next scene
                 if(levelName != null) {
-                    SceneManager.LoadScene(levelName);
+                    //SceneManager.LoadScene(levelName);
+                    StartCoroutine(LoadLevel(levelName));
                     _transtitioning = false;
                 }
             }
@@ -51,7 +54,7 @@ public class ScreenWipe : MonoBehaviour {
 
     void FollowCamera() {
         transform.position = _mainCamera.position;
-        transform.Translate(6f, 0.8f, -5f);
+        transform.Translate(7.5f, 0.8f, -5f);
         transform.rotation = _mainCamera.rotation;
         transform.Rotate(0f, -90f, 0f);
     }
@@ -59,7 +62,16 @@ public class ScreenWipe : MonoBehaviour {
     void SceneLoaded(Scene scene, LoadSceneMode mode) {
         _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
         FollowCamera();
+        _particleSystem.Stop();
     }
+
+    private IEnumerator LoadLevel(string _level) {
+        operation = SceneManager.LoadSceneAsync(_level);
+        operation.allowSceneActivation = true;
+
+        yield return null;
+    }
+
 
     public void Wipe() {
         _particleSystem.Play();

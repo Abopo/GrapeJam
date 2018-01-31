@@ -24,7 +24,7 @@ public class CameraSpeedSlider : MonoBehaviour {
 
     public void OnValueChanged()
     { 
-        if(_grapeCamera == null || SpeedSlider == null)
+        if(SpeedSlider == null)
             return;
 
         PlayerPrefs.SetFloat("CameraSpeed", SpeedSlider.value * 100 + 50);

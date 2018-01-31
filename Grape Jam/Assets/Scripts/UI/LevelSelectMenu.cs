@@ -22,6 +22,10 @@ public class LevelSelectMenu : MonoBehaviour {
         _justMoved = false;
 
         UpdateSelection();
+
+        // Make sure the cursor is visible
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Update is called once per frame

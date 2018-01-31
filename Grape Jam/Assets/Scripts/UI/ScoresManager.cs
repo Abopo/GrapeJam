@@ -8,7 +8,7 @@ public class ScoresManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //PlayerPrefs.SetInt("FirstTimePlaying", 0);
+        PlayerPrefs.SetInt("FirstTimePlaying", 0);
 
         if (PlayerPrefs.GetInt("FirstTimePlaying") == 0) {
             PlayerPrefs.SetInt("Level0Score", 0);
